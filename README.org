@@ -1,6 +1,10 @@
-#+TITLE: STIX Org Theme
+#+TITLE: STIX Org
 #+DATE: 2020-01-30
 #+STARTUP: showall
+#+SUBTITLE: STIX Theme for Org
+#+DESCRIPTION: Scientific and Technical Information Exchange theme for Org
+#+KEYWORDS: org html theme stix
+#+SETUPFILE: setup.org
 
  _{unofficial} Scientific and Technical Information Exchange (STIX) theme
 for Org HTML exporter.
