@@ -9,6 +9,6 @@
  _{unofficial} Scientific and Technical Information Exchange (STIX) theme
 for Org HTML exporter.
 
-This theme incorporates elements from the [[https://github.com/poole/lanyon][Lanyon]] for Jekyll theme, the
-[[https://github.com/gongzhitaao/orgcss][OrgCSS]] stylesheet for Org's HTML exporter, and many other sources of
-beautiful minimalist document themes.
+The STIX theme uses the [[https://github.com/stipub/stixfonts][STIX Fonts]]. This theme incorporates elements
+from the [[https://github.com/poole/lanyon][Lanyon]] for Jekyll theme, the [[https://github.com/gongzhitaao/orgcss][OrgCSS]] stylesheet for Org's HTML
+exporter, and many other sources of beautiful minimalist documents.
