@@ -1,0 +1,113 @@
+#+TITLE: Tasks
+#+DATE: 2020-01-31
+#+STARTUP: showall
+#+SUBTITLE: STIX Theme Tasks
+#+DESCRIPTION: Tasks for completing the STIX Theme for Org
+#+KEYWORDS: org html theme stix
+#+SETUPFILE: setup.org
+
+
+* TODO complete readme
+** TODO the what, why, an so forth
+** TODO how to use it
+
+* TODO example org file
+An Org file that demonstrates almost everything in Org
+
+** structure
+- [ ] title
+- [ ] subtitle
+- [ ] author
+- [ ] date, version
+- [ ] table of contents
+- [ ] headings
+  - [ ] todo items
+  - [ ] progress
+  - [ ] priorities
+  - [ ] tags
+  - [ ] properties
+- [ ] paragraphs
+- [ ] tables
+- [ ] block quotes
+- [ ] src blocks
+- [ ] example blocks
+- [ ] html blocks
+- [ ] verse blocks
+- [ ] center blocks
+- [ ] drawers
+** formatting
+- [ ] bold
+- [ ] italic
+- [ ] underline
+- [ ] strikethrough
+- [ ] code inline formatting
+- [ ] subscript
+- [ ] superscript
+- [ ] special symbols
+- [ ] math
+- [ ] images
+- [ ] captions
+- [ ] horizontal rules
+** lists
+- [ ] ordered lists
+- [ ] unordered lists
+- [ ] definition lists
+- [ ] checkboxes
+** links
+- [ ] hyperlinks
+- [ ] footnotes
+- [ ] reference labels
+
+* TODO GitHub style example
+GitHub style Org is rendered with
+https://github.com/wallyqs/org-ruby. It supports these Org features
+
+** structure
+- [ ] title
+- [ ] headings
+- [ ] paragraphs
+- [ ] tables
+- [ ] block quotes
+- [ ] src blocks
+- [ ] example blocks
+- [ ] html blocks
+** formatting
+- [ ] bold
+- [ ] italic
+- [ ] underline
+- [ ] strikethrough
+- [ ] code inline formatting
+** lists
+- [ ] ordered lists
+- [ ] unordered lists
+- [ ] definition lists
+** links
+- [ ] hyperlinks
+- [ ] footnotes
+
+* TODO Hugo style example
+Hugo style Org is rendered with
+https://github.com/niklasfasching/go-org. It supports these Org features
+
+** structure
+- [ ] title
+- [ ] headings
+- [ ] paragraphs
+- [ ] tables
+- [ ] block quotes
+- [ ] src blocks
+- [ ] example blocks
+- [ ] html blocks
+** formatting
+- [ ] bold
+- [ ] italic
+- [ ] underline
+- [ ] strikethrough
+- [ ] code inline formatting
+** lists
+- [ ] ordered lists
+- [ ] unordered lists
+- [ ] definition lists
+** links
+- [ ] hyperlinks
+- [ ] footnotes
