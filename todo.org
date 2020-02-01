@@ -28,7 +28,7 @@ Basic stuff that doesn't rely on structure or render quirks
   - [X] headings
   - [X] body
   - [ ] monospace
-- [ ] heading sizes
+- [X] heading sizes
 - [ ] white space, margins, etc
 
 * TODO example org file

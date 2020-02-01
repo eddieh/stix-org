@@ -55,14 +55,11 @@
 /* Browser Reset */
 
 * {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -80,6 +77,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading-fonts);
+    text-rendering: optimizeLegibility;
 }
 
 tt, code, kbd, samp,
@@ -122,6 +120,12 @@ header {
     margin: 0;
 }
 
+header h1 { font-size: 2.5rem; }
+header h2 { font-size: 2.25rem; }
+header h3 { font-size: 2rem; }
+header h4 { font-size: 1.75rem; }
+header h5 { font-size: 1.5rem; }
+header h5 { font-size: 1.25rem; }
 
 /* TOC */
 
@@ -129,9 +133,14 @@ header {
     margin-top: 2em;
 }
 
-#table-of-contents h1 {
-    margin: 0;
-    padding: 0;
+#table-of-contents :matches(h1, h2, h3, h4, h5, h6) {
+    margin-top: 0;
+}
+
+#table-of-contents h1 { font-size: 1.25eem; }
+#table-of-contents h2 { font-size: 1.125rem; }
+#table-of-contents :matches(h3, h4, h5, h6) {
+    font-size: 1rem;
 }
 
 #text-table-of-contents ul {
@@ -140,7 +149,30 @@ header {
 
 #text-table-of-contents > ul {
     padding: 0;
+    margin-top: 1em;
 }
+
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 2em;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+
+/* Paragraphs  */
+
+p { margin-top: 1em; }
+
+
+/* Lists */
 
 ol ul, ul ol, ul ul, ol ol {
     padding-left: 1em;
