@@ -11,15 +11,35 @@
 ** TODO the what, why, an so forth
 ** TODO how to use it
 
+* TODO general styles
+Basic stuff that doesn't rely on structure or render quirks
+
+- [-] colors
+  - [X] title
+  - [X] subtitle
+  - [X] headings
+  - [X] body
+  - [X] background
+  - [ ] links
+- [ ] links
+- [-] fonts
+  - [X] title
+  - [ ] subtitle
+  - [X] headings
+  - [X] body
+  - [ ] monospace
+- [ ] heading sizes
+- [ ] white space, margins, etc
+
 * TODO example org file
 An Org file that demonstrates almost everything in Org
 
 ** structure
-- [ ] title
-- [ ] subtitle
+- [X] title
+- [X] subtitle
 - [ ] author
 - [ ] date, version
-- [ ] table of contents
+- [X] table of contents
 - [ ] headings
   - [ ] todo items
   - [ ] progress

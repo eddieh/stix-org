@@ -34,11 +34,20 @@
 
 :root {
     --bg-color: #fff;
+    --title-color: #333;
     --txt-color: #444;
     --mono-color: #111;
     --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --body-fonts: STIXGeneral, "Times New Roman", serif;
     --mono-fonts: "DejaVu Sans Mono", Menlo, Monaco, monospace;
+}
+
+
+/* Dev helpers */
+
+/* Temporary border */
+.tmpb {
+    border: 1px solid gray;
 }
 
 
@@ -80,9 +89,53 @@ pre, xmp, plaintext, listing {
 }
 
 
+/* Links */
+
+
+
 /* Content width */
 
 #content {
     max-width: 700px;
     margin: 0 auto;
+}
+
+
+/* Page Header */
+
+header {
+    padding: 1em 0 0;
+}
+
+.title {
+    color: var(--title-color);
+    margin: 0;
+}
+
+.subtitle {
+    margin: 0;
+}
+
+
+/* TOC */
+
+#table-of-contents {
+    margin-top: 2em;
+}
+
+#table-of-contents h1 {
+    margin: 0;
+    padding: 0;
+}
+
+#text-table-of-contents ul {
+    list-style: none;
+}
+
+#text-table-of-contents > ul {
+    padding: 0;
+}
+
+ol ul, ul ol, ul ul, ol ol {
+    padding-left: 1em;
 }
