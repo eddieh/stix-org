@@ -29,7 +29,7 @@ Basic stuff that doesn't rely on structure or render quirks
   - [X] body
   - [ ] monospace
 - [X] heading sizes
-- [ ] white space, margins, etc
+- [X] white space, margins, etc
 
 * TODO example org file
 An Org file that demonstrates almost everything in Org
@@ -46,7 +46,7 @@ An Org file that demonstrates almost everything in Org
   - [ ] priorities
   - [ ] tags
   - [ ] properties
-- [ ] paragraphs
+- [X] paragraphs
 - [ ] tables
 - [ ] block quotes
 - [ ] src blocks

@@ -145,6 +145,7 @@ header h5 { font-size: 1.25rem; }
 
 #text-table-of-contents ul {
     list-style: none;
+    margin-top: 0;
 }
 
 #text-table-of-contents > ul {
@@ -167,10 +168,15 @@ h5 { font-size: 1.125rem; }
 h6 { font-size: 1rem; }
 
 
-/* Paragraphs  */
+/* Margins */
 
-p { margin-top: 1em; }
+blockquote, dl, figure, hr, ol, p, pre, ul {
+    margin-top: 1em;
+}
 
+audio, canvas, detail, embed, form, object, picture, video {
+    margin-top: 1em;
+}
 
 /* Lists */
 
