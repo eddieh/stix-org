@@ -1,0 +1,91 @@
+#+TITLE: Example Org File
+#+DATE: 2020-01-31
+#+STARTUP: showall
+#+SUBTITLE: Org features, structures, and markup
+#+DESCRIPTION: A document that demonstrates almost everything in Org
+#+KEYWORDS: org html example demonstration demo sample
+#+SETUPFILE: setup.org
+
+
+* Front Matter
+
+Org files should begin with front matter. The special front matter
+comments control many aspects of an Org file. Some special are
+rendered when exported, some control meta data, some control how Org
+works or set options and configurations. These special comments have
+the form =#+NAME: value(s)=
+
+
+** Title and Date
+
+At the very least an Org document should begin with a title and a
+date. For example the first two lines of this file are
+
+#+BEGIN_SRC org
+  ,#+TITLE: Example Org File
+  ,#+DATE: 2020-01-31
+#+END_SRC
+
+
+* Headings
+
+Headings structure documents into sections and subsections. They begin
+with an =*= and the number of asterisks denote the heading level. The
+top or first level begins with one asterisks followed by the section
+title and the syntax is =* Section Title=. A second level heading begins with
+two asterisks followed by the subsection title and the syntax is =**
+Subsection Title=.
+
+HTML has only six heading levels, but an Org document can have many
+more. In fact Org has 8 heading faces defined, but has a constant
+called =org-indent--deepest-level= that implies 50 or more levels are
+possible.
+
+#+BEGIN_SRC emacs-lisp
+  (defconst org-indent--deepest-level 50
+    "Maximum theoretical headline depth.")
+#+END_SRC
+
+However, the max export depth is 19.
+
+#+BEGIN_SRC emacs-lisp
+  (defconst org-export-max-depth 19
+    "Maximum nesting depth for headlines, counting from 0.")
+#+END_SRC
+
+Since HTML supports only six levels we'll show that many as an
+example. Org will happily create =<hn>= headings for /n/-level
+headings with \( n > 6 \).
+
+#+BEGIN_SRC org
+  ,* Top or first level headline
+  Curabitur blandit tempus ardua ridiculus sed magna.
+  ,** Second level
+  Me non paenitet nullum festiviorem excogitasse ad hoc.
+  ,*** Third level
+  Ab illo tempore, ab est sed immemorabili.
+  ,**** Forth level
+  Sed haec quis possit intrepidus aestimare tellus.
+  ,***** Fifth level
+  Nihil hic munitissimus habendi senatus locus, nihil horum?
+  ,****** Sixth level
+  Quae vero auctorem tractata ab fiducia dicuntur.
+#+END_SRC
+
+* Top or first level headline
+Curabitur blandit tempus ardua ridiculus sed magna.
+
+** Second level
+Me non paenitet nullum festiviorem excogitasse ad hoc.
+
+*** Third level
+Ab illo tempore, ab est sed immemorabili.
+
+**** Forth level
+Sed haec quis possit intrepidus aestimare tellus.
+
+***** Fifth level
+Nihil hic munitissimus habendi senatus locus, nihil horum?
+
+****** Sixth level
+Quae vero auctorem tractata ab fiducia dicuntur.

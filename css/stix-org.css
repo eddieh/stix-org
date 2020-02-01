@@ -30,6 +30,18 @@
  */
 
 
+/* CSS Variables */
+
+:root {
+    --bg-color: #fff;
+    --txt-color: #444;
+    --mono-color: #111;
+    --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --body-fonts: STIXGeneral, "Times New Roman", serif;
+    --mono-fonts: "DejaVu Sans Mono", Menlo, Monaco, monospace;
+}
+
+
 /* Browser Reset */
 
 * {
@@ -43,8 +55,34 @@ html, body {
   padding: 0;
 }
 
+
+/* Fonts */
+
 html {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 100%;
+  font-size: 14pt;
   line-height: 1.5;
+}
+
+body {
+    font-family: var(--body-fonts);
+    color: var(--txt-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-fonts);
+}
+
+tt, code, kbd, samp,
+pre, xmp, plaintext, listing {
+    font-family: var(--mono-fonts);
+    font-size: 12pt;
+    color: var(--mono-color);
+}
+
+
+/* Content width */
+
+#content {
+    max-width: 700px;
+    margin: 0 auto;
 }
