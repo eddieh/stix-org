@@ -14,14 +14,14 @@
 * TODO general styles
 Basic stuff that doesn't rely on structure or render quirks
 
-- [-] colors
+- [X] colors
   - [X] title
   - [X] subtitle
   - [X] headings
   - [X] body
   - [X] background
-  - [ ] links
-- [ ] links
+  - [X] links
+- [X] links
 - [-] fonts
   - [X] title
   - [ ] subtitle

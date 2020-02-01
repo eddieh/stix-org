@@ -34,7 +34,8 @@
 
 :root {
     --bg-color: #fff;
-    --title-color: #333;
+    --title-color: #505050;
+    --subtitle-color: #c0c0c0;
     --txt-color: #444;
     --mono-color: #111;
     --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -91,6 +92,10 @@ pre, xmp, plaintext, listing {
 
 /* Links */
 
+a:link { color: #394C90; }
+a:visited { color: #7A7DB0; }
+a:link, a:visited { text-decoration: none; }
+a:hover { text-decoration: underline; }
 
 
 /* Content width */
@@ -113,6 +118,7 @@ header {
 }
 
 .subtitle {
+    color: var(--subtitle-color);
     margin: 0;
 }
 
