@@ -123,3 +123,47 @@ Which produces the table
 
 | 2 | 4 |
 | 4 | 2 |
+
+
+* Source Blocks
+
+An Org source block containing an Emacs Lisp function called
+=mccarthy91=.
+
+#+BEGIN_SRC org
+  ,#+BEGIN_SRC elisp
+    (defun mccarthy91 (n)
+       "McCarthy 91 is used as a formal verification test case."
+       (if (<= n 100)
+           (mccarthy91 (mccarthy91 (+ n 11)))
+         (- n 10)))
+  ,#+END_SRC
+#+END_SRC
+
+Renders to HTML like so
+
+#+BEGIN_SRC emacs-lisp
+  (defun mccarthy91 (n)
+     "McCarthy 91 is used as a formal verification test case."
+     (if (<= n 100)
+         (mccarthy91 (mccarthy91 (+ n 11)))
+       (- n 10)))
+#+END_SRC
+
+** Long lines
+
+The next code block is used to check if the styling can display an 80
+character lines without overflow. The block is made up of lines
+contains the first 80 characters of Ascii85 (aka Base85) encoding.
+
+#+BEGIN_SRC text
+  0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{
+  0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{
+  0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{
+#+END_SRC
+
+Now we must check how a code block that with overflow looks.
+
+#+begin_src objc
+  + (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath inBundleWithURL:(NSURL *)bundleURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+#+end_src

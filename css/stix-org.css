@@ -38,6 +38,7 @@
     --subtitle-color: #c0c0c0;
     --txt-color: #444;
     --mono-color: #111;
+    --src-bg-color: #f9f9f9;
     --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --body-fonts: STIXGeneral, "Times New Roman", serif;
     --mono-fonts: "DejaVu Sans Mono", Menlo, Monaco, monospace;
@@ -98,8 +99,8 @@ a:hover { text-decoration: underline; }
 
 /* Content width */
 
-#content {
-    max-width: 700px;
+#preamble, #content, #postamble {
+    max-width: 780px;
     margin: 0 auto;
 }
 
@@ -222,4 +223,13 @@ caption.t-bottom { caption-side: bottom; }
 
 caption, figcaption {
     margin-bottom: 0.3em;
+}
+
+
+/* Source Blocks */
+
+pre {
+    padding: .5em .2em;
+    background-color: var(--src-bg-color);
+    overflow-x: scroll;
 }
