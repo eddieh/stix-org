@@ -89,3 +89,37 @@ Nihil hic munitissimus habendi senatus locus, nihil horum?
 
 ****** Sixth level
 Quae vero auctorem tractata ab fiducia dicuntur.
+
+
+* Tables
+
+Tables in Org use a sensible syntax that looks great in plain
+text. The tables look even better in HTML thanks to [[https://github.com/gongzhitaao/orgcss][OrgCSS]]. The Org
+syntax is self-evident from the example
+
+#+BEGIN_SRC org
+  | Name  | Phone | Age |
+  |-------+-------+-----|
+  | Peter |  1234 |  17 |
+  | Anna  |  4321 |  25 |
+#+END_SRC
+
+Which produces this table
+
+| Name  | Phone | Age |
+|-------+-------+-----|
+| Peter |  1234 |  17 |
+| Anna  |  4321 |  25 |
+
+Tables without headers are supported too. Just omit the horizontal
+divider line.
+
+#+BEGIN_SRC org
+  | 2 | 4 |
+  | 4 | 2 |
+#+END_SRC
+
+Which produces the table
+
+| 2 | 4 |
+| 4 | 2 |

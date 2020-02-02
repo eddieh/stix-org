@@ -47,7 +47,12 @@ An Org file that demonstrates almost everything in Org
   - [ ] tags
   - [ ] properties
 - [X] paragraphs
-- [ ] tables
+- [-] tables
+  - [X] basic table formatting
+  - [ ] table alignment
+  - [ ] full-width table
+  - [ ] cell alignment
+  - [ ] captions
 - [ ] block quotes
 - [ ] src blocks
 - [ ] example blocks
