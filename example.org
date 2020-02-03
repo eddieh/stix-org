@@ -154,7 +154,7 @@ Renders to HTML like so
 
 The next code block is used to check if the styling can display an 80
 character lines without overflow. The block is made up of lines
-contains the first 80 characters of Ascii85 (aka Base85) encoding.
+contains the first 80 characters of a base-85 encoding called [[https://rfc.zeromq.org/spec:32/Z85/][Z85]].
 
 #+BEGIN_SRC text
   0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{
