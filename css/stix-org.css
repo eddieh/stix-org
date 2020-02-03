@@ -98,6 +98,8 @@ code, kbd, pre {
     text-decoration: underline;
 }
 
+sub, sup { font-size: 75%; }
+
 
 /* Links */
 

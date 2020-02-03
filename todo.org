@@ -66,9 +66,9 @@ An Org file that demonstrates almost everything in Org
 - [X] underline
 - [X] strikethrough
 - [X] code inline formatting
-- [ ] subscript
-- [ ] superscript
-- [ ] special symbols
+- [X] subscript
+- [X] superscript
+- [X] special symbols
 - [ ] math
 - [ ] images
 - [ ] captions

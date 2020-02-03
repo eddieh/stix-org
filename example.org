@@ -175,3 +175,36 @@ Want something *bold* use =*bold*=. Want something /italic/ use
 =/italic/=. Want something _underlined_ use =_underlined_=. Want
 something +strikethrough+ use =+strikethrough+=. And lastly, want
 something =monospaced= use ~=monospaced=~ or =~monospaced~=.
+
+
+** Subscripts and Superscripts
+
+Text characters set below or above the line of type for a font/size
+combination are necessary for technical writing. Subscripts and
+superscripts are achieved in the same way as in TeX or LaTeX.
+
+The radius of the sun is R_{sun} = 6.96 \times 10^{8} m.  On the other
+hand, the radius of Alpha Centauri is R_{Alpha Centauri} = 1.28 \times
+R_{sun}.
+
+
+** Special Symbols
+
+There are many special symbols and non-Latin alphabets that can be
+inserted in an Org document. The syntax is like TeX or LaTeX too.
+
+Given a circle \Gamma of diameter d, the length of its circumference
+is \pi{}d. We can type \alpha as =\alpha=, \beta as =\beta=, and \chi
+as =\chi=. If you need a symbol in a word or formula it can be
+terminated with a pair of curly braces, so the previous \pi{}d is
+achived by typing =\pi{}d=.
+
+Some other symbols include \copy as =\copy=, \dag as =\dag=, and
+\times as seen in the subscript/superscript section above as
+=\times=. There's \pm as =\pm= or =\plusmn=. There's \frac12 as
+=\frac12= and there's \frac34 as =\frac34=. There's x \to \infin,
+typed as =x \to \infin=. Don't forget the en dash -- or the em dash
+---, respectively =--= and =---=.
+
+Get a list of special symbols with =org-entities-help= or you can add
+your own in the variable =org-entities-user=.
