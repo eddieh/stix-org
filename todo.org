@@ -61,11 +61,11 @@ An Org file that demonstrates almost everything in Org
 - [ ] center blocks
 - [ ] drawers
 ** formatting
-- [ ] bold
-- [ ] italic
-- [ ] underline
-- [ ] strikethrough
-- [ ] code inline formatting
+- [X] bold
+- [X] italic
+- [X] underline
+- [X] strikethrough
+- [X] code inline formatting
 - [ ] subscript
 - [ ] superscript
 - [ ] special symbols

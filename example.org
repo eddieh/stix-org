@@ -167,3 +167,11 @@ Now we must check how a code block that with overflow looks.
 #+begin_src objc
   + (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath inBundleWithURL:(NSURL *)bundleURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 #+end_src
+
+
+* Formatting
+
+Want something *bold* use =*bold*=. Want something /italic/ use
+=/italic/=. Want something _underlined_ use =_underlined_=. Want
+something +strikethrough+ use =+strikethrough+=. And lastly, want
+something =monospaced= use ~=monospaced=~ or =~monospaced~=.

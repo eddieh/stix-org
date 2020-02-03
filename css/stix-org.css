@@ -39,6 +39,11 @@
     --txt-color: #444;
     --mono-color: #111;
     --src-bg-color: #f9f9f9;
+    --code-color: #646490;
+    --link-color: #394C90;
+    --visited-color: #7A7DB0;
+    --tbl-vborder-color: gray;
+    --tbl-hborder-color: lightgray;
     --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --body-fonts: STIXGeneral, "Times New Roman", serif;
     --mono-fonts: "DejaVu Sans Mono", Menlo, Monaco, monospace;
@@ -81,18 +86,23 @@ h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility;
 }
 
-tt, code, kbd, samp,
-pre, xmp, plaintext, listing {
+code, kbd, pre {
     font-family: var(--mono-fonts);
     font-size: 12pt;
-    color: var(--mono-color);
+}
+
+
+/* Formatting */
+
+.underline {
+    text-decoration: underline;
 }
 
 
 /* Links */
 
-a:link { color: #394C90; }
-a:visited { color: #7A7DB0; }
+a:link { color: var(--link-color); }
+a:visited { color: var(--visited-color); }
 a:link, a:visited { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -127,6 +137,7 @@ header h3 { font-size: 2rem; }
 header h4 { font-size: 1.75rem; }
 header h5 { font-size: 1.5rem; }
 header h5 { font-size: 1.25rem; }
+
 
 /* TOC */
 
@@ -202,11 +213,11 @@ thead {
 }
 
 table td + td, table th + th {
-    border-left: 1px solid gray;
+    border-left: 1px solid var(--tbl-vborder-color);
 }
 
 table tr {
-    border-top: 1px solid lightgray;
+    border-top: 1px solid var(--tbl-hborder-color);
 }
 
 td, th {
@@ -230,6 +241,13 @@ caption, figcaption {
 
 pre {
     padding: .5em .2em;
+    color: var(--mono-color);
     background-color: var(--src-bg-color);
     overflow-x: scroll;
+}
+
+code {
+    padding: .2em;
+    color: var(--code-color);
+    background-color: var(--src-bg-color);
 }
