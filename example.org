@@ -264,10 +264,55 @@ tables/. We will denote /true/ with a T and /false/ with a F.
 
 *** Defining /Not/
 
-The propisiotn \( P \) and its complement \( \neg P \) are defined by
-the truth table:
+The propisiotn \( P \) and its complement \( \neg P \), read /not P/,
+are defined by the truth table:
 
 | \( P \) | \( \neg P \) |
 |---------+--------------|
 | T       | F            |
 | F       | T            |
+
+
+*** Defining /And/
+
+Given a proposition \( P \) and a proposition \( Q \) the logical
+conjunction \( P \land Q \), read /P and Q/, is defined by the truth
+table:
+
+| \( P \) | \( Q \) | \( P \land Q \) |
+|---------+---------+-----------------|
+| T       | T       | T               |
+| T       | F       | F               |
+| F       | T       | F               |
+| F       | F       | F               |
+
+
+*** Defining /Or/
+
+Given a proposition \( P \) and a proposition \( Q \) the logical
+disjunction \( P \lor Q \), read /P or Q/, is defined by the truth
+table:
+
+| \( P \) | \( Q \) | \( P \lor Q \) |
+|---------+---------+-----------------|
+| T       | T       | T               |
+| T       | F       | T               |
+| F       | T       | T               |
+| F       | F       | F               |
+
+
+*** Defining /Xor/
+
+Given a proposition \( P \) and a proposition \( Q \) the logical
+exclusive disjunction \( P \oplus Q \), read /P exlusive or Q/, is
+defined by the truth table:
+
+| \( P \) | \( Q \) | \( P \oplus Q \) |
+|---------+---------+------------------|
+| T       | T       | F                |
+| T       | F       | T                |
+| F       | T       | T                |
+| F       | F       | F                |
+
+/Notation note:/ the symbol \( \veebar \) is an alternative to \(
+\oplus \).
