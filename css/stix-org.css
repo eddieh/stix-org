@@ -264,3 +264,12 @@ code {
     color: var(--code-color);
     background-color: var(--src-bg-color);
 }
+
+
+/* Math */
+
+.katex {
+    font-size: 1em;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+}

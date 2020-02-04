@@ -245,5 +245,29 @@ List of lists
 Definition lists
 
 - Proposition :: A statement that is either /true/ or /false/
-- True :: agreement with fact or reality
-- False :: conflicting with fact or reality
+- True :: Agreement with fact or reality
+- False :: Conflicting with fact or reality
+
+
+* Math
+
+Math (and music) are universal languages. Any system for preparing
+documents must provide facilities for writing and displaying math.
+
+
+** Logical Proposition
+
+Given a proposition \( P \) and a proposition \( Q \) we can define
+some logical modifiers, combinatory terms, and relations using /truth
+tables/. We will denote /true/ with a T and /false/ with a F.
+
+
+*** Defining /Not/
+
+The propisiotn \( P \) and its complement \( \neg P \) are defined by
+the truth table:
+
+| \( P \) | \( \neg P \) |
+|---------+--------------|
+| T       | F            |
+| F       | T            |
