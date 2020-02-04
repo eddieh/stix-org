@@ -195,8 +195,19 @@ audio, canvas, detail, embed, form, object, picture, video {
 
 /* Lists */
 
+ol, ul {
+    list-style-position: inside;
+}
+
 ol ul, ul ol, ul ul, ol ol {
+    margin: 0;
     padding-left: 1em;
+}
+
+dt { font-weight: bold; }
+dd {
+    margin-left: 1em;
+    margin-bottom: .5em;
 }
 
 

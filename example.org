@@ -208,3 +208,42 @@ typed as =x \to \infin=. Don't forget the en dash -- or the em dash
 
 Get a list of special symbols with =org-entities-help= or you can add
 your own in the variable =org-entities-user=.
+
+
+* Lists
+
+Some technology that relies on quantum physics include
+
+- Lasers
+- Solar cells
+- Xerox machines and laser printers
+- Transistors
+- Integrated circuits
+- Digital cameras
+- Supercondoctors
+
+Programming languages
+
+1. C
+2. Objective-C
+3. Python
+4. JavaScript
+5. Scheme (or LISP)
+6. Ruby
+7. Shell script
+
+List of lists
+
+- Unordered list items may begin with
+  - dash =-=
+  - plus =+=
+  - asterisk =*=
+- Ordered list items may begin with
+    - a number followed by a period =1.=
+    - a number followed by a parenthesis =1)=
+
+Definition lists
+
+- Proposition :: A statement that is either /true/ or /false/
+- True :: agreement with fact or reality
+- False :: conflicting with fact or reality

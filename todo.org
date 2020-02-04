@@ -74,9 +74,9 @@ An Org file that demonstrates almost everything in Org
 - [ ] captions
 - [ ] horizontal rules
 ** lists
-- [ ] ordered lists
-- [ ] unordered lists
-- [ ] definition lists
+- [X] ordered lists
+- [X] unordered lists
+- [X] definition lists
 - [ ] checkboxes
 ** links
 - [ ] hyperlinks
