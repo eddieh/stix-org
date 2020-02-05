@@ -273,3 +273,24 @@ code {
     line-height: 1.5;
     text-rendering: optimizeLegibility;
 }
+
+
+/* Figures & images */
+
+
+figure img {
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    text-align: center;
+}
+
+.fill-width {
+    max-width: 780px;
+}
+
+.natural-width {
+    width: intrinsic;
+}

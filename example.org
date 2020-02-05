@@ -361,3 +361,23 @@ The following is a summation with index /k/ from 1 to /n/ - 1.
 The following is a summation with index /j/ from 0 to /n/ - 1.
 
 \[ \sum_{j=0}^{n-1} x^j = 1 + x + x^2 + x^3 + ... + x^{n-1} \]
+
+
+* Images
+
+The first image is of the Wallpaper Groups also called the Plane
+Symmetry Groups or the Plane Crystallographic Groups it is taken from
+a paper published in American Mathematical Monthly titled [[https://www.math.fsu.edu/~quine/MB_10/schattschneider.pdf][The Plane
+Symmetry Groups: Their Recognition and Notation]].
+
+#+NAME: fig:wg
+#+CAPTION: The 17 Wallpaper Groups
+#+ATTR_HTML: :class fill-width :alt All 17 wallpaper groups
+[[./img/wallpaper-groups.png]]
+
+The next image should not stretch.
+
+#+NAME: fig:cw
+#+CAPTION: Color Wheel
+#+ATTR_HTML: :class natural-width :alt A color wheel
+[[./img/color-wheel.png]]
