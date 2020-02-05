@@ -254,6 +254,40 @@ Definition lists
 Math (and music) are universal languages. Any system for preparing
 documents must provide facilities for writing and displaying math.
 
+The set of natural numbers \( 1, 2, 3, ..., \infty \) is represented
+by the symbol \( \mathbb{N} \). The set of itegers \( -\infty, ...,
+-2, -1, 0, 1, 2, ..., \infty \) is represented by the symbol \(
+\mathbb{Z} \). The letter Z comes from Zahlen, the German word for
+numbers.
+
+Here are some properties of integers:
+
+The set \(\mathbb{Z}\) is closed under addition
+
+\[ a, b \in \mathbb{Z} \implies a + b \in \mathbb{Z} \]
+
+The set \(\mathbb{Z}\) is closed under subtraction
+
+\[ a, b \in \mathbb{Z} \implies a - b \in \mathbb{Z} \]
+
+And the set \(\mathbb{Z}\) is closed under multiplication
+
+\[ a, b \in \mathbb{Z} \implies a \times b \in \mathbb{Z} \]
+
+
+** Notation
+
+Inline math such as \(a^2\) is inserted when \(\LaTeX\) is delimited
+by =\(= ... =\)=. Whereas display math is inserted when \(\LaTeX\) is
+delimited by =\[= ... =\]=. Consider \(n \ge 1, F_0 = 0, F_1 = 1\),
+then we can express a recurrence relation in dispaly math as
+
+\[ F_{n+1} = F_n + F_{n-1} \]
+
+
+
+
+
 
 ** Logical Proposition
 
@@ -316,3 +350,14 @@ defined by the truth table:
 
 /Notation note:/ the symbol \( \veebar \) is an alternative to \(
 \oplus \).
+
+
+** Sums
+
+The following is a summation with index /k/ from 1 to /n/ - 1.
+
+\[ \sum_{k=1}^{n-1} a_k = a_1 + a_2 + a_3 ... + a_{n-1} \]
+
+The following is a summation with index /j/ from 0 to /n/ - 1.
+
+\[ \sum_{j=0}^{n-1} x^j = 1 + x + x^2 + x^3 + ... + x^{n-1} \]
