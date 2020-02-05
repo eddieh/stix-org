@@ -381,3 +381,19 @@ The next image should not stretch.
 #+CAPTION: Color Wheel
 #+ATTR_HTML: :class natural-width :alt A color wheel
 [[./img/color-wheel.png]]
+
+
+* Horizontal Rules
+
+Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Unam
+incolunt Belgae, aliam Aquitani, tertiam. Contra legem facit qui id
+facit quod lex prohibet. Ut enim ad minim veniam, quis nostrud
+exercitation. Nec dubitamus multa iter quae et nos invenerat.
+
+#+ATTR_HTML: :class section-hr
+------------------------------------------------------------------------
+
+Qui ipsorum lingua Celtae, nostra Galli appellantur. Idque Caesaris
+facere voluntate liceret: sese habere. Cum ceteris in veneratione tui
+montes, nascetur mus. Quo usque tandem abutere, Catilina, patientia
+nostra?
