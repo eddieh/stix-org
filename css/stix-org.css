@@ -78,6 +78,7 @@ html {
 
 body {
     font-family: var(--body-fonts);
+    background-color: var(--bg-color);
     color: var(--txt-color);
 }
 
@@ -308,7 +309,7 @@ hr {
 }
 
 hr:after {
-    background: #fff;
+    background-color: var(--bg-color);
     content: "○";
     padding: 0 6px;
     position: relative;

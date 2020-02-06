@@ -52,7 +52,8 @@ An Org file that demonstrates almost everything in Org
   - [ ] table alignment
   - [ ] full-width table
   - [ ] cell alignment
-  - [ ] captions
+  - [X] column alignment
+  - [X] captions
 - [ ] block quotes
 - [ ] src blocks
 - [ ] example blocks
@@ -72,7 +73,7 @@ An Org file that demonstrates almost everything in Org
 - [X] math
 - [X] images
 - [X] captions
-- [ ] horizontal rules
+- [X] horizontal rules
 ** lists
 - [X] ordered lists
 - [X] unordered lists

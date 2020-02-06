@@ -125,6 +125,76 @@ Which produces the table
 | 4 | 2 |
 
 
+** Column Alignment
+
+Consider the payoff matrix for Roshambo. If we want player one's
+options to be represented by the first column and aligned right while
+player two's options are represented by the first row and center
+aligned, we can get a decent looking payoff matrix with the following
+markup in Org
+
+#+BEGIN_SRC org
+  |          | Rock | Paper | Sissors |
+  |      <r> | <c>  |  <c>  |   <c>   |
+  |     Rock |  0   |  -1   |    1    |
+  |    Paper |  1   |   0   |   -1    |
+  | Scissors |  -1  |   1   |    0    |
+#+END_SRC
+
+Which produces the following table
+
+|          | Rock | Paper | Sissors |
+|      <r> | <c>  |  <c>  |   <c>   |
+|     Rock |  0   |  -1   |    1    |
+|    Paper |  1   |   0   |   -1    |
+| Scissors |  -1  |   1   |    0    |
+
+As can bee seen above, columns can be aligned right with =<r>=,
+aligned center with =<c>=, and aligned left with =<l>=.
+
+# Complex table (a playoff matrix for Roshambo)
+#+BEGIN_COMMENT
++-------------------+-------------------+
+|                   |     Player 2      |
+|                   +-----+-----+-------+
+|                   |Rock |Paper|Sissors|
++----------+--------+-----+-----+-------+
+|          |    Rock|  0  | -1  |   1   |
+|          +--------+-----+-----+-------+
+|Player 1  |   Paper|  1  |  0  |  -1   |
+|          +--------+-----+-----+-------+
+|          | Sissors| -1  |  1  |   0   |
++----------+--------+-----+-----+-------+
+#+END_COMMENT
+
+
+** Table Captions
+
+A table with a caption is easy to produce. Consider the magic square
+of order 3. We can compute the magic constant for magic square of
+order /n/ using the formula \(M = n (n^2 + 1) / 2 \). This give us a
+magic constant of 15 for the order 3 magic square. We can construct
+the magic square in Org with a caption like so
+
+#+BEGIN_SRC org
+  ,#+NAME: tbl:ms-o3
+  ,#+CAPTION: Magic Square of Order 3
+  ,#+ATTR_HTML: :width 25%
+  | <c> | <c> | <c> |
+  |  2  |  7  |  6  |
+  |  9  |  5  |  1  |
+  |  4  |  3  |  8  |
+#+END_SRC
+
+#+NAME: tbl:ms-o3
+#+CAPTION: Magic Square of Order 3
+#+ATTR_HTML: :width 25%
+| <c> | <c> | <c> |
+|  2  |  7  |  6  |
+|  9  |  5  |  1  |
+|  4  |  3  |  8  |
+
+
 * Source Blocks
 
 An Org source block containing an Emacs Lisp function called
@@ -390,7 +460,6 @@ incolunt Belgae, aliam Aquitani, tertiam. Contra legem facit qui id
 facit quod lex prohibet. Ut enim ad minim veniam, quis nostrud
 exercitation. Nec dubitamus multa iter quae et nos invenerat.
 
-#+ATTR_HTML: :class section-hr
 ------------------------------------------------------------------------
 
 Qui ipsorum lingua Celtae, nostra Galli appellantur. Idque Caesaris
