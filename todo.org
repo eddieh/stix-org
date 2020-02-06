@@ -80,7 +80,7 @@ An Org file that demonstrates almost everything in Org
 - [X] definition lists
 - [ ] checkboxes
 ** links
-- [ ] hyperlinks
+- [X] hyperlinks
 - [ ] footnotes
 - [ ] reference labels
 

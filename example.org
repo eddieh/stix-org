@@ -127,7 +127,7 @@ Which produces the table
 
 ** Column Alignment
 
-Consider the payoff matrix for Roshambo. If we want player one's
+Consider the payoff matrix for [[https://en.wikipedia.org/wiki/Rock_paper_scissors][Roshambo]]. If we want player one's
 options to be represented by the first column and aligned right while
 player two's options are represented by the first row and center
 aligned, we can get a decent looking payoff matrix with the following
@@ -466,3 +466,31 @@ Qui ipsorum lingua Celtae, nostra Galli appellantur. Idque Caesaris
 facere voluntate liceret: sese habere. Cum ceteris in veneratione tui
 montes, nascetur mus. Quo usque tandem abutere, Catilina, patientia
 nostra?
+
+
+* Links
+
+We need hypertext, it's the web after all. The Org link format is
+simple, either =[link]= or =[[link][description]]=. There are some
+[[https://orgmode.org/org.html#Link-Format][escaping concerns]] so it is best to always insert or edit a link with
+=C-c C-l=.
+
+
+** External Links
+
+There are a number of external links in this document. Org can link to
+many different types of resources. The two most common types of
+resources are web links "https" (or "http") and "file" links.
+
+A clickable URL to the On-Line Encyclopedia of Integer Sequences
+follows [[https://oeis.org]]. The next example is a descriptive link to
+the [[https://dlmf.nist.gov][NIST Digital Library of Mathematical Functions]].
+
+# The next link doesn't seem to work when exporting although it works
+# with C-c C-o
+
+# A link to line 42 of your Emacs init file follows
+# [[file:~/.emacs.d/init.el::42]].
+
+
+** Internal Links
