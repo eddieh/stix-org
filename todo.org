@@ -58,9 +58,9 @@ An Org file that demonstrates almost everything in Org
   - [X] block quotes
   - [X] verse blocks
   - [X] center blocks
-  - [ ] src blocks
+  - [X] src blocks
+  - [X] example blocks
   - [ ] html blocks
-  - [ ] example blocks
 - [ ] drawers
 ** formatting
 - [X] bold

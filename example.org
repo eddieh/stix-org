@@ -601,3 +601,15 @@ volutpat. Sed haec quis possit intrepidus aestimare tellus.
 #+BEGIN_CENTER
 🛏️
 #+END_CENTER
+
+
+** Examples
+
+Magna pars studiorum, prodita quaerimus. Cum sociis natoque penatibus
+et magnis dis parturient. Cum ceteris in veneratione tui montes,
+nascetur mus. Pellentesque habitant morbi tristique senectus et netus.
+Quo usque tandem abutere, Catilina, patientia nostra?
+
+#+BEGIN_EXAMPLE
+Some example from a text file.
+#+END_EXAMPLE
