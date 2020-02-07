@@ -56,8 +56,8 @@ An Org file that demonstrates almost everything in Org
   - [X] captions
 - [-] blocks
   - [X] block quotes
-  - [ ] verse blocks
-  - [ ] center blocks
+  - [X] verse blocks
+  - [X] center blocks
   - [ ] src blocks
   - [ ] html blocks
   - [ ] example blocks

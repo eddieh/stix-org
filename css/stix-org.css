@@ -330,3 +330,9 @@ blockquote {
 blockquote p:first-of-type {
     margin: 0;
 }
+
+.verse {
+    color: var(--bq-color);
+    padding: .5em  4em .5em 1.33em;
+    border-left: .25em solid var(--bq-border-color);
+}

@@ -498,6 +498,9 @@ the [[https://dlmf.nist.gov][NIST Digital Library of Mathematical Functions]].
 
 * Blocks
 
+
+** Blockquotes
+
 Phasellus laoreet lorem vel dolor tempus vehicula. Donec sed odio
 operae, eu vulputate felis rhoncus. Fictum, deserunt mollit anim
 laborum astutumque! A communi observantia non est recedendum. At nos
@@ -548,3 +551,53 @@ some or all of the points A, B and C coincide? Yet this seems largely
 responsible for the convenience with which Pythagoras' Theorem can be
 used. --- Edsger W. Dijkstra
 #+END_QUOTE
+
+
+** Verse
+
+Cum sociis natoque penatibus et magnis dis parturient. Morbi odio
+eros, volutpat ut pharetra vitae, lobortis sed nibh. Sed haec quis
+possit intrepidus aestimare tellus.
+
+#+BEGIN_VERSE
+Tyger Tyger, burning bright,
+In the forests of the night;
+What immortal hand or eye,
+Could frame thy fearful symmetry?
+    --- William Blake
+#+END_VERSE
+
+Paullum deliquit, ponderibus modulisque suis ratio utitur. Quisque
+placerat facilisis egestas cillum dolore. Nihil hic munitissimus
+habendi senatus locus, nihil horum?
+
+#+BEGIN_VERSE
+Once upon a midnight dreary, while I pondered, weak and weary,
+Over many a quaint and curious volume of forgotten lore—
+    While I nodded, nearly napping, suddenly there came a tapping,
+As of some one gently rapping, rapping at my chamber door.
+“’Tis some visitor,” I muttered, “tapping at my chamber door—
+            Only this and nothing more.”
+    --- Edgar Allan Poe
+#+END_VERSE
+
+
+** Center
+
+Inmensae subtilitatis, obscuris et malesuada fames. Salutantibus vitae
+elit libero, a pharetra augue. Pellentesque habitant morbi tristique
+senectus et netus. Fictum, deserunt mollit anim laborum astutumque!
+Cum sociis natoque penatibus et magnis dis parturient.
+
+#+BEGIN_CENTER
+I should go to bed.
+#+END_CENTER
+
+Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Quae vero
+auctorem tractata ab fiducia dicuntur. Cras mattis iudicium purus sit
+amet fermentum. Morbi fringilla convallis sapien, id pulvinar odio
+volutpat. Sed haec quis possit intrepidus aestimare tellus.
+
+#+BEGIN_CENTER
+🛏️
+#+END_CENTER
