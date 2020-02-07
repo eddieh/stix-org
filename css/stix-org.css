@@ -44,6 +44,8 @@
     --visited-color: #7A7DB0;
     --tbl-vborder-color: gray;
     --tbl-hborder-color: lightgray;
+    --bq-color:  #7a7a7a;
+    --bq-border-color: #e5e5e5;
     --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --body-fonts: STIXGeneral, "Times New Roman", serif;
     --mono-fonts: "DejaVu Sans Mono", Menlo, Monaco, monospace;
@@ -314,4 +316,17 @@ hr:after {
     padding: 0 6px;
     position: relative;
     top: -15px;
+}
+
+
+/* Blocks */
+
+blockquote {
+    color: var(--bq-color);
+    padding: .5em  4em .5em 1.33em;
+    border-left: .25em solid var(--bq-border-color);
+}
+
+blockquote p:first-of-type {
+    margin: 0;
 }

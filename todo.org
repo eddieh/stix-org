@@ -54,12 +54,13 @@ An Org file that demonstrates almost everything in Org
   - [ ] cell alignment
   - [X] column alignment
   - [X] captions
-- [ ] block quotes
-- [ ] src blocks
-- [ ] example blocks
-- [ ] html blocks
-- [ ] verse blocks
-- [ ] center blocks
+- [-] blocks
+  - [X] block quotes
+  - [ ] verse blocks
+  - [ ] center blocks
+  - [ ] src blocks
+  - [ ] html blocks
+  - [ ] example blocks
 - [ ] drawers
 ** formatting
 - [X] bold

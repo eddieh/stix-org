@@ -494,3 +494,57 @@ the [[https://dlmf.nist.gov][NIST Digital Library of Mathematical Functions]].
 
 
 ** Internal Links
+
+
+* Blocks
+
+Phasellus laoreet lorem vel dolor tempus vehicula. Donec sed odio
+operae, eu vulputate felis rhoncus. Fictum, deserunt mollit anim
+laborum astutumque! A communi observantia non est recedendum. At nos
+hinc posthac, sitientis piros Afros.
+
+#+BEGIN_QUOTE
+Give a man a fish and feed him for a day. Don't teach a man to fish
+and feed yourself. He's a grown man. And fishing's not that
+hard. --- Ron Swanson
+#+END_QUOTE
+
+Sed haec quis possit intrepidus aestimare tellus. Lorem ipsum dolor
+sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut
+labore et dolore magna aliqua. Fabio vel iudice vincam, sunt in culpa
+qui officia. Morbi odio eros, volutpat ut pharetra vitae, lobortis sed
+nibh.
+
+#+BEGIN_QUOTE
+It would be very nice if I could illustrate the various techniques
+with small demonstration programs and could conclude with "... and
+when faced with a program a thousand times as large, you compose it in
+the same way." This common educational device, however, would be
+self-defeating as one of my central themes will be that any two things
+that differ in some respect by a factor of already a hundred or more,
+are utterly incomparable.
+
+History has shown that this truth is very hard to believe. Apparently
+we are too much trained to disregard differences in scale, to treat
+them as "gradual differences that are not essential." We tell
+ourselves that what we can do once, we can also do twice and by
+induction we fool ourselves into believing that we can do it as many
+times as needed, but this is just not true! A factor of a thousand is
+already far beyond our powers of imagination!
+
+[...]
+
+It is in the same mood that I should like to draw the reader's
+attention to the fact that "clarity" has pronounced quantitative
+aspects, a fact many mathematicians, curiously enough, seem to be
+unaware of. A theorem stating the validity of a conclusion when ten
+pages full of conditions are satisfied is hardly a convenient tool, as
+all conditions have to be verified whenever the theorem is appealed
+to. In Euclidean geometry, Pythagoras' Theorem holds for any three
+points A, B and C such that through A and C a straight line can be
+drawn orthogonal to a straight line through B and C. How many
+mathematicians appreciate that the theorem remains applicable when
+some or all of the points A, B and C coincide? Yet this seems largely
+responsible for the convenience with which Pythagoras' Theorem can be
+used. --- Edsger W. Dijkstra
+#+END_QUOTE
