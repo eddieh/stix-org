@@ -626,6 +626,36 @@ furor iste tuus nos eludet? Qui ipsorum lingua Celtae, nostra Galli
 appellantur [fn:2]. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
 Salutantibus vitae elit libero, a pharetra augue.
 
+** Footnote Syntax
+
+Org footnotes are just links that start with =fn:=. The footnotes
+may be numbered, named, anonymous and can be inline or defined in a
+footnotes section. A numbered footnote looks like this:
+
+#+BEGIN_SRC org
+The Org homepage[fn:1] now looks a lot better than it used to.
+...
+[fn:1] The link is: https://orgmode.org
+#+END_SRC
+
+Named and anonymous footnotes look like these:
+
+=[fn:name]=
+
+A named footnote reference, where =name= is a unique label word, or,
+for simplicity of automatic creation, a number.
+
+=[fn:: This is the inline definition of this footnote]=
+
+An anonymous footnote where the definition is given directly at the
+reference point.
+
+=[fn:name: a definition]=
+
+An inline definition of a footnote, which also specifies a name for
+the note. Since Org allows multiple references to the same note, you
+can then use =[fn:name]= to create additional references.
+
 
 * Footnotes
 
