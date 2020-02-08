@@ -495,6 +495,16 @@ the [[https://dlmf.nist.gov][NIST Digital Library of Mathematical Functions]].
 
 ** Internal Links
 
+With an internal link we can refer to a previous section like the
+section on [[*Math][Math]]. Or we can link to some named element such as [[fig:wg][the
+wallpaper group figure]]. Or we can link to a section [[*Headings]] without
+a description. Section links are of the form =[[*section
+name][optional description]]=, or to use a section's custom ID to form
+the link =[[#custom-id][optional description]]=, and to link to a
+named entity use the form =[[entity-name][optional description]]=,
+e.g. for the wallpaper group figure the link is formed with
+=[[fig:wg][wallpaper group figure]]=.
+
 
 * Blocks
 
