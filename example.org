@@ -613,3 +613,21 @@ Quo usque tandem abutere, Catilina, patientia nostra?
 #+BEGIN_EXAMPLE
 Some example from a text file.
 #+END_EXAMPLE
+
+
+* Footnotes and Endnotes
+
+Technical writing requires many structures and organizational tools to
+be effective. One of the quintessential structures in a technical
+document are footnotes [fn:1].
+
+Plura mihi bona sunt, inclinet, amari petere vellent. Quam diu etiam
+furor iste tuus nos eludet? Qui ipsorum lingua Celtae, nostra Galli
+appellantur [fn:2]. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+Salutantibus vitae elit libero, a pharetra augue.
+
+
+* Footnotes
+
+[fn:1] https://history.nasa.gov/printFriendly/footnoteguide.html
+[fn:2] Latin nonsense provided by http://lorembuilder.com
