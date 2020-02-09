@@ -47,7 +47,7 @@
     --bq-color:  #7a7a7a;
     --bq-border-color: #e5e5e5;
     --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --body-fonts: STIXGeneral, "Times New Roman", serif;
+    --body-fonts: "STIXGeneral", "Times New Roman", serif;
     --mono-fonts: "DejaVu Sans Mono", Menlo, Monaco, monospace;
 }
 

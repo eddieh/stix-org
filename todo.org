@@ -84,6 +84,10 @@ An Org file that demonstrates almost everything in Org
 - [X] hyperlinks
 - [X] footnotes
 - [ ] reference labels
+** web fonts
+- [X] STIX font
+- [X] DejaVu Sans Mono font
+- [ ] Headings font
 
 * TODO GitHub style example
 GitHub style Org is rendered with

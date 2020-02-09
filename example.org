@@ -667,6 +667,23 @@ the note. Since Org allows multiple references to the same note, you
 can then use =[fn:name]= to create additional references.
 
 
+* Fonts
+
+Uses [[https://everythingfonts.com/font/stix-regular][STIX Regular]] for body text from everythingfonts.com. When you
+embed fonts from everythingfonts.com you're require you to display
+this powered by fonts from everythingfonts.com badge.
+
+#+HTML: <a href="https://everythingfonts.com" class="efbadgelink">
+#+HTML: <img src="https://everythingfonts.com/branding/efff.gif"
+#+HTML:    title="Powered by fonts from Everything Fonts.com"
+#+HTML:    alt="Powered by fonts from everythingfonts.com"/>
+#+HTML: </a>
+
+For monospaced typeface [[https://fontlibrary.org/en/font/dejavu-sans-mono][DejaVu Sans Mono]] from fontlibrary.org. As far
+as I can tell fontlibrary.org does not require any specific
+attribution.
+
+
 * Footnotes
 
 [fn:1] https://history.nasa.gov/printFriendly/footnoteguide.html
