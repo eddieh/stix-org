@@ -27,9 +27,10 @@ Basic stuff that doesn't rely on structure or render quirks
   - [ ] subtitle
   - [X] headings
   - [X] body
-  - [ ] monospace
+  - [X] monospace
 - [X] heading sizes
 - [X] white space, margins, etc
+- [ ] responsive rules
 
 * TODO example org file
 An Org file that demonstrates almost everything in Org
@@ -142,3 +143,16 @@ https://github.com/niklasfasching/go-org. It supports these Org features
 ** links
 - [ ] hyperlinks
 - [ ] footnotes
+
+* TODO testing
+- [ ] macOS
+  - [ ] Safari
+  - [ ] Chrome
+  - [ ] Firefox
+- [ ] Windows
+  - [ ] Chrome
+  - [ ] Firefox
+  - [ ] Edge
+- [ ] Linux
+  - [ ] Chromium
+  - [ ] Ice Weasel (I guess it is Firefox again)

@@ -9,6 +9,9 @@
  _{unofficial} Scientific and Technical Information Exchange (STIX) theme
 for Org HTML exporter.
 
-The STIX theme uses the [[https://github.com/stipub/stixfonts][STIX Fonts]]. This theme incorporates elements
-from the [[https://github.com/poole/lanyon][Lanyon]] for Jekyll theme, the [[https://github.com/gongzhitaao/orgcss][OrgCSS]] stylesheet for Org's HTML
-exporter, and many other sources of beautiful minimalist documents.
+The STIX theme uses the [[https://github.com/stipub/stixfonts][STIX Fonts]] for body text and the [[https://dejavu-fonts.github.io][DejaVu Sans
+Mono]] font for code. The theme incorporates elements from the [[https://github.com/poole/lanyon][Lanyon]]
+for Jekyll theme, the [[https://github.com/gongzhitaao/orgcss][OrgCSS]] stylesheet for Org's HTML exporter, and
+many other sources of beautiful minimalist documents.
+
+** Usage
