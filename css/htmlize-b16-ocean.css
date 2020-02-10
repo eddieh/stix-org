@@ -1,3 +1,35 @@
+/*
+ * _________                       ____________
+ * ______  /_______ ______________<  /_  _____/
+ * _____  __ \  __ `/_  ___/  _ \_  /_  __ \
+ * ____  /_/ / /_/ /_(__  )/  __/  / / /_/ /
+ *    /_.___/\__,_/ /____/ \___//_/  \____/
+ *                  ___  _______ ___ ____
+ *                 / _ \/ __/ -_) _ `/ _ \
+ *                 \___/\__/\__/\_,_/_//_/
+ *
+ *
+ * Base16 Ocean for HTMLize'd Org Code Blocks
+ * ==========================================
+ *
+ * CSS generated¹ for HTMLize code blocks with
+ *
+ *     M-x org-html-htmlize-generate-css
+ *
+ * To use the generated CSS place the following in yout Emacs init file.
+ *
+ *     (setq org-html-htmlize-output-type 'css)
+ *
+ * Based on
+ *  - http://chriskempson.com/projects/base16/
+ *  - https://github.com/belak/base16-emacs
+ *
+ * MIT license by @haltingproblems
+ * https://github.com/eddieh/stix-org
+ *
+ * ¹Includes hand modification.
+ */
+
 .src {
     color: #c0c5ce;
     background: #2b303b;
