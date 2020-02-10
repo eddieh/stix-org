@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2020-02-10 Mon 15:36 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example Org File</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Eddie Hillenbrand">
+<meta name="description" content="A document that demonstrates almost everything in Org"
+>
+<meta name="keywords" content="org html example demonstration demo sample">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<link rel="stylesheet" href="https://everythingfonts.com/font/face/EPin6zkn6Z_cJmle2RtS6QeF">
+<link rel="stylesheet" href="https://fontlibrary.org/face/dejavu-sans-mono">
+<link rel="stylesheet" href="css/stix-org.css">
+<link rel="stylesheet" href="css/htmlize-b16-ocean.css">
+<style>
+aside {
+display: block;
+margin-top: 2em;
+font-family: sans-serif;
+top: -1px;
+background: #eee;
+padding: .5em;
+border-top: 5px solid #666;
+}
+aside > p { margin: 0; }
+</style>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">Example Org File</h1>
+<p class="subtitle">Org features, structures, and markup</p>
+</header><nav id="table-of-contents">
+<h1>Table of Contents</h1>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org108c819">1. Front Matter</a>
+<ul>
+<li><a href="#org9bbf417">1.1. Title and Date</a></li>
+</ul>
+</li>
+<li><a href="#orgd7c8e96">2. Headings</a></li>
+<li><a href="#orgc6bfc3f">3. Top or first level headline</a>
+<ul>
+<li><a href="#org96fe6c9">3.1. Second level</a>
+<ul>
+<li><a href="#org5188f35">3.1.1. Third level</a>
+<ul>
+<li><a href="#org9436082">3.1.1.1. Forth level</a>
+<ul>
+<li><a href="#org3e95b88">3.1.1.1.1. Fifth level</a>
+<ul>
+<li><a href="#org26dd7f7">3.1.1.1.1.1. Sixth level</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org9a765c6">4. Tables</a>
+<ul>
+<li><a href="#orgb329f07">4.1. Column Alignment</a></li>
+<li><a href="#orgc9f4b3f">4.2. Table Captions</a></li>
+</ul>
+</li>
+<li><a href="#org2cb3017">5. Source Blocks</a>
+<ul>
+<li><a href="#orge8f96ad">5.1. Long lines</a></li>
+</ul>
+</li>
+<li><a href="#org5c63c6d">6. Formatting</a>
+<ul>
+<li><a href="#org7b15208">6.1. Subscripts and Superscripts</a></li>
+<li><a href="#org9ffe549">6.2. Special Symbols</a></li>
+</ul>
+</li>
+<li><a href="#org43f07db">7. Lists</a></li>
+<li><a href="#org14c0f04">8. Math</a>
+<ul>
+<li><a href="#org2e45cef">8.1. Notation</a></li>
+<li><a href="#org93a424f">8.2. Logical Proposition</a>
+<ul>
+<li><a href="#org101a5f8">8.2.1. Defining <i>Not</i></a></li>
+<li><a href="#org1ee3c64">8.2.2. Defining <i>And</i></a></li>
+<li><a href="#org1e1c34d">8.2.3. Defining <i>Or</i></a></li>
+<li><a href="#org503f18f">8.2.4. Defining <i>Xor</i></a></li>
+</ul>
+</li>
+<li><a href="#org9da980f">8.3. Sums</a></li>
+</ul>
+</li>
+<li><a href="#org5cee8e4">9. Images</a></li>
+<li><a href="#org74ddf7c">10. Horizontal Rules</a></li>
+<li><a href="#orgec24c94">11. Links</a>
+<ul>
+<li><a href="#org6bd4cd3">11.1. External Links</a></li>
+<li><a href="#org7f3df02">11.2. Internal Links</a></li>
+</ul>
+</li>
+<li><a href="#org990781e">12. Blocks</a>
+<ul>
+<li><a href="#org4c66bf1">12.1. Blockquotes</a></li>
+<li><a href="#orgc3eefee">12.2. Verse</a></li>
+<li><a href="#orge2f3afd">12.3. Center</a></li>
+<li><a href="#org69b86c8">12.4. Examples</a></li>
+</ul>
+</li>
+<li><a href="#org538a2a2">13. Footnotes and Endnotes</a>
+<ul>
+<li><a href="#orgabe23fc">13.1. Footnote Syntax</a></li>
+</ul>
+</li>
+<li><a href="#orgff30ebc">14. Fonts</a></li>
+</ul>
+</div>
+</nav>
+<aside>
+<p>
+You're viewing the Org example document exported to HTML with the STIX
+Org theme. Return the <a href="https://github.com/eddieh/stix-org">STIX Org on GitHub</a>.
+</p>
+</aside>
+
+<section id="outline-container-org108c819" class="outline-1">
+<h1 id="org108c819"><span class="section-number-1">1</span> Front Matter</h1>
+<div class="outline-text-1" id="text-1">
+<p>
+Org files should begin with front matter. The special front matter
+comments control many aspects of an Org file. Some special are
+rendered when exported, some control meta data, some control how Org
+works or set options and configurations. These special comments have
+the form <code>#+NAME: value(s)</code>
+</p>
+</div>
+
+
+<div id="outline-container-org9bbf417" class="outline-2">
+<h2 id="org9bbf417"><span class="section-number-2">1.1</span> Title and Date</h2>
+<div class="outline-text-2" id="text-1-1">
+<p>
+At the very least an Org document should begin with a title and a
+date. For example the first two lines of this file are
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-document-info-keyword">#+TITLE:</span> <span class="org-org-document-title">Example Org File</span>
+<span class="org-org-document-info-keyword">#+DATE:</span> <span class="org-org-document-info">2020-01-31</span>
+</pre>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-orgd7c8e96" class="outline-1">
+<h1 id="orgd7c8e96"><span class="section-number-1">2</span> Headings</h1>
+<div class="outline-text-1" id="text-2">
+<p>
+Headings structure documents into sections and subsections. They begin
+with an <code>*</code> and the number of asterisks denote the heading level. The
+top or first level begins with one asterisks followed by the section
+title and the syntax is <code>* Section Title</code>. A second level heading begins with
+two asterisks followed by the subsection title and the syntax is <code>**
+Subsection Title</code>.
+</p>
+
+<p>
+HTML has only six heading levels, but an Org document can have many
+more. In fact Org has 8 heading faces defined, but has a constant
+called <code>org-indent--deepest-level</code> that implies 50 or more levels are
+possible.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defconst</span> <span class="org-variable-name">org-indent--deepest-level</span> 50
+  <span class="org-doc">"Maximum theoretical headline depth."</span>)
+</pre>
+</div>
+
+<p>
+However, the max export depth is 19.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defconst</span> <span class="org-variable-name">org-export-max-depth</span> 19
+  <span class="org-doc">"Maximum nesting depth for headlines, counting from 0."</span>)
+</pre>
+</div>
+
+<p>
+Since HTML supports only six levels we'll show that many as an
+example. Org will happily create <code>&lt;hn&gt;</code> headings for <i>n</i>-level
+headings with \( n &gt; 6 \).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* Top or first level headline</span>
+Curabitur blandit tempus ardua ridiculus sed magna.
+<span class="org-org-level-2">** Second level</span>
+Me non paenitet nullum festiviorem excogitasse ad hoc.
+<span class="org-org-level-3">*** Third level</span>
+Ab illo tempore, ab est sed immemorabili.
+<span class="org-org-level-4">**** Forth level</span>
+Sed haec quis possit intrepidus aestimare tellus.
+<span class="org-org-level-5">***** Fifth level</span>
+Nihil hic munitissimus habendi senatus locus, nihil horum?
+<span class="org-org-level-6">****** Sixth level</span>
+Quae vero auctorem tractata ab fiducia dicuntur.
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgc6bfc3f" class="outline-1">
+<h1 id="orgc6bfc3f"><span class="section-number-1">3</span> Top or first level headline</h1>
+<div class="outline-text-1" id="text-3">
+<p>
+Curabitur blandit tempus ardua ridiculus sed magna.
+</p>
+</div>
+
+<div id="outline-container-org96fe6c9" class="outline-2">
+<h2 id="org96fe6c9"><span class="section-number-2">3.1</span> Second level</h2>
+<div class="outline-text-2" id="text-3-1">
+<p>
+Me non paenitet nullum festiviorem excogitasse ad hoc.
+</p>
+</div>
+
+<div id="outline-container-org5188f35" class="outline-3">
+<h3 id="org5188f35"><span class="section-number-3">3.1.1</span> Third level</h3>
+<div class="outline-text-3" id="text-3-1-1">
+<p>
+Ab illo tempore, ab est sed immemorabili.
+</p>
+</div>
+
+<div id="outline-container-org9436082" class="outline-4">
+<h4 id="org9436082"><span class="section-number-4">3.1.1.1</span> Forth level</h4>
+<div class="outline-text-4" id="text-3-1-1-1">
+<p>
+Sed haec quis possit intrepidus aestimare tellus.
+</p>
+</div>
+
+<div id="outline-container-org3e95b88" class="outline-5">
+<h5 id="org3e95b88"><span class="section-number-5">3.1.1.1.1</span> Fifth level</h5>
+<div class="outline-text-5" id="text-3-1-1-1-1">
+<p>
+Nihil hic munitissimus habendi senatus locus, nihil horum?
+</p>
+</div>
+
+<div id="outline-container-org26dd7f7" class="outline-6">
+<h6 id="org26dd7f7"><span class="section-number-6">3.1.1.1.1.1</span> Sixth level</h6>
+<div class="outline-text-6" id="text-3-1-1-1-1-1">
+<p>
+Quae vero auctorem tractata ab fiducia dicuntur.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org9a765c6" class="outline-1">
+<h1 id="org9a765c6"><span class="section-number-1">4</span> Tables</h1>
+<div class="outline-text-1" id="text-4">
+<p>
+Tables in Org use a sensible syntax that looks great in plain
+text. The tables look even better in HTML thanks to <a href="https://github.com/gongzhitaao/orgcss">OrgCSS</a>. The Org
+syntax is self-evident from the example
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-table">| Name  | Phone | Age |</span>
+<span class="org-org-table">|-------+-------+-----|</span>
+<span class="org-org-table">| Peter |  1234 |  17 |</span>
+<span class="org-org-table">| Anna  |  4321 |  25 |</span>
+</pre>
+</div>
+
+<p>
+Which produces this table
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-right">Phone</th>
+<th scope="col" class="org-right">Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Peter</td>
+<td class="org-right">1234</td>
+<td class="org-right">17</td>
+</tr>
+
+<tr>
+<td class="org-left">Anna</td>
+<td class="org-right">4321</td>
+<td class="org-right">25</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Tables without headers are supported too. Just omit the horizontal
+divider line.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-table">| 2 | 4 |</span>
+<span class="org-org-table">| 4 | 2 |</span>
+</pre>
+</div>
+
+<p>
+Which produces the table
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div id="outline-container-orgb329f07" class="outline-2">
+<h2 id="orgb329f07"><span class="section-number-2">4.1</span> Column Alignment</h2>
+<div class="outline-text-2" id="text-4-1">
+<p>
+Consider the payoff matrix for <a href="https://en.wikipedia.org/wiki/Rock_paper_scissors">Roshambo</a>. If we want player one's
+options to be represented by the first column and aligned right while
+player two's options are represented by the first row and center
+aligned, we can get a decent looking payoff matrix with the following
+markup in Org
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-table">|          | Rock | Paper | Sissors |</span>
+<span class="org-org-table">|      </span><span class="org-org-formula">&lt;r&gt;</span><span class="org-org-table"> | </span><span class="org-org-formula">&lt;c&gt;</span><span class="org-org-table">  |  </span><span class="org-org-formula">&lt;c&gt;</span><span class="org-org-table">  |   </span><span class="org-org-formula">&lt;c&gt;</span><span class="org-org-table">   |</span>
+<span class="org-org-table">|     Rock |  0   |  -1   |    1    |</span>
+<span class="org-org-table">|    Paper |  1   |   0   |   -1    |</span>
+<span class="org-org-table">| Scissors |  -1  |   1   |    0    |</span>
+</pre>
+</div>
+
+<p>
+Which produces the following table
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-center">
+
+<col  class="org-center">
+
+<col  class="org-center">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-center">Rock</td>
+<td class="org-center">Paper</td>
+<td class="org-center">Sissors</td>
+</tr>
+
+<tr>
+<td class="org-right">Rock</td>
+<td class="org-center">0</td>
+<td class="org-center">-1</td>
+<td class="org-center">1</td>
+</tr>
+
+<tr>
+<td class="org-right">Paper</td>
+<td class="org-center">1</td>
+<td class="org-center">0</td>
+<td class="org-center">-1</td>
+</tr>
+
+<tr>
+<td class="org-right">Scissors</td>
+<td class="org-center">-1</td>
+<td class="org-center">1</td>
+<td class="org-center">0</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+As can bee seen above, columns can be aligned right with <code>&lt;r&gt;</code>,
+aligned center with <code>&lt;c&gt;</code>, and aligned left with <code>&lt;l&gt;</code>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgc9f4b3f" class="outline-2">
+<h2 id="orgc9f4b3f"><span class="section-number-2">4.2</span> Table Captions</h2>
+<div class="outline-text-2" id="text-4-2">
+<p>
+A table with a caption is easy to produce. Consider the magic square
+of order 3. We can compute the magic constant for magic square of
+order <i>n</i> using the formula \(M = n (n^2 + 1) / 2 \). This give us a
+magic constant of 15 for the order 3 magic square. We can construct
+the magic square in Org with a caption like so
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+NAME: tbl:ms-o3</span>
+<span class="org-org-meta-line">#+CAPTION:</span> <span class="org-org-block">Magic Square of Order 3</span>
+<span class="org-org-meta-line">#+ATTR_HTML: :width 25%</span>
+<span class="org-org-table">| </span><span class="org-org-formula">&lt;c&gt;</span><span class="org-org-table"> | </span><span class="org-org-formula">&lt;c&gt;</span><span class="org-org-table"> | </span><span class="org-org-formula">&lt;c&gt;</span><span class="org-org-table"> |</span>
+<span class="org-org-table">|  2  |  7  |  6  |</span>
+<span class="org-org-table">|  9  |  5  |  1  |</span>
+<span class="org-org-table">|  4  |  3  |  8  |</span>
+</pre>
+</div>
+
+<table id="orgcb747e1" width="25%">
+<caption class="t-above"><span class="table-number">Table 1:</span> Magic Square of Order 3</caption>
+
+<colgroup>
+<col  class="org-center">
+
+<col  class="org-center">
+
+<col  class="org-center">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-center">2</td>
+<td class="org-center">7</td>
+<td class="org-center">6</td>
+</tr>
+
+<tr>
+<td class="org-center">9</td>
+<td class="org-center">5</td>
+<td class="org-center">1</td>
+</tr>
+
+<tr>
+<td class="org-center">4</td>
+<td class="org-center">3</td>
+<td class="org-center">8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org2cb3017" class="outline-1">
+<h1 id="org2cb3017"><span class="section-number-1">5</span> Source Blocks</h1>
+<div class="outline-text-1" id="text-5">
+<p>
+An Org source block containing an Emacs Lisp function called
+<code>mccarthy91</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-block-begin-line">#+BEGIN_SRC elisp</span>
+<span class="org-org-block">  (</span><span class="org-org-block"><span class="org-keyword">defun</span></span><span class="org-org-block"> </span><span class="org-org-block"><span class="org-function-name">mccarthy91</span></span><span class="org-org-block"> (n)</span>
+<span class="org-org-block">     </span><span class="org-org-block"><span class="org-doc">"McCarthy 91 is used as a formal verification test case."</span></span>
+<span class="org-org-block">     (</span><span class="org-org-block"><span class="org-keyword">if</span></span><span class="org-org-block"> (&lt;= n 100)</span>
+<span class="org-org-block">         (mccarthy91 (mccarthy91 (+ n 11)))</span>
+<span class="org-org-block">       (- n 10)))</span>
+<span class="org-org-block-end-line">#+END_SRC</span>
+</pre>
+</div>
+
+<p>
+Renders to HTML like so
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">mccarthy91</span> (n)
+   <span class="org-doc">"McCarthy 91 is used as a formal verification test case."</span>
+   (<span class="org-keyword">if</span> (&lt;= n 100)
+       (mccarthy91 (mccarthy91 (+ n 11)))
+     (- n 10)))
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge8f96ad" class="outline-2">
+<h2 id="orge8f96ad"><span class="section-number-2">5.1</span> Long lines</h2>
+<div class="outline-text-2" id="text-5-1">
+<p>
+The next code block is used to check if the styling can display an 80
+character lines without overflow. The block is made up of lines
+contains the first 80 characters of a base-85 encoding called <a href="https://rfc.zeromq.org/spec:32/Z85/">Z85</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&amp;&lt;&gt;()[]{
+0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&amp;&lt;&gt;()[]{
+0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&amp;&lt;&gt;()[]{
+</pre>
+</div>
+
+<p>
+Now we must check how a code block that with overflow looks.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-objc">+ (<span class="org-type">nullable</span> <span class="org-type">NSURL</span> *)<span class="org-function-name">URLForResource</span>:(<span class="org-type">nullable</span> <span class="org-type">NSString</span> *)<span class="org-variable-name">name</span> <span class="org-function-name">withExtension</span>:(<span class="org-type">nullable</span> <span class="org-type">NSString</span> *)<span class="org-variable-name">ext</span> <span class="org-function-name">subdirectory</span>:(<span class="org-type">nullable</span> <span class="org-type">NSString</span> *)<span class="org-variable-name">subpath</span> <span class="org-function-name">inBundleWithURL</span>:(<span class="org-type">NSURL</span> *)<span class="org-variable-name">bundleURL</span> <span class="org-function-name">API_AVAILABLE</span>(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+</pre>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org5c63c6d" class="outline-1">
+<h1 id="org5c63c6d"><span class="section-number-1">6</span> Formatting</h1>
+<div class="outline-text-1" id="text-6">
+<p>
+Want something <b>bold</b> use <code>*bold*</code>. Want something <i>italic</i> use
+<code>/italic/</code>. Want something <span class="underline">underlined</span> use <code>_underlined_</code>. Want
+something <del>strikethrough</del> use <code>+strikethrough+</code>. And lastly, want
+something <code>monospaced</code> use <code>=monospaced=</code> or <code>~monospaced~</code>.
+</p>
+</div>
+
+
+<div id="outline-container-org7b15208" class="outline-2">
+<h2 id="org7b15208"><span class="section-number-2">6.1</span> Subscripts and Superscripts</h2>
+<div class="outline-text-2" id="text-6-1">
+<p>
+Text characters set below or above the line of type for a font/size
+combination are necessary for technical writing. Subscripts and
+superscripts are achieved in the same way as in TeX or LaTeX.
+</p>
+
+<p>
+The radius of the sun is R<sub>sun</sub> = 6.96 &times; 10<sup>8</sup> m.  On the other
+hand, the radius of Alpha Centauri is R<sub>Alpha Centauri</sub> = 1.28 &times;
+R<sub>sun</sub>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org9ffe549" class="outline-2">
+<h2 id="org9ffe549"><span class="section-number-2">6.2</span> Special Symbols</h2>
+<div class="outline-text-2" id="text-6-2">
+<p>
+There are many special symbols and non-Latin alphabets that can be
+inserted in an Org document. The syntax is like TeX or LaTeX too.
+</p>
+
+<p>
+Given a circle &Gamma; of diameter d, the length of its circumference
+is &pi;d. We can type &alpha; as <code>\alpha</code>, &beta; as <code>\beta</code>, and &chi;
+as <code>\chi</code>. If you need a symbol in a word or formula it can be
+terminated with a pair of curly braces, so the previous &pi;d is
+achived by typing <code>\pi{}d</code>.
+</p>
+
+<p>
+Some other symbols include &copy; as <code>\copy</code>, &dagger; as <code>\dag</code>, and
+&times; as seen in the subscript/superscript section above as
+<code>\times</code>. There's &plusmn; as <code>\pm</code> or <code>\plusmn</code>. There's &frac12; as
+<code>\frac12</code> and there's &frac34; as <code>\frac34</code>. There's x &rarr; &infin;,
+typed as <code>x \to \infin</code>. Don't forget the en dash &#x2013; or the em dash
+&#x2014;, respectively <code>--</code> and <code>---</code>.
+</p>
+
+<p>
+Get a list of special symbols with <code>org-entities-help</code> or you can add
+your own in the variable <code>org-entities-user</code>.
+</p>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org43f07db" class="outline-1">
+<h1 id="org43f07db"><span class="section-number-1">7</span> Lists</h1>
+<div class="outline-text-1" id="text-7">
+<p>
+Some technology that relies on quantum physics include
+</p>
+
+<ul class="org-ul">
+<li>Lasers</li>
+<li>Solar cells</li>
+<li>Xerox machines and laser printers</li>
+<li>Transistors</li>
+<li>Integrated circuits</li>
+<li>Digital cameras</li>
+<li>Supercondoctors</li>
+</ul>
+
+<p>
+Programming languages
+</p>
+
+<ol class="org-ol">
+<li>C</li>
+<li>Objective-C</li>
+<li>Python</li>
+<li>JavaScript</li>
+<li>Scheme (or LISP)</li>
+<li>Ruby</li>
+<li>Shell script</li>
+</ol>
+
+<p>
+List of lists
+</p>
+
+<ul class="org-ul">
+<li>Unordered list items may begin with
+<ul class="org-ul">
+<li>dash <code>-</code></li>
+<li>plus <code>+</code></li>
+<li>asterisk <code>*</code></li>
+</ul></li>
+<li>Ordered list items may begin with
+<ul class="org-ul">
+<li>a number followed by a period <code>1.</code></li>
+<li>a number followed by a parenthesis <code>1)</code></li>
+</ul></li>
+</ul>
+
+<p>
+Definition lists
+</p>
+
+<dl class="org-dl">
+<dt>Proposition</dt><dd>A statement that is either <i>true</i> or <i>false</i></dd>
+<dt>True</dt><dd>Agreement with fact or reality</dd>
+<dt>False</dt><dd>Conflicting with fact or reality</dd>
+</dl>
+</div>
+</section>
+
+
+<section id="outline-container-org14c0f04" class="outline-1">
+<h1 id="org14c0f04"><span class="section-number-1">8</span> Math</h1>
+<div class="outline-text-1" id="text-8">
+<p>
+Math (and music) are universal languages. Any system for preparing
+documents must provide facilities for writing and displaying math.
+</p>
+
+<p>
+The set of natural numbers \( 1, 2, 3, &#x2026;, \infty \)is represented
+by the symbol \( \mathbb{N} \). The set of itegers \( -\infty, &#x2026;,
+-2, -1, 0, 1, 2, &#x2026;, \infty \)is represented by the symbol \(
+\mathbb{Z} \). The letter Z comes from Zahlen, the German word for
+numbers.
+</p>
+
+<p>
+Here are some properties of integers:
+</p>
+
+<p>
+The set \(\mathbb{Z}\)is closed under addition
+</p>
+
+<p>
+\[ a, b \in \mathbb{Z} \implies a + b \in \mathbb{Z} \]
+</p>
+
+<p>
+The set \(\mathbb{Z}\)is closed under subtraction
+</p>
+
+<p>
+\[ a, b \in \mathbb{Z} \implies a - b \in \mathbb{Z} \]
+</p>
+
+<p>
+And the set \(\mathbb{Z}\)is closed under multiplication
+</p>
+
+<p>
+\[ a, b \in \mathbb{Z} \implies a \times b \in \mathbb{Z} \]
+</p>
+</div>
+
+
+<div id="outline-container-org2e45cef" class="outline-2">
+<h2 id="org2e45cef"><span class="section-number-2">8.1</span> Notation</h2>
+<div class="outline-text-2" id="text-8-1">
+<p>
+Inline math such as \(a^2\)is inserted when \(\LaTeX\)is delimited
+by <code>\(</code> &#x2026; <code>\)</code>. Whereas display math is inserted when \(\LaTeX\)is
+delimited by <code>\[</code> &#x2026; <code>\]</code>. Consider \(n \ge 1, F_0 = 0, F_1 = 1\),
+then we can express a recurrence relation in dispaly math as
+</p>
+
+<p>
+\[ F_{n+1} = F_n + F_{n-1} \]
+</p>
+</div>
+</div>
+
+
+
+
+
+
+<div id="outline-container-org93a424f" class="outline-2">
+<h2 id="org93a424f"><span class="section-number-2">8.2</span> Logical Proposition</h2>
+<div class="outline-text-2" id="text-8-2">
+<p>
+Given a proposition \( P \)and a proposition \( Q \)we can define
+some logical modifiers, combinatory terms, and relations using <i>truth
+tables</i>. We will denote <i>true</i> with a T and <i>false</i> with a F.
+</p>
+</div>
+
+
+<div id="outline-container-org101a5f8" class="outline-3">
+<h3 id="org101a5f8"><span class="section-number-3">8.2.1</span> Defining <i>Not</i></h3>
+<div class="outline-text-3" id="text-8-2-1">
+<p>
+The propisiotn \( P \)and its complement \( \neg P \), read <i>not P</i>,
+are defined by the truth table:
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">\( P \)</th>
+<th scope="col" class="org-left">\( \neg P \)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">F</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">T</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org1ee3c64" class="outline-3">
+<h3 id="org1ee3c64"><span class="section-number-3">8.2.2</span> Defining <i>And</i></h3>
+<div class="outline-text-3" id="text-8-2-2">
+<p>
+Given a proposition \( P \)and a proposition \( Q \)the logical
+conjunction \( P \land Q \), read <i>P and Q</i>, is defined by the truth
+table:
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">\( P \)</th>
+<th scope="col" class="org-left">\( Q \)</th>
+<th scope="col" class="org-left">\( P \land Q \)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">T</td>
+<td class="org-left">T</td>
+</tr>
+
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">F</td>
+<td class="org-left">F</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">T</td>
+<td class="org-left">F</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">F</td>
+<td class="org-left">F</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org1e1c34d" class="outline-3">
+<h3 id="org1e1c34d"><span class="section-number-3">8.2.3</span> Defining <i>Or</i></h3>
+<div class="outline-text-3" id="text-8-2-3">
+<p>
+Given a proposition \( P \)and a proposition \( Q \)the logical
+disjunction \( P \lor Q \), read <i>P or Q</i>, is defined by the truth
+table:
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">\( P \)</th>
+<th scope="col" class="org-left">\( Q \)</th>
+<th scope="col" class="org-left">\( P \lor Q \)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">T</td>
+<td class="org-left">T</td>
+</tr>
+
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">F</td>
+<td class="org-left">T</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">T</td>
+<td class="org-left">T</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">F</td>
+<td class="org-left">F</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org503f18f" class="outline-3">
+<h3 id="org503f18f"><span class="section-number-3">8.2.4</span> Defining <i>Xor</i></h3>
+<div class="outline-text-3" id="text-8-2-4">
+<p>
+Given a proposition \( P \)and a proposition \( Q \)the logical
+exclusive disjunction \( P \oplus Q \), read <i>P exlusive or Q</i>, is
+defined by the truth table:
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">\( P \)</th>
+<th scope="col" class="org-left">\( Q \)</th>
+<th scope="col" class="org-left">\( P \oplus Q \)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">T</td>
+<td class="org-left">F</td>
+</tr>
+
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">F</td>
+<td class="org-left">T</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">T</td>
+<td class="org-left">T</td>
+</tr>
+
+<tr>
+<td class="org-left">F</td>
+<td class="org-left">F</td>
+<td class="org-left">F</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<i>Notation note:</i> the symbol \( \veebar \)is an alternative to \(
+\oplus \).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9da980f" class="outline-2">
+<h2 id="org9da980f"><span class="section-number-2">8.3</span> Sums</h2>
+<div class="outline-text-2" id="text-8-3">
+<p>
+The following is a summation with index <i>k</i> from 1 to <i>n</i> - 1.
+</p>
+
+<p>
+\[ \sum_{k=1}^{n-1} a_k = a_1 + a_2 + a_3 &#x2026; + a_{n-1} \]
+</p>
+
+<p>
+The following is a summation with index <i>j</i> from 0 to <i>n</i> - 1.
+</p>
+
+<p>
+\[ \sum_{j=0}^{n-1} x^j = 1 + x + x^2 + x^3 + &#x2026; + x^{n-1} \]
+</p>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org5cee8e4" class="outline-1">
+<h1 id="org5cee8e4"><span class="section-number-1">9</span> Images</h1>
+<div class="outline-text-1" id="text-9">
+<p>
+The first image is of the Wallpaper Groups also called the Plane
+Symmetry Groups or the Plane Crystallographic Groups it is taken from
+a paper published in American Mathematical Monthly titled <a href="https://www.math.fsu.edu/~quine/MB_10/schattschneider.pdf">The Plane
+Symmetry Groups: Their Recognition and Notation</a>.
+</p>
+
+
+<figure id="org8d2c1b3">
+<img src="./img/wallpaper-groups.png" alt="All 17 wallpaper groups" class="fill-width">
+
+<figcaption><span class="figure-number">Figure 1: </span>The 17 Wallpaper Groups</figcaption>
+</figure>
+
+<p>
+The next image should not stretch.
+</p>
+
+
+<figure id="org60d1d9c">
+<img src="./img/color-wheel.png" alt="A color wheel" class="natural-width">
+
+<figcaption><span class="figure-number">Figure 2: </span>Color Wheel</figcaption>
+</figure>
+</div>
+</section>
+
+
+<section id="outline-container-org74ddf7c" class="outline-1">
+<h1 id="org74ddf7c"><span class="section-number-1">10</span> Horizontal Rules</h1>
+<div class="outline-text-1" id="text-10">
+<p>
+Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Unam
+incolunt Belgae, aliam Aquitani, tertiam. Contra legem facit qui id
+facit quod lex prohibet. Ut enim ad minim veniam, quis nostrud
+exercitation. Nec dubitamus multa iter quae et nos invenerat.
+</p>
+
+<hr>
+
+<p>
+Qui ipsorum lingua Celtae, nostra Galli appellantur. Idque Caesaris
+facere voluntate liceret: sese habere. Cum ceteris in veneratione tui
+montes, nascetur mus. Quo usque tandem abutere, Catilina, patientia
+nostra?
+</p>
+</div>
+</section>
+
+
+<section id="outline-container-orgec24c94" class="outline-1">
+<h1 id="orgec24c94"><span class="section-number-1">11</span> Links</h1>
+<div class="outline-text-1" id="text-11">
+<p>
+We need hypertext, it's the web after all. The Org link format is
+simple, either <code>[link]</code> or <code>[[link][description]]</code>. There are some
+<a href="https://orgmode.org/org.html#Link-Format">escaping concerns</a> so it is best to always insert or edit a link with
+<code>C-c C-l</code>.
+</p>
+</div>
+
+
+<div id="outline-container-org6bd4cd3" class="outline-2">
+<h2 id="org6bd4cd3"><span class="section-number-2">11.1</span> External Links</h2>
+<div class="outline-text-2" id="text-11-1">
+<p>
+There are a number of external links in this document. Org can link to
+many different types of resources. The two most common types of
+resources are web links "https" (or "http") and "file" links.
+</p>
+
+<p>
+A clickable URL to the On-Line Encyclopedia of Integer Sequences
+follows <a href="https://oeis.org">https://oeis.org</a>. The next example is a descriptive link to
+the <a href="https://dlmf.nist.gov">NIST Digital Library of Mathematical Functions</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org7f3df02" class="outline-2">
+<h2 id="org7f3df02"><span class="section-number-2">11.2</span> Internal Links</h2>
+<div class="outline-text-2" id="text-11-2">
+<p>
+With an internal link we can refer to a previous section like the
+section on <a href="#org14c0f04">Math</a>. Or we can link to some named element such as <a href="#org8d2c1b3">the
+wallpaper group figure</a>. Or we can link to a section <a href="#orgd7c8e96">2</a> without
+a description. Section links are of the form <code>[[*section
+name][optional description]]</code>, or to use a section's custom ID to form
+the link <code>[[#custom-id][optional description]]</code>, and to link to a
+named entity use the form <code>[[entity-name][optional description]]</code>,
+e.g. for the wallpaper group figure the link is formed with
+<code>[[fig:wg][wallpaper group figure]]</code>.
+</p>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org990781e" class="outline-1">
+<h1 id="org990781e"><span class="section-number-1">12</span> Blocks</h1>
+<div class="outline-text-1" id="text-12">
+</div>
+<div id="outline-container-org4c66bf1" class="outline-2">
+<h2 id="org4c66bf1"><span class="section-number-2">12.1</span> Blockquotes</h2>
+<div class="outline-text-2" id="text-12-1">
+<p>
+Phasellus laoreet lorem vel dolor tempus vehicula. Donec sed odio
+operae, eu vulputate felis rhoncus. Fictum, deserunt mollit anim
+laborum astutumque! A communi observantia non est recedendum. At nos
+hinc posthac, sitientis piros Afros.
+</p>
+
+<blockquote>
+<p>
+Give a man a fish and feed him for a day. Don't teach a man to fish
+and feed yourself. He's a grown man. And fishing's not that
+hard. &#x2014; Ron Swanson
+</p>
+</blockquote>
+
+<p>
+Sed haec quis possit intrepidus aestimare tellus. Lorem ipsum dolor
+sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut
+labore et dolore magna aliqua. Fabio vel iudice vincam, sunt in culpa
+qui officia. Morbi odio eros, volutpat ut pharetra vitae, lobortis sed
+nibh.
+</p>
+
+<blockquote>
+<p>
+It would be very nice if I could illustrate the various techniques
+with small demonstration programs and could conclude with "&#x2026; and
+when faced with a program a thousand times as large, you compose it in
+the same way." This common educational device, however, would be
+self-defeating as one of my central themes will be that any two things
+that differ in some respect by a factor of already a hundred or more,
+are utterly incomparable.
+</p>
+
+<p>
+History has shown that this truth is very hard to believe. Apparently
+we are too much trained to disregard differences in scale, to treat
+them as "gradual differences that are not essential." We tell
+ourselves that what we can do once, we can also do twice and by
+induction we fool ourselves into believing that we can do it as many
+times as needed, but this is just not true! A factor of a thousand is
+already far beyond our powers of imagination!
+</p>
+
+<p>
+[&#x2026;]
+</p>
+
+<p>
+It is in the same mood that I should like to draw the reader's
+attention to the fact that "clarity" has pronounced quantitative
+aspects, a fact many mathematicians, curiously enough, seem to be
+unaware of. A theorem stating the validity of a conclusion when ten
+pages full of conditions are satisfied is hardly a convenient tool, as
+all conditions have to be verified whenever the theorem is appealed
+to. In Euclidean geometry, Pythagoras' Theorem holds for any three
+points A, B and C such that through A and C a straight line can be
+drawn orthogonal to a straight line through B and C. How many
+mathematicians appreciate that the theorem remains applicable when
+some or all of the points A, B and C coincide? Yet this seems largely
+responsible for the convenience with which Pythagoras' Theorem can be
+used. &#x2014; Edsger W. Dijkstra
+</p>
+</blockquote>
+</div>
+</div>
+
+
+<div id="outline-container-orgc3eefee" class="outline-2">
+<h2 id="orgc3eefee"><span class="section-number-2">12.2</span> Verse</h2>
+<div class="outline-text-2" id="text-12-2">
+<p>
+Cum sociis natoque penatibus et magnis dis parturient. Morbi odio
+eros, volutpat ut pharetra vitae, lobortis sed nibh. Sed haec quis
+possit intrepidus aestimare tellus.
+</p>
+
+<p class="verse">
+Tyger Tyger, burning bright,<br>
+In the forests of the night;<br>
+What immortal hand or eye,<br>
+Could frame thy fearful symmetry?<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#x2014; William Blake<br>
+</p>
+
+<p>
+Paullum deliquit, ponderibus modulisque suis ratio utitur. Quisque
+placerat facilisis egestas cillum dolore. Nihil hic munitissimus
+habendi senatus locus, nihil horum?
+</p>
+
+<p class="verse">
+Once upon a midnight dreary, while I pondered, weak and weary,<br>
+Over many a quaint and curious volume of forgotten lore—<br>
+&#xa0;&#xa0;&#xa0;&#xa0;While I nodded, nearly napping, suddenly there came a tapping,<br>
+As of some one gently rapping, rapping at my chamber door.<br>
+“’Tis some visitor,” I muttered, “tapping at my chamber door—<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Only this and nothing more.”<br>
+&#xa0;&#xa0;&#xa0;&#xa0;&#x2014; Edgar Allan Poe<br>
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge2f3afd" class="outline-2">
+<h2 id="orge2f3afd"><span class="section-number-2">12.3</span> Center</h2>
+<div class="outline-text-2" id="text-12-3">
+<p>
+Inmensae subtilitatis, obscuris et malesuada fames. Salutantibus vitae
+elit libero, a pharetra augue. Pellentesque habitant morbi tristique
+senectus et netus. Fictum, deserunt mollit anim laborum astutumque!
+Cum sociis natoque penatibus et magnis dis parturient.
+</p>
+
+<div class="org-center">
+<p>
+I should go to bed.
+</p>
+</div>
+
+<p>
+Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Quae vero
+auctorem tractata ab fiducia dicuntur. Cras mattis iudicium purus sit
+amet fermentum. Morbi fringilla convallis sapien, id pulvinar odio
+volutpat. Sed haec quis possit intrepidus aestimare tellus.
+</p>
+
+<div class="org-center">
+<p>
+🛏️
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org69b86c8" class="outline-2">
+<h2 id="org69b86c8"><span class="section-number-2">12.4</span> Examples</h2>
+<div class="outline-text-2" id="text-12-4">
+<p>
+Magna pars studiorum, prodita quaerimus. Cum sociis natoque penatibus
+et magnis dis parturient. Cum ceteris in veneratione tui montes,
+nascetur mus. Pellentesque habitant morbi tristique senectus et netus.
+Quo usque tandem abutere, Catilina, patientia nostra?
+</p>
+
+<pre class="example">
+Some example from a text file.
+</pre>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org538a2a2" class="outline-1">
+<h1 id="org538a2a2"><span class="section-number-1">13</span> Footnotes and Endnotes</h1>
+<div class="outline-text-1" id="text-13">
+<p>
+Technical writing requires many structures and organizational tools to
+be effective. One of the quintessential structures in a technical
+document are footnotes <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+</p>
+
+<p>
+Plura mihi bona sunt, inclinet, amari petere vellent. Quam diu etiam
+furor iste tuus nos eludet? Qui ipsorum lingua Celtae, nostra Galli
+appellantur <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+Salutantibus vitae elit libero, a pharetra augue.
+</p>
+</div>
+
+<div id="outline-container-orgabe23fc" class="outline-2">
+<h2 id="orgabe23fc"><span class="section-number-2">13.1</span> Footnote Syntax</h2>
+<div class="outline-text-2" id="text-13-1">
+<p>
+Org footnotes are just links that start with <code>fn:</code>. The footnotes
+may be numbered, named, anonymous and can be inline or defined in a
+footnotes section. A numbered footnote looks like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org">The Org homepage<span class="org-org-footnote">[fn:1]</span> now looks a lot better than it used to.
+...
+<span class="org-org-footnote">[fn:1]</span> The link is: <span class="org-org-link"><a href="https://orgmode.org">https://orgmode.org</a></span>
+</pre>
+</div>
+
+<p>
+Named and anonymous footnotes look like these:
+</p>
+
+<p>
+<code>[fn:name]</code>
+</p>
+
+<p>
+A named footnote reference, where <code>name</code> is a unique label word, or,
+for simplicity of automatic creation, a number.
+</p>
+
+<p>
+<code>[fn:: This is the inline definition of this footnote]</code>
+</p>
+
+<p>
+An anonymous footnote where the definition is given directly at the
+reference point.
+</p>
+
+<p>
+<code>[fn:name: a definition]</code>
+</p>
+
+<p>
+An inline definition of a footnote, which also specifies a name for
+the note. Since Org allows multiple references to the same note, you
+can then use <code>[fn:name]</code> to create additional references.
+</p>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-orgff30ebc" class="outline-1">
+<h1 id="orgff30ebc"><span class="section-number-1">14</span> Fonts</h1>
+<div class="outline-text-1" id="text-14">
+<p>
+Uses <a href="https://everythingfonts.com/font/stix-regular">STIX Regular</a> for body text from everythingfonts.com. When you
+embed fonts from everythingfonts.com you're require you to display
+this powered by fonts from everythingfonts.com badge.
+</p>
+
+<a href="https://everythingfonts.com" class="efbadgelink">
+<img src="https://everythingfonts.com/branding/efff.gif"
+title="Powered by fonts from Everything Fonts.com"
+alt="Powered by fonts from everythingfonts.com"/>
+</a>
+
+<p>
+For monospaced typeface <a href="https://fontlibrary.org/en/font/dejavu-sans-mono">DejaVu Sans Mono</a> from fontlibrary.org. As far
+as I can tell fontlibrary.org does not require any specific
+attribution.
+</p>
+</div>
+</section>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://history.nasa.gov/printFriendly/footnoteguide.html">https://history.nasa.gov/printFriendly/footnoteguide.html</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+Latin nonsense provided by <a href="http://lorembuilder.com">http://lorembuilder.com</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Eddie Hillenbrand</p>
+<p class="date">Date: 2020-01-31</p>
+</div>
+</body>
+</html>

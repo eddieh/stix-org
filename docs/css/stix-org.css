@@ -1,0 +1,345 @@
+/*
+ *         ___                                   ___
+ *        /  /\          ___       ___          /__/|
+ *       /  /:/_        /  /\     /  /\        |  |:|
+ *      /  /:/ /\      /  /:/    /  /:/        |  |:|
+ *     /  /:/ /::\    /  /:/    /__/::\      __|__|:|
+ *    /__/:/ /:/\:\  /  /::\    \__\/\:\__  /__/::::\____
+ *    \  \:\/:/~/:/ /__/:/\:\      \  \:\/\    ~\~~\::::/
+ *     \  \::/ /:/  \__\/  \:\      \__\::/     |~~|:|~~
+ *      \__\/ /:/        \  \:\     /__/:/      |  |:|
+ *        /__/:/          \__\/     \__\/       |  |:|
+ *        \__\/                                 |__|/
+ *  _____ _                    ___            _____
+ * |_   _| |_ ___ _____ ___   |  _|___ ___   |     |___ ___
+ *   | | |   | -_|     | -_|  |  _| . |  _|  |  |  |  _| . |
+ *   |_| |_|_|___|_|_|_|___|  |_| |___|_|    |_____|_| |_  |
+ *                                                     |___|
+ *
+ * ---------------------------------------------------------
+ *
+ *
+ * STIX Theme for Org
+ * ==================
+ *
+ * Scientific and Technical Information Exchange theme for Org HTML
+ * Exporter.
+ *
+ * MIT license by @haltingproblems
+ * https://github.com/eddieh/stix-org
+ */
+
+
+/* CSS Variables */
+
+:root {
+    --bg-color: #fff;
+    --title-color: #505050;
+    --subtitle-color: #c0c0c0;
+    --txt-color: #444;
+    --mono-color: #111;
+    --src-bg-color: #f9f9f9;
+    --code-color: #646490;
+    --link-color: #394C90;
+    --visited-color: #7A7DB0;
+    --tbl-vborder-color: gray;
+    --tbl-hborder-color: lightgray;
+    --bq-color:  #7a7a7a;
+    --bq-border-color: #e5e5e5;
+    --heading-fonts: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --body-fonts: "STIXGeneral", "Times New Roman", serif;
+    --mono-fonts: "DejaVu Sans Mono", Menlo, Monaco, monospace;
+}
+
+
+/* Dev helpers */
+
+/* Temporary border */
+.tmpb {
+    border: 1px solid gray;
+}
+
+
+/* Browser Reset */
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Fonts */
+
+html {
+  font-size: 14pt;
+  line-height: 1.5;
+}
+
+body {
+    font-family: var(--body-fonts);
+    background-color: var(--bg-color);
+    color: var(--txt-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-fonts);
+    text-rendering: optimizeLegibility;
+}
+
+code, kbd, pre {
+    font-family: var(--mono-fonts);
+    font-size: 12pt;
+}
+
+
+/* Formatting */
+
+.underline {
+    text-decoration: underline;
+}
+
+sub, sup { font-size: 75%; }
+
+
+/* Links */
+
+a:link { color: var(--link-color); }
+a:visited { color: var(--visited-color); }
+a:link, a:visited { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+/* Content width */
+
+#preamble, #content, #postamble {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+
+/* Page Header */
+
+header {
+    padding: 1em 0 0;
+}
+
+.title {
+    color: var(--title-color);
+    margin: 0;
+}
+
+.subtitle {
+    color: var(--subtitle-color);
+    margin: 0;
+}
+
+header h1 { font-size: 2.5rem; }
+header h2 { font-size: 2.25rem; }
+header h3 { font-size: 2rem; }
+header h4 { font-size: 1.75rem; }
+header h5 { font-size: 1.5rem; }
+header h5 { font-size: 1.25rem; }
+
+
+/* TOC */
+
+#table-of-contents {
+    margin-top: 2em;
+}
+
+#table-of-contents :matches(h1, h2, h3, h4, h5, h6) {
+    margin-top: 0;
+}
+
+#table-of-contents h1 { font-size: 1.25rem; }
+#table-of-contents h2 { font-size: 1.125rem; }
+#table-of-contents :matches(h3, h4, h5, h6) {
+    font-size: 1rem;
+}
+
+#text-table-of-contents ul {
+    list-style: none;
+    margin-top: 0;
+}
+
+#text-table-of-contents > ul {
+    padding: 0;
+    margin-top: 1em;
+}
+
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 2em;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+
+/* Margins */
+
+blockquote, dl, figure, hr, ol, p, pre, table, ul {
+    margin-top: 1em;
+}
+
+audio, canvas, detail, embed, form, object, picture, video {
+    margin-top: 1em;
+}
+
+
+/* Lists */
+
+ol, ul {
+    list-style-position: inside;
+}
+
+ol ul, ul ol, ul ul, ol ol {
+    margin: 0;
+    padding-left: 1em;
+}
+
+dt { font-weight: bold; }
+dd {
+    margin-left: 1em;
+    margin-bottom: .5em;
+}
+
+
+/* Tables */
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-collapse: collapse;
+}
+
+thead {
+    border-bottom: 2px solid;
+}
+
+table td + td, table th + th {
+    border-left: 1px solid var(--tbl-vborder-color);
+}
+
+table tr {
+    border-top: 1px solid var(--tbl-hborder-color);
+}
+
+td, th {
+    padding: 0.3em 0.6em;
+    vertical-align: middle;
+}
+
+.org-right { text-align: right; }
+.org-left { text-align: left; }
+.org-center { text-align: center; }
+
+caption.t-above { caption-side: top; }
+caption.t-bottom { caption-side: bottom; }
+
+caption, figcaption {
+    margin-bottom: 0.3em;
+}
+
+
+/* Source Blocks */
+
+pre {
+    padding: .5em .2em;
+    color: var(--mono-color);
+    background-color: var(--src-bg-color);
+    overflow-x: scroll;
+}
+
+code {
+    padding: .2em;
+    color: var(--code-color);
+    background-color: var(--src-bg-color);
+}
+
+
+/* Math */
+
+.katex {
+    font-size: 1em;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+}
+
+
+/* Figures & images */
+
+
+figure img {
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    text-align: center;
+}
+
+.fill-width {
+    max-width: 780px;
+}
+
+.natural-width {
+    width: intrinsic;
+}
+
+
+/* Horizontal rule */
+
+hr {
+    border: none;
+    border-top: 3px double #333;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
+hr:after {
+    background-color: var(--bg-color);
+    content: "○";
+    padding: 0 6px;
+    position: relative;
+    top: -15px;
+}
+
+
+/* Blocks */
+
+blockquote {
+    color: var(--bq-color);
+    padding: .5em  4em .5em 1.33em;
+    border-left: .25em solid var(--bq-border-color);
+}
+
+blockquote p:first-of-type {
+    margin: 0;
+}
+
+.verse {
+    color: var(--bq-color);
+    padding: .5em  4em .5em 1.33em;
+    border-left: .25em solid var(--bq-border-color);
+}
+
+
+/* Footnotes */
+
+.footpara {
+    display: inline;
+}
