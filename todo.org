@@ -34,7 +34,7 @@ Basic stuff that doesn't rely on structure or render quirks
   - [X] monospace
 - [X] heading sizes
 - [X] white space, margins, etc
-- [ ] responsive rules
+- [X] responsive rules
 
 * TODO example org file
 An Org file that demonstrates almost everything in Org
