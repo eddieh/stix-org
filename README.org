@@ -25,6 +25,12 @@ is big, slow---and hijacks your context menu. When a page uses
 MathJax, you know it. The software that renders the math should be
 unseen to the reader.
 
+[[file:img/code-blocks-and-formatting-600w.png]]
+
+-----
+
+[[file:img/math-and-images-600w.png]]
+
 
 ** Usage
 
