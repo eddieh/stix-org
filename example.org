@@ -6,6 +6,23 @@
 #+KEYWORDS: org html example demonstration demo sample
 #+SETUPFILE: setup.org
 
+#+HTML_HEAD: <style>
+#+HTML_HEAD: aside {
+#+HTML_HEAD: display: block;
+#+HTML_HEAD: margin-top: 2em;
+#+html_head: font-family: sans-serif;
+#+HTML_HEAD: top: -1px;
+#+HTML_HEAD: background: #eee;
+#+HTML_HEAD: padding: .5em;
+#+HTML_HEAD: border-top: 5px solid #666;
+#+HTML_HEAD: }
+#+HTML_HEAD: aside > p { margin: 0; }
+#+HTML_HEAD: </style>
+
+#+BEGIN_aside
+You're viewing the Org example document exported to HTML with the STIX
+Org theme. Return the [[https://github.com/eddieh/stix-org][STIX Org on GitHub]].
+#+END_aside
 
 * Front Matter
 

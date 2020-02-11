@@ -8,8 +8,11 @@
 
 
 * TODO complete readme
-** TODO the what, why, an so forth
-** TODO how to use it
+- [X] the what, why, an so
+- [X] how to use it
+- [ ] link to GitHub Pages
+- [X] link back to GitHub repo
+
 
 * TODO general styles
 Basic stuff that doesn't rely on structure or render quirks
