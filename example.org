@@ -218,7 +218,7 @@ An Org source block containing an Emacs Lisp function called
 =mccarthy91=.
 
 #+BEGIN_SRC org
-  ,#+BEGIN_SRC elisp
+  ,#+BEGIN_SRC emacs-lisp
     (defun mccarthy91 (n)
        "McCarthy 91 is used as a formal verification test case."
        (if (<= n 100)
