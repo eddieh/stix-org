@@ -12,6 +12,7 @@
 - [X] how to use it
 - [ ] link to GitHub Pages
 - [X] link back to GitHub repo
+- [X] add screenshots to readme
 
 
 * TODO general styles
