@@ -26,7 +26,7 @@ MathJax, you know it. The software that renders the math should be
 unseen to the reader.
 
 Check out the screenshots below or visit the [[https://eddieh.github.io/stix-org][example document exported
-with the theme]].
+with this theme]].
 
 #+ATTR_HTML: :align center
 [[file:img/code-blocks-and-formatting-600w.png]]
@@ -70,3 +70,72 @@ documents and adjust the URL/path to point to your copy of the
 
 Now =C-c C-e h o= to export the Org file to HTML and open it in your
 default browser.
+
+
+*** Requirements
+
+- Emacs 26.3
+- [[https://orgmode.org][Org mode]] version 9.3.1
+- [[https://github.com/hniksic/emacs-htmlize][htmlize]] 1.55
+
+
+** Organization
+
+The repo is a little crowded, but here is a rundown of the files and
+directories.
+
+
+*** Theme files
+
+The only files need to use the theme are the two CSS files from the
+=css= directory and the =setup.org= file.
+
+- =css/htmlize-b16-ocean.css=
+- =css/stix-org.css=
+- =setup.org=
+
+
+*** Example document
+
+The example document is an Org file that contains many features,
+structures, and markup supported by Org. The document is a good base
+for developing a theme and hopefully, others will use it as such.
+
+- =example.org=
+
+View the exported example document using this theme [[https://eddieh.github.io/stix-org][here]].
+
+
+*** Git & GitHub stuff
+
+Stuff the repository need and GitHub needs like the README and stuff
+for GitHub Pages.
+
+- =docs/=
+- =img/=
+- =resources/=
+- =.gitattributes=
+- =.gitignore=
+- =README.org=
+- =todo.org=
+
+
+*** Build support
+
+Right now the build support only builds the GitHub pages, but assuming
+there's interest beyond my own 🤞, it will contain stuff to minify,
+package, and upload to a CDN, etc.
+
+- =lisp/=
+- =Makefile=
+- =init.el=
+
+
+** Credits
+
+Made with ☕️ in Bellevue, WA by [[https://twitter.com/haltingproblems][@haltingproblems]].
+
+
+** License
+
+Permissive [[https://github.com/eddieh/stix-org/blob/master/LICENSE][MIT license]].
