@@ -76,12 +76,14 @@
 html {
   font-size: 14pt;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 body {
     font-family: var(--body-fonts);
     background-color: var(--bg-color);
     color: var(--txt-color);
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -91,6 +93,13 @@ h1, h2, h3, h4, h5, h6 {
 
 code, kbd, pre {
     font-family: var(--mono-fonts);
+}
+
+code, kbd {
+    font-size: .8rem;
+}
+
+pre {
     font-size: 12pt;
 }
 
@@ -342,4 +351,26 @@ blockquote p:first-of-type {
 
 .footpara {
     display: inline;
+}
+
+
+/* Media queries  */
+
+/* Mobile */
+@media (max-width: 780px) {
+    #preamble, #content, #postamble {
+        max-width: initial;
+        margin: unset;
+        padding: 0 1em;
+    }
+    .fill-width { max-width: 100%; }
+    pre { font-size: .5em; }
+}
+
+/* Larger than mobile */
+@media (min-width: 780px) {
+    #preamble, #content, #postamble {
+        max-width: 780px;
+        margin: 0 auto;
+    }
 }
