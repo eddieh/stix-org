@@ -21,22 +21,22 @@
 
 #+BEGIN_aside
 You're viewing the Org example document exported to HTML with the STIX
-Org theme. Return the [[https://github.com/eddieh/stix-org][STIX Org on GitHub]].
+Org theme. Return to [[https://github.com/eddieh/stix-org][STIX Org on GitHub]].
 #+END_aside
 
-* Front Matter
+* Frontmatter
 
-Org files should begin with front matter. The special front matter
-comments control many aspects of an Org file. Some special are
-rendered when exported, some control meta data, some control how Org
-works or set options and configurations. These special comments have
-the form =#+NAME: value(s)=
+An Org document should begin with frontmatter, the special frontmatter
+comments control many aspects of an Org document. Some special
+comments are rendered when exported, some control metadata, some
+control how Org works or set options and configurations. These special
+comments have the form =#+NAME: value(s)=.
 
 
 ** Title and Date
 
 At the very least an Org document should begin with a title and a
-date. For example the first two lines of this file are
+date. For example, the first two lines of this file are:
 
 #+BEGIN_SRC org
   ,#+TITLE: Example Org File
@@ -47,14 +47,14 @@ date. For example the first two lines of this file are
 * Headings
 
 Headings structure documents into sections and subsections. They begin
-with an =*= and the number of asterisks denote the heading level. The
-top or first level begins with one asterisks followed by the section
-title and the syntax is =* Section Title=. A second level heading begins with
-two asterisks followed by the subsection title and the syntax is =**
-Subsection Title=.
+with an =*= and the number of asterisks denotes the heading level. The
+top or first-level begins with one asterisk followed by the section
+title and the syntax is =* Section Title=. A second-level heading
+begins with two asterisks followed by the subsection title and the
+syntax is =** Subsection Title=.
 
 HTML has only six heading levels, but an Org document can have many
-more. In fact Org has 8 heading faces defined, but has a constant
+more. In fact, Org has 8 heading faces defined but has a constant
 called =org-indent--deepest-level= that implies 50 or more levels are
 possible.
 
@@ -110,9 +110,9 @@ Quae vero auctorem tractata ab fiducia dicuntur.
 
 * Tables
 
-Tables in Org use a sensible syntax that looks great in plain
-text. The tables look even better in HTML thanks to [[https://github.com/gongzhitaao/orgcss][OrgCSS]]. The Org
-syntax is self-evident from the example
+Tables in Org use a sensible syntax that looks great in plain text.
+The tables look even better in HTML thanks to rules borrowed from
+[[https://github.com/gongzhitaao/orgcss][OrgCSS]]. The Org syntax is self-evident from the example:
 
 #+BEGIN_SRC org
   | Name  | Phone | Age |
@@ -121,7 +121,7 @@ syntax is self-evident from the example
   | Anna  |  4321 |  25 |
 #+END_SRC
 
-Which produces this table
+Which produces this table:
 
 | Name  | Phone | Age |
 |-------+-------+-----|
@@ -129,14 +129,14 @@ Which produces this table
 | Anna  |  4321 |  25 |
 
 Tables without headers are supported too. Just omit the horizontal
-divider line.
+divider line. Given the example Org markup:
 
 #+BEGIN_SRC org
   | 2 | 4 |
   | 4 | 2 |
 #+END_SRC
 
-Which produces the table
+Which produces the table:
 
 | 2 | 4 |
 | 4 | 2 |
@@ -146,9 +146,9 @@ Which produces the table
 
 Consider the payoff matrix for [[https://en.wikipedia.org/wiki/Rock_paper_scissors][Roshambo]]. If we want player one's
 options to be represented by the first column and aligned right while
-player two's options are represented by the first row and center
-aligned, we can get a decent looking payoff matrix with the following
-markup in Org
+player two's options are represented by the first row and
+center-aligned, we can get a decent looking payoff matrix with the
+following markup in Org:
 
 #+BEGIN_SRC org
   |          | Rock | Paper | Sissors |
@@ -158,7 +158,7 @@ markup in Org
   | Scissors |  -1  |   1   |    0    |
 #+END_SRC
 
-Which produces the following table
+Which produces the following table:
 
 |          | Rock | Paper | Sissors |
 |      <r> | <c>  |  <c>  |   <c>   |
@@ -166,7 +166,7 @@ Which produces the following table
 |    Paper |  1   |   0   |   -1    |
 | Scissors |  -1  |   1   |    0    |
 
-As can bee seen above, columns can be aligned right with =<r>=,
+As can bee is seen above, columns can be aligned right with =<r>=,
 aligned center with =<c>=, and aligned left with =<l>=.
 
 # Complex table (a playoff matrix for Roshambo)
@@ -189,9 +189,9 @@ aligned center with =<c>=, and aligned left with =<l>=.
 
 A table with a caption is easy to produce. Consider the magic square
 of order 3. We can compute the magic constant for magic square of
-order /n/ using the formula \(M = n (n^2 + 1) / 2 \). This give us a
+order /n/ using the formula \(M = n (n^2 + 1) / 2 \). This gives us a
 magic constant of 15 for the order 3 magic square. We can construct
-the magic square in Org with a caption like so
+the magic square in Org with a caption like so:
 
 #+BEGIN_SRC org
   ,#+NAME: tbl:ms-o3
@@ -215,7 +215,7 @@ the magic square in Org with a caption like so
 * Source Blocks
 
 An Org source block containing an Emacs Lisp function called
-=mccarthy91=.
+=mccarthy91=:
 
 #+BEGIN_SRC org
   ,#+BEGIN_SRC emacs-lisp
@@ -227,7 +227,7 @@ An Org source block containing an Emacs Lisp function called
   ,#+END_SRC
 #+END_SRC
 
-Renders to HTML like so
+Renders to HTML like so:
 
 #+BEGIN_SRC emacs-lisp
   (defun mccarthy91 (n)
@@ -239,7 +239,7 @@ Renders to HTML like so
 
 ** Long lines
 
-The next code block is used to check if the styling can display an 80
+The next code block is used to check if the styling can display 80
 character lines without overflow. The block is made up of lines
 contains the first 80 characters of a base-85 encoding called [[https://rfc.zeromq.org/spec:32/Z85/][Z85]].
 
@@ -249,11 +249,11 @@ contains the first 80 characters of a base-85 encoding called [[https://rfc.zero
   0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{
 #+END_SRC
 
-Now we must check how a code block that with overflow looks.
+Now we must check how a code block that overflows looks.
 
-#+begin_src objc
+#+BEGIN_SRC objc
   + (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath inBundleWithURL:(NSURL *)bundleURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
-#+end_src
+#+END_SRC
 
 
 * Formatting
@@ -284,7 +284,7 @@ Given a circle \Gamma of diameter d, the length of its circumference
 is \pi{}d. We can type \alpha as =\alpha=, \beta as =\beta=, and \chi
 as =\chi=. If you need a symbol in a word or formula it can be
 terminated with a pair of curly braces, so the previous \pi{}d is
-achived by typing =\pi{}d=.
+achieved by typing =\pi{}d=.
 
 Some other symbols include \copy as =\copy=, \dag as =\dag=, and
 \times as seen in the subscript/superscript section above as
@@ -307,7 +307,7 @@ Some technology that relies on quantum physics include
 - Transistors
 - Integrated circuits
 - Digital cameras
-- Supercondoctors
+- Superconductors
 
 Programming languages
 
@@ -342,7 +342,7 @@ Math (and music) are universal languages. Any system for preparing
 documents must provide facilities for writing and displaying math.
 
 The set of natural numbers \( 1, 2, 3, ..., \infty \) is represented
-by the symbol \( \mathbb{N} \). The set of itegers \( -\infty, ...,
+by the symbol \( \mathbb{N} \). The set of integers \( -\infty, ...,
 -2, -1, 0, 1, 2, ..., \infty \) is represented by the symbol \(
 \mathbb{Z} \). The letter Z comes from Zahlen, the German word for
 numbers.
@@ -380,12 +380,12 @@ then we can express a recurrence relation in dispaly math as
 
 Given a proposition \( P \) and a proposition \( Q \) we can define
 some logical modifiers, combinatory terms, and relations using /truth
-tables/. We will denote /true/ with a T and /false/ with a F.
+tables/. We will denote /true/ with a T and /false/ with an F.
 
 
 *** Defining /Not/
 
-The propisiotn \( P \) and its complement \( \neg P \), read /not P/,
+The proposition \( P \) and its complement \( \neg P \), read /not P/,
 are defined by the truth table:
 
 | \( P \) | \( \neg P \) |
@@ -425,7 +425,7 @@ table:
 *** Defining /Xor/
 
 Given a proposition \( P \) and a proposition \( Q \) the logical
-exclusive disjunction \( P \oplus Q \), read /P exlusive or Q/, is
+exclusive disjunction \( P \oplus Q \), read /exclusive P or Q/, is
 defined by the truth table:
 
 | \( P \) | \( Q \) | \( P \oplus Q \) |
@@ -443,7 +443,7 @@ defined by the truth table:
 
 The following is a summation with index /k/ from 1 to /n/ - 1.
 
-\[ \sum_{k=1}^{n-1} a_k = a_1 + a_2 + a_3 ... + a_{n-1} \]
+\[ \sum_{k=1}^{n-1} a_k = a_1 + a_2 + a_3 + ... + a_{n-1} \]
 
 The following is a summation with index /j/ from 0 to /n/ - 1.
 
@@ -452,10 +452,10 @@ The following is a summation with index /j/ from 0 to /n/ - 1.
 
 * Images
 
-The first image is of the Wallpaper Groups also called the Plane
-Symmetry Groups or the Plane Crystallographic Groups it is taken from
-a paper published in American Mathematical Monthly titled [[https://www.math.fsu.edu/~quine/MB_10/schattschneider.pdf][The Plane
-Symmetry Groups: Their Recognition and Notation]].
+The first image is of the Wallpaper Groups (also called the Plane
+Symmetry Groups or the Plane Crystallographic Groups). It is taken
+from a paper published in American Mathematical Monthly titled [[https://www.math.fsu.edu/~quine/MB_10/schattschneider.pdf][The
+Plane Symmetry Groups: Their Recognition and Notation]].
 
 #+NAME: fig:wg
 #+CAPTION: The 17 Wallpaper Groups
@@ -495,7 +495,7 @@ simple, either =[link]= or =[[link][description]]=. There are some
 
 ** External Links
 
-There are a number of external links in this document. Org can link to
+There are several external links in this document. Org can link to
 many different types of resources. The two most common types of
 resources are web links "https" (or "http") and "file" links.
 
@@ -524,6 +524,12 @@ e.g. for the wallpaper group figure the link is formed with
 
 
 * Blocks
+
+Quis aute iure reprehenderit in voluptate velit esse. A communi
+observantia non est recedendum. Hi omnes lingua, institutis, legibus
+inter se differunt. Prima luce, cum quibus mons aliud consensu ab eo.
+Gallia est omnis divisa in partes tres, quarum. Ullamco laboris nisi
+ut aliquid ex ea commodi consequat.
 
 
 ** Blockquotes
@@ -650,8 +656,8 @@ document are footnotes [fn:1].
 
 Plura mihi bona sunt, inclinet, amari petere vellent. Quam diu etiam
 furor iste tuus nos eludet? Qui ipsorum lingua Celtae, nostra Galli
-appellantur [fn:2]. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
-Salutantibus vitae elit libero, a pharetra augue.
+appellantur [fn:2]. Vivamus sagittis lacus vel augue laoreet rutrum
+faucibus. Salutantibus vitae elit libero, a pharetra augue.
 
 ** Footnote Syntax
 
