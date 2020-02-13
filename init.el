@@ -4,18 +4,20 @@
 (require 'htmlize)
 (require 'org)
 
-(setq org-html-doctype "html5")
-(setq org-html-html5-fancy t)
-(setq org-html-head-include-default-style nil)
-(setq org-html-head "")
-(setq org-html-head-include-scripts nil)
-(setq org-html-preamble t)
+(defun string-from-file (path)
+  "Get the content of the file at PATH as a string"
+  (with-temp-buffer
+    (insert-file-contents path)
+    (buffer-string)))
+
+(setq org-html-head-extra
+      (if (getenv "STIX_ORG_GITHUB_PAGES_GA")
+	  (string-from-file "resources/ga.html") ""))
+
 (setq org-html-preamble-format '(("en" "")))
-(setq org-html-postamble t)
 (setq org-html-postamble-format
   '(("en" "<p class=\"author\">Author: %a</p>
 <p class=\"date\">Date: %d</p>")))
 (setq org-html-htmlize-output-type 'css)
-(setq org-html-with-latex 'verbatim)
 (setq org-html-self-link-headlines nil)
 (setq org-html-toplevel-hlevel 1)

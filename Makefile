@@ -8,7 +8,7 @@ index.org: example.org
 docs:
 	mkdir -p docs
 
-docs/index.html: docs index.org
+docs/index.html: init.el docs index.org
 	emacs index.org -q --batch -l init.el -f org-html-export-to-html
 	mv index.html docs
 
