@@ -1,7 +1,7 @@
 #+HTML_DOCTYPE: html5
 #+HTML_CONTAINER: section
 #+OPTIONS: tex:verbatim toc:6 H:6 num:t
-#+OPTIONS: html-fancy:t html-style:nil html-scripts:nil
+#+OPTIONS: html5-fancy:t html-style:nil html-scripts:nil
 #+OPTIONS: html-preamble:t html-postamble:t
 #+HTML_HEAD: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
 #+HTML_HEAD: <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" crossorigin="anonymous"></script>

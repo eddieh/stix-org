@@ -9,7 +9,7 @@ docs:
 	mkdir -p docs
 
 docs/index.html: init.el docs index.org
-	emacs index.org -q --batch -l init.el -f org-html-export-to-html
+	emacs index.org -q --batch -l init.el -f example-org-html-export-to-github-pages
 	mv index.html docs
 
 build: docs/index.html

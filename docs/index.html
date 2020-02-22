@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2020-02-13 Thu 14:19 -->
+<!-- 2020-02-22 Sat 13:37 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Example Org File</title>
 <meta name="generator" content="Org mode">
 <meta name="author" content="Eddie Hillenbrand">
-<meta name="description" content="A document that demonstrates almost everything in Org"
+<meta name="description" content="Example Emacs Org file demonstrating features, structures, and markup exported with the STIX theme for scientific and technical documents"
 >
 <meta name="keywords" content="org html example demonstration demo sample">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous">
@@ -36,111 +36,118 @@ aside > p { margin: 0; }
   gtag('js', new Date());
   gtag('config', 'UA-158362610-2');
 </script>
+<link rel="canonical" href="https://github.com/eddieh/stix-org">
+<meta name="twitter:title" content="Example Org File">
+<meta name="twitter:description" content="Example Emacs Org file demonstrating features, structures, and markup exported with the STIX theme for scientific and technical documents">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/237240757/4cdfde80-522c-11ea-943e-014d4569ae9e">
+<meta property="og:title" content="Example Org File">
+<meta property="og:description" content="Example Emacs Org file demonstrating features, structures, and markup exported with the STIX theme for scientific and technical documents">
+<meta property="og:url" content="https://github.com/eddieh/stix-org">
+<meta property="og:image" content="https://repository-images.githubusercontent.com/237240757/4cdfde80-522c-11ea-943e-014d4569ae9e">
 </head>
 <body>
 <div id="content">
-<h1 class="title">Example Org File
-<br>
-<span class="subtitle">Org features, structures, and markup</span>
-</h1>
-<div id="table-of-contents">
+<header>
+<h1 class="title">Example Org File</h1>
+<p class="subtitle">Org features, structures, and markup</p>
+</header><nav id="table-of-contents">
 <h1>Table of Contents</h1>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5c4a6b0">1. Frontmatter</a>
+<li><a href="#org74729ba">1. Frontmatter</a>
 <ul>
-<li><a href="#org9c17d8e">1.1. Title and Date</a></li>
+<li><a href="#org214367e">1.1. Title and Date</a></li>
 </ul>
 </li>
-<li><a href="#orgd677677">2. Headings</a></li>
-<li><a href="#org8e4e531">3. Top or first level headline</a>
+<li><a href="#org59865a9">2. Headings</a></li>
+<li><a href="#orged6743f">3. Top or first level headline</a>
 <ul>
-<li><a href="#org8b50200">3.1. Second level</a>
+<li><a href="#org63ff5cd">3.1. Second level</a>
 <ul>
-<li><a href="#org485cdd6">3.1.1. Third level</a>
+<li><a href="#org118e66f">3.1.1. Third level</a>
 <ul>
-<li><a href="#org5169206">3.1.1.1. Forth level</a>
+<li><a href="#orgf7d82b5">3.1.1.1. Forth level</a>
 <ul>
-<li><a href="#orgadca8d2">3.1.1.1.1. Fifth level</a>
+<li><a href="#orgedac12e">3.1.1.1.1. Fifth level</a>
 <ul>
-<li><a href="#org94f47d4">3.1.1.1.1.1. Sixth level</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#org7ac6d91">3.1.1.1.1.1. Sixth level</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgb7687ee">4. Tables</a>
-<ul>
-<li><a href="#org2570387">4.1. Column Alignment</a></li>
-<li><a href="#org872c216">4.2. Table Captions</a></li>
 </ul>
 </li>
-<li><a href="#org28eabb8">5. Source Blocks</a>
-<ul>
-<li><a href="#org3e36e8f">5.1. Long lines</a></li>
 </ul>
 </li>
-<li><a href="#orgf1c1b29">6. Formatting</a>
+<li><a href="#org7393f05">4. Tables</a>
 <ul>
-<li><a href="#org0ecdd63">6.1. Subscripts and Superscripts</a></li>
-<li><a href="#orge6f61b1">6.2. Special Symbols</a></li>
+<li><a href="#orgf92f841">4.1. Column Alignment</a></li>
+<li><a href="#org9066098">4.2. Table Captions</a></li>
 </ul>
 </li>
-<li><a href="#org1857056">7. Lists</a></li>
-<li><a href="#orgdb45daa">8. Math</a>
+<li><a href="#org5f4a460">5. Source Blocks</a>
 <ul>
-<li><a href="#orgd7707fa">8.1. Notation</a></li>
-<li><a href="#orgb82332e">8.2. Logical Proposition</a>
-<ul>
-<li><a href="#orgd4a8939">8.2.1. Defining <i>Not</i></a></li>
-<li><a href="#orgca6c5a8">8.2.2. Defining <i>And</i></a></li>
-<li><a href="#orgea3e3b2">8.2.3. Defining <i>Or</i></a></li>
-<li><a href="#org48700d7">8.2.4. Defining <i>Xor</i></a></li>
+<li><a href="#orgef03ea7">5.1. Long lines</a></li>
 </ul>
 </li>
-<li><a href="#orgb8104e0">8.3. Sums</a></li>
-</ul>
-</li>
-<li><a href="#org37792a4">9. Images</a></li>
-<li><a href="#org4dde103">10. Horizontal Rules</a></li>
-<li><a href="#org0ef3db6">11. Links</a>
+<li><a href="#orgea58fe7">6. Formatting</a>
 <ul>
-<li><a href="#org690fecb">11.1. External Links</a></li>
-<li><a href="#org7b29ec7">11.2. Internal Links</a></li>
+<li><a href="#org3673d0d">6.1. Subscripts and Superscripts</a></li>
+<li><a href="#orgdaaab0d">6.2. Special Symbols</a></li>
 </ul>
 </li>
-<li><a href="#org42f8349">12. Blocks</a>
+<li><a href="#orgb0c4e02">7. Lists</a></li>
+<li><a href="#org6a4cd3e">8. Math</a>
 <ul>
-<li><a href="#orgffcdc6c">12.1. Blockquotes</a></li>
-<li><a href="#orgdd6e36a">12.2. Verse</a></li>
-<li><a href="#orgaf1fc55">12.3. Center</a></li>
-<li><a href="#org9c7c192">12.4. Examples</a></li>
-</ul>
-</li>
-<li><a href="#org2fd699f">13. Footnotes and Endnotes</a>
+<li><a href="#orgf1ac292">8.1. Notation</a></li>
+<li><a href="#org9fa5875">8.2. Logical Proposition</a>
 <ul>
-<li><a href="#org4c5d94e">13.1. Footnote Syntax</a></li>
+<li><a href="#org8c2140c">8.2.1. Defining <i>Not</i></a></li>
+<li><a href="#orgeb9be02">8.2.2. Defining <i>And</i></a></li>
+<li><a href="#orge8ebeed">8.2.3. Defining <i>Or</i></a></li>
+<li><a href="#org020ac2f">8.2.4. Defining <i>Xor</i></a></li>
 </ul>
 </li>
-<li><a href="#org756ea83">14. Fonts</a></li>
+<li><a href="#org5dbf453">8.3. Sums</a></li>
+</ul>
+</li>
+<li><a href="#orgfef0c56">9. Images</a></li>
+<li><a href="#org3fc8692">10. Horizontal Rules</a></li>
+<li><a href="#org85ebe28">11. Links</a>
+<ul>
+<li><a href="#orgad5a83e">11.1. External Links</a></li>
+<li><a href="#org2b5d69d">11.2. Internal Links</a></li>
+</ul>
+</li>
+<li><a href="#org6f45798">12. Blocks</a>
+<ul>
+<li><a href="#org378745e">12.1. Blockquotes</a></li>
+<li><a href="#org55147ce">12.2. Verse</a></li>
+<li><a href="#org7a772bc">12.3. Center</a></li>
+<li><a href="#orgb469806">12.4. Examples</a></li>
+</ul>
+</li>
+<li><a href="#org2b25900">13. Footnotes and Endnotes</a>
+<ul>
+<li><a href="#org448f69a">13.1. Footnote Syntax</a></li>
+</ul>
+</li>
+<li><a href="#org66f5de8">14. Fonts</a></li>
 </ul>
 </div>
-</div>
-<div class="aside">
+</nav>
+<aside>
 <p>
 You're viewing the Org example document exported to HTML with the STIX
 Org theme. Return to <a href="https://github.com/eddieh/stix-org">STIX Org on GitHub</a>.
 </p>
+</aside>
 
-</div>
-
-<section id="outline-container-org5c4a6b0" class="outline-1">
-<h1 id="org5c4a6b0"><span class="section-number-1">1</span> Frontmatter</h1>
+<section id="outline-container-org74729ba" class="outline-1">
+<h1 id="org74729ba"><span class="section-number-1">1</span> Frontmatter</h1>
 <div class="outline-text-1" id="text-1">
 <p>
 An Org document should begin with frontmatter, the special frontmatter
@@ -152,8 +159,8 @@ comments have the form <code>#+NAME: value(s)</code>.
 </div>
 
 
-<div id="outline-container-org9c17d8e" class="outline-2">
-<h2 id="org9c17d8e"><span class="section-number-2">1.1</span> Title and Date</h2>
+<div id="outline-container-org214367e" class="outline-2">
+<h2 id="org214367e"><span class="section-number-2">1.1</span> Title and Date</h2>
 <div class="outline-text-2" id="text-1-1">
 <p>
 At the very least an Org document should begin with a title and a
@@ -170,8 +177,8 @@ date. For example, the first two lines of this file are:
 </section>
 
 
-<section id="outline-container-orgd677677" class="outline-1">
-<h1 id="orgd677677"><span class="section-number-1">2</span> Headings</h1>
+<section id="outline-container-org59865a9" class="outline-1">
+<h1 id="org59865a9"><span class="section-number-1">2</span> Headings</h1>
 <div class="outline-text-1" id="text-2">
 <p>
 Headings structure documents into sections and subsections. They begin
@@ -229,48 +236,48 @@ Quae vero auctorem tractata ab fiducia dicuntur.
 </div>
 </section>
 
-<section id="outline-container-org8e4e531" class="outline-1">
-<h1 id="org8e4e531"><span class="section-number-1">3</span> Top or first level headline</h1>
+<section id="outline-container-orged6743f" class="outline-1">
+<h1 id="orged6743f"><span class="section-number-1">3</span> Top or first level headline</h1>
 <div class="outline-text-1" id="text-3">
 <p>
 Curabitur blandit tempus ardua ridiculus sed magna.
 </p>
 </div>
 
-<div id="outline-container-org8b50200" class="outline-2">
-<h2 id="org8b50200"><span class="section-number-2">3.1</span> Second level</h2>
+<div id="outline-container-org63ff5cd" class="outline-2">
+<h2 id="org63ff5cd"><span class="section-number-2">3.1</span> Second level</h2>
 <div class="outline-text-2" id="text-3-1">
 <p>
 Me non paenitet nullum festiviorem excogitasse ad hoc.
 </p>
 </div>
 
-<div id="outline-container-org485cdd6" class="outline-3">
-<h3 id="org485cdd6"><span class="section-number-3">3.1.1</span> Third level</h3>
+<div id="outline-container-org118e66f" class="outline-3">
+<h3 id="org118e66f"><span class="section-number-3">3.1.1</span> Third level</h3>
 <div class="outline-text-3" id="text-3-1-1">
 <p>
 Ab illo tempore, ab est sed immemorabili.
 </p>
 </div>
 
-<div id="outline-container-org5169206" class="outline-4">
-<h4 id="org5169206"><span class="section-number-4">3.1.1.1</span> Forth level</h4>
+<div id="outline-container-orgf7d82b5" class="outline-4">
+<h4 id="orgf7d82b5"><span class="section-number-4">3.1.1.1</span> Forth level</h4>
 <div class="outline-text-4" id="text-3-1-1-1">
 <p>
 Sed haec quis possit intrepidus aestimare tellus.
 </p>
 </div>
 
-<div id="outline-container-orgadca8d2" class="outline-5">
-<h5 id="orgadca8d2"><span class="section-number-5">3.1.1.1.1</span> Fifth level</h5>
+<div id="outline-container-orgedac12e" class="outline-5">
+<h5 id="orgedac12e"><span class="section-number-5">3.1.1.1.1</span> Fifth level</h5>
 <div class="outline-text-5" id="text-3-1-1-1-1">
 <p>
 Nihil hic munitissimus habendi senatus locus, nihil horum?
 </p>
 </div>
 
-<div id="outline-container-org94f47d4" class="outline-6">
-<h6 id="org94f47d4"><span class="section-number-6">3.1.1.1.1.1</span> Sixth level</h6>
+<div id="outline-container-org7ac6d91" class="outline-6">
+<h6 id="org7ac6d91"><span class="section-number-6">3.1.1.1.1.1</span> Sixth level</h6>
 <div class="outline-text-6" id="text-3-1-1-1-1-1">
 <p>
 Quae vero auctorem tractata ab fiducia dicuntur.
@@ -284,8 +291,8 @@ Quae vero auctorem tractata ab fiducia dicuntur.
 </section>
 
 
-<section id="outline-container-orgb7687ee" class="outline-1">
-<h1 id="orgb7687ee"><span class="section-number-1">4</span> Tables</h1>
+<section id="outline-container-org7393f05" class="outline-1">
+<h1 id="org7393f05"><span class="section-number-1">4</span> Tables</h1>
 <div class="outline-text-1" id="text-4">
 <p>
 Tables in Org use a sensible syntax that looks great in plain text.
@@ -375,8 +382,8 @@ Which produces the table:
 </div>
 
 
-<div id="outline-container-org2570387" class="outline-2">
-<h2 id="org2570387"><span class="section-number-2">4.1</span> Column Alignment</h2>
+<div id="outline-container-orgf92f841" class="outline-2">
+<h2 id="orgf92f841"><span class="section-number-2">4.1</span> Column Alignment</h2>
 <div class="outline-text-2" id="text-4-1">
 <p>
 Consider the payoff matrix for <a href="https://en.wikipedia.org/wiki/Rock_paper_scissors">Roshambo</a>. If we want player one's
@@ -450,8 +457,8 @@ aligned center with <code>&lt;c&gt;</code>, and aligned left with <code>&lt;l&gt
 </div>
 
 
-<div id="outline-container-org872c216" class="outline-2">
-<h2 id="org872c216"><span class="section-number-2">4.2</span> Table Captions</h2>
+<div id="outline-container-org9066098" class="outline-2">
+<h2 id="org9066098"><span class="section-number-2">4.2</span> Table Captions</h2>
 <div class="outline-text-2" id="text-4-2">
 <p>
 A table with a caption is easy to produce. Consider the magic square
@@ -472,7 +479,7 @@ the magic square in Org with a caption like so:
 </pre>
 </div>
 
-<table id="org36ca662" width="25%">
+<table id="org45719fc" width="25%">
 <caption class="t-above"><span class="table-number">Table 1:</span> Magic Square of Order 3</caption>
 
 <colgroup>
@@ -507,8 +514,8 @@ the magic square in Org with a caption like so:
 </section>
 
 
-<section id="outline-container-org28eabb8" class="outline-1">
-<h1 id="org28eabb8"><span class="section-number-1">5</span> Source Blocks</h1>
+<section id="outline-container-org5f4a460" class="outline-1">
+<h1 id="org5f4a460"><span class="section-number-1">5</span> Source Blocks</h1>
 <div class="outline-text-1" id="text-5">
 <p>
 An Org source block containing an Emacs Lisp function called
@@ -540,8 +547,8 @@ Renders to HTML like so:
 </div>
 </div>
 
-<div id="outline-container-org3e36e8f" class="outline-2">
-<h2 id="org3e36e8f"><span class="section-number-2">5.1</span> Long lines</h2>
+<div id="outline-container-orgef03ea7" class="outline-2">
+<h2 id="orgef03ea7"><span class="section-number-2">5.1</span> Long lines</h2>
 <div class="outline-text-2" id="text-5-1">
 <p>
 The next code block is used to check if the styling can display 80
@@ -569,8 +576,8 @@ Now we must check how a code block that overflows looks.
 </section>
 
 
-<section id="outline-container-orgf1c1b29" class="outline-1">
-<h1 id="orgf1c1b29"><span class="section-number-1">6</span> Formatting</h1>
+<section id="outline-container-orgea58fe7" class="outline-1">
+<h1 id="orgea58fe7"><span class="section-number-1">6</span> Formatting</h1>
 <div class="outline-text-1" id="text-6">
 <p>
 Want something <b>bold</b> use <code>*bold*</code>. Want something <i>italic</i> use
@@ -581,8 +588,8 @@ something <code>monospaced</code> use <code>=monospaced=</code> or <code>~monosp
 </div>
 
 
-<div id="outline-container-org0ecdd63" class="outline-2">
-<h2 id="org0ecdd63"><span class="section-number-2">6.1</span> Subscripts and Superscripts</h2>
+<div id="outline-container-org3673d0d" class="outline-2">
+<h2 id="org3673d0d"><span class="section-number-2">6.1</span> Subscripts and Superscripts</h2>
 <div class="outline-text-2" id="text-6-1">
 <p>
 Text characters set below or above the line of type for a font/size
@@ -599,8 +606,8 @@ R<sub>sun</sub>.
 </div>
 
 
-<div id="outline-container-orge6f61b1" class="outline-2">
-<h2 id="orge6f61b1"><span class="section-number-2">6.2</span> Special Symbols</h2>
+<div id="outline-container-orgdaaab0d" class="outline-2">
+<h2 id="orgdaaab0d"><span class="section-number-2">6.2</span> Special Symbols</h2>
 <div class="outline-text-2" id="text-6-2">
 <p>
 There are many special symbols and non-Latin alphabets that can be
@@ -633,8 +640,8 @@ your own in the variable <code>org-entities-user</code>.
 </section>
 
 
-<section id="outline-container-org1857056" class="outline-1">
-<h1 id="org1857056"><span class="section-number-1">7</span> Lists</h1>
+<section id="outline-container-orgb0c4e02" class="outline-1">
+<h1 id="orgb0c4e02"><span class="section-number-1">7</span> Lists</h1>
 <div class="outline-text-1" id="text-7">
 <p>
 Some technology that relies on quantum physics include
@@ -695,8 +702,8 @@ Definition lists
 </section>
 
 
-<section id="outline-container-orgdb45daa" class="outline-1">
-<h1 id="orgdb45daa"><span class="section-number-1">8</span> Math</h1>
+<section id="outline-container-org6a4cd3e" class="outline-1">
+<h1 id="org6a4cd3e"><span class="section-number-1">8</span> Math</h1>
 <div class="outline-text-1" id="text-8">
 <p>
 Math (and music) are universal languages. Any system for preparing
@@ -741,8 +748,8 @@ And the set \(\mathbb{Z}\)is closed under multiplication
 </div>
 
 
-<div id="outline-container-orgd7707fa" class="outline-2">
-<h2 id="orgd7707fa"><span class="section-number-2">8.1</span> Notation</h2>
+<div id="outline-container-orgf1ac292" class="outline-2">
+<h2 id="orgf1ac292"><span class="section-number-2">8.1</span> Notation</h2>
 <div class="outline-text-2" id="text-8-1">
 <p>
 Inline math such as \(a^2\)is inserted when \(\LaTeX\)is delimited
@@ -762,8 +769,8 @@ then we can express a recurrence relation in dispaly math as
 
 
 
-<div id="outline-container-orgb82332e" class="outline-2">
-<h2 id="orgb82332e"><span class="section-number-2">8.2</span> Logical Proposition</h2>
+<div id="outline-container-org9fa5875" class="outline-2">
+<h2 id="org9fa5875"><span class="section-number-2">8.2</span> Logical Proposition</h2>
 <div class="outline-text-2" id="text-8-2">
 <p>
 Given a proposition \( P \)and a proposition \( Q \)we can define
@@ -773,8 +780,8 @@ tables</i>. We will denote <i>true</i> with a T and <i>false</i> with an F.
 </div>
 
 
-<div id="outline-container-orgd4a8939" class="outline-3">
-<h3 id="orgd4a8939"><span class="section-number-3">8.2.1</span> Defining <i>Not</i></h3>
+<div id="outline-container-org8c2140c" class="outline-3">
+<h3 id="org8c2140c"><span class="section-number-3">8.2.1</span> Defining <i>Not</i></h3>
 <div class="outline-text-3" id="text-8-2-1">
 <p>
 The proposition \( P \)and its complement \( \neg P \), read <i>not P</i>,
@@ -811,8 +818,8 @@ are defined by the truth table:
 </div>
 
 
-<div id="outline-container-orgca6c5a8" class="outline-3">
-<h3 id="orgca6c5a8"><span class="section-number-3">8.2.2</span> Defining <i>And</i></h3>
+<div id="outline-container-orgeb9be02" class="outline-3">
+<h3 id="orgeb9be02"><span class="section-number-3">8.2.2</span> Defining <i>And</i></h3>
 <div class="outline-text-3" id="text-8-2-2">
 <p>
 Given a proposition \( P \)and a proposition \( Q \)the logical
@@ -867,8 +874,8 @@ table:
 </div>
 
 
-<div id="outline-container-orgea3e3b2" class="outline-3">
-<h3 id="orgea3e3b2"><span class="section-number-3">8.2.3</span> Defining <i>Or</i></h3>
+<div id="outline-container-orge8ebeed" class="outline-3">
+<h3 id="orge8ebeed"><span class="section-number-3">8.2.3</span> Defining <i>Or</i></h3>
 <div class="outline-text-3" id="text-8-2-3">
 <p>
 Given a proposition \( P \)and a proposition \( Q \)the logical
@@ -923,8 +930,8 @@ table:
 </div>
 
 
-<div id="outline-container-org48700d7" class="outline-3">
-<h3 id="org48700d7"><span class="section-number-3">8.2.4</span> Defining <i>Xor</i></h3>
+<div id="outline-container-org020ac2f" class="outline-3">
+<h3 id="org020ac2f"><span class="section-number-3">8.2.4</span> Defining <i>Xor</i></h3>
 <div class="outline-text-3" id="text-8-2-4">
 <p>
 Given a proposition \( P \)and a proposition \( Q \)the logical
@@ -985,8 +992,8 @@ defined by the truth table:
 </div>
 
 
-<div id="outline-container-orgb8104e0" class="outline-2">
-<h2 id="orgb8104e0"><span class="section-number-2">8.3</span> Sums</h2>
+<div id="outline-container-org5dbf453" class="outline-2">
+<h2 id="org5dbf453"><span class="section-number-2">8.3</span> Sums</h2>
 <div class="outline-text-2" id="text-8-3">
 <p>
 The following is a summation with index <i>k</i> from 1 to <i>n</i> - 1.
@@ -1008,8 +1015,8 @@ The following is a summation with index <i>j</i> from 0 to <i>n</i> - 1.
 </section>
 
 
-<section id="outline-container-org37792a4" class="outline-1">
-<h1 id="org37792a4"><span class="section-number-1">9</span> Images</h1>
+<section id="outline-container-orgfef0c56" class="outline-1">
+<h1 id="orgfef0c56"><span class="section-number-1">9</span> Images</h1>
 <div class="outline-text-1" id="text-9">
 <p>
 The first image is of the Wallpaper Groups (also called the Plane
@@ -1019,28 +1026,28 @@ Plane Symmetry Groups: Their Recognition and Notation</a>.
 </p>
 
 
-<div id="org2c172ba" class="figure">
-<p><img src="./img/wallpaper-groups.png" alt="All 17 wallpaper groups" class="fill-width">
-</p>
-<p><span class="figure-number">Figure 1: </span>The 17 Wallpaper Groups</p>
-</div>
+<figure id="orgd48db72">
+<img src="./img/wallpaper-groups.png" alt="All 17 wallpaper groups" class="fill-width">
+
+<figcaption><span class="figure-number">Figure 1: </span>The 17 Wallpaper Groups</figcaption>
+</figure>
 
 <p>
 The next image should not stretch.
 </p>
 
 
-<div id="org9f0c248" class="figure">
-<p><img src="./img/color-wheel.png" alt="A color wheel" class="natural-width">
-</p>
-<p><span class="figure-number">Figure 2: </span>Color Wheel</p>
-</div>
+<figure id="org0a35e38">
+<img src="./img/color-wheel.png" alt="A color wheel" class="natural-width">
+
+<figcaption><span class="figure-number">Figure 2: </span>Color Wheel</figcaption>
+</figure>
 </div>
 </section>
 
 
-<section id="outline-container-org4dde103" class="outline-1">
-<h1 id="org4dde103"><span class="section-number-1">10</span> Horizontal Rules</h1>
+<section id="outline-container-org3fc8692" class="outline-1">
+<h1 id="org3fc8692"><span class="section-number-1">10</span> Horizontal Rules</h1>
 <div class="outline-text-1" id="text-10">
 <p>
 Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Unam
@@ -1061,8 +1068,8 @@ nostra?
 </section>
 
 
-<section id="outline-container-org0ef3db6" class="outline-1">
-<h1 id="org0ef3db6"><span class="section-number-1">11</span> Links</h1>
+<section id="outline-container-org85ebe28" class="outline-1">
+<h1 id="org85ebe28"><span class="section-number-1">11</span> Links</h1>
 <div class="outline-text-1" id="text-11">
 <p>
 We need hypertext, it's the web after all. The Org link format is
@@ -1073,8 +1080,8 @@ simple, either <code>[link]</code> or <code>[[link][description]]</code>. There 
 </div>
 
 
-<div id="outline-container-org690fecb" class="outline-2">
-<h2 id="org690fecb"><span class="section-number-2">11.1</span> External Links</h2>
+<div id="outline-container-orgad5a83e" class="outline-2">
+<h2 id="orgad5a83e"><span class="section-number-2">11.1</span> External Links</h2>
 <div class="outline-text-2" id="text-11-1">
 <p>
 There are several external links in this document. Org can link to
@@ -1091,13 +1098,13 @@ the <a href="https://dlmf.nist.gov">NIST Digital Library of Mathematical Functio
 </div>
 
 
-<div id="outline-container-org7b29ec7" class="outline-2">
-<h2 id="org7b29ec7"><span class="section-number-2">11.2</span> Internal Links</h2>
+<div id="outline-container-org2b5d69d" class="outline-2">
+<h2 id="org2b5d69d"><span class="section-number-2">11.2</span> Internal Links</h2>
 <div class="outline-text-2" id="text-11-2">
 <p>
 With an internal link we can refer to a previous section like the
-section on <a href="#orgdb45daa">Math</a>. Or we can link to some named element such as <a href="#org2c172ba">the
-wallpaper group figure</a>. Or we can link to a section <a href="#orgd677677">2</a> without
+section on <a href="#org6a4cd3e">Math</a>. Or we can link to some named element such as <a href="#orgd48db72">the
+wallpaper group figure</a>. Or we can link to a section <a href="#org59865a9">2</a> without
 a description. Section links are of the form <code>[[*section
 name][optional description]]</code>, or to use a section's custom ID to form
 the link <code>[[#custom-id][optional description]]</code>, and to link to a
@@ -1110,8 +1117,8 @@ e.g. for the wallpaper group figure the link is formed with
 </section>
 
 
-<section id="outline-container-org42f8349" class="outline-1">
-<h1 id="org42f8349"><span class="section-number-1">12</span> Blocks</h1>
+<section id="outline-container-org6f45798" class="outline-1">
+<h1 id="org6f45798"><span class="section-number-1">12</span> Blocks</h1>
 <div class="outline-text-1" id="text-12">
 <p>
 Quis aute iure reprehenderit in voluptate velit esse. A communi
@@ -1123,8 +1130,8 @@ ut aliquid ex ea commodi consequat.
 </div>
 
 
-<div id="outline-container-orgffcdc6c" class="outline-2">
-<h2 id="orgffcdc6c"><span class="section-number-2">12.1</span> Blockquotes</h2>
+<div id="outline-container-org378745e" class="outline-2">
+<h2 id="org378745e"><span class="section-number-2">12.1</span> Blockquotes</h2>
 <div class="outline-text-2" id="text-12-1">
 <p>
 Phasellus laoreet lorem vel dolor tempus vehicula. Donec sed odio
@@ -1194,8 +1201,8 @@ used. &#x2014; Edsger W. Dijkstra
 </div>
 
 
-<div id="outline-container-orgdd6e36a" class="outline-2">
-<h2 id="orgdd6e36a"><span class="section-number-2">12.2</span> Verse</h2>
+<div id="outline-container-org55147ce" class="outline-2">
+<h2 id="org55147ce"><span class="section-number-2">12.2</span> Verse</h2>
 <div class="outline-text-2" id="text-12-2">
 <p>
 Cum sociis natoque penatibus et magnis dis parturient. Morbi odio
@@ -1230,8 +1237,8 @@ As of some one gently rapping, rapping at my chamber door.<br>
 </div>
 
 
-<div id="outline-container-orgaf1fc55" class="outline-2">
-<h2 id="orgaf1fc55"><span class="section-number-2">12.3</span> Center</h2>
+<div id="outline-container-org7a772bc" class="outline-2">
+<h2 id="org7a772bc"><span class="section-number-2">12.3</span> Center</h2>
 <div class="outline-text-2" id="text-12-3">
 <p>
 Inmensae subtilitatis, obscuris et malesuada fames. Salutantibus vitae
@@ -1262,8 +1269,8 @@ volutpat. Sed haec quis possit intrepidus aestimare tellus.
 </div>
 
 
-<div id="outline-container-org9c7c192" class="outline-2">
-<h2 id="org9c7c192"><span class="section-number-2">12.4</span> Examples</h2>
+<div id="outline-container-orgb469806" class="outline-2">
+<h2 id="orgb469806"><span class="section-number-2">12.4</span> Examples</h2>
 <div class="outline-text-2" id="text-12-4">
 <p>
 Magna pars studiorum, prodita quaerimus. Cum sociis natoque penatibus
@@ -1280,8 +1287,8 @@ Some example from a text file.
 </section>
 
 
-<section id="outline-container-org2fd699f" class="outline-1">
-<h1 id="org2fd699f"><span class="section-number-1">13</span> Footnotes and Endnotes</h1>
+<section id="outline-container-org2b25900" class="outline-1">
+<h1 id="org2b25900"><span class="section-number-1">13</span> Footnotes and Endnotes</h1>
 <div class="outline-text-1" id="text-13">
 <p>
 Technical writing requires many structures and organizational tools to
@@ -1297,8 +1304,8 @@ faucibus. Salutantibus vitae elit libero, a pharetra augue.
 </p>
 </div>
 
-<div id="outline-container-org4c5d94e" class="outline-2">
-<h2 id="org4c5d94e"><span class="section-number-2">13.1</span> Footnote Syntax</h2>
+<div id="outline-container-org448f69a" class="outline-2">
+<h2 id="org448f69a"><span class="section-number-2">13.1</span> Footnote Syntax</h2>
 <div class="outline-text-2" id="text-13-1">
 <p>
 Org footnotes are just links that start with <code>fn:</code>. The footnotes
@@ -1349,8 +1356,8 @@ can then use <code>[fn:name]</code> to create additional references.
 </section>
 
 
-<section id="outline-container-org756ea83" class="outline-1">
-<h1 id="org756ea83"><span class="section-number-1">14</span> Fonts</h1>
+<section id="outline-container-org66f5de8" class="outline-1">
+<h1 id="org66f5de8"><span class="section-number-1">14</span> Fonts</h1>
 <div class="outline-text-1" id="text-14">
 <p>
 Uses <a href="https://everythingfonts.com/font/stix-regular">STIX Regular</a> for body text from everythingfonts.com. When you
