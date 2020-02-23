@@ -1,6 +1,6 @@
 ;;; org-clock.el --- The time clocking code for Org mode -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2004-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2004-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -40,8 +40,6 @@
 (declare-function org-link-make-string "ol" (link &optional description))
 (declare-function org-table-goto-line "org-table" (n))
 (declare-function org-dynamic-block-define "org" (type func))
-(declare-function w32-notification-notify "w32fns.c" (&rest params))
-(declare-function w32-notification-close "w32fns.c" (&rest params))
 
 (defvar org-frame-title-format-backup nil)
 (defvar org-state)
@@ -275,15 +273,6 @@ also using the face `org-mode-line-clock-overrun'."
 	  (const :tag "Just mark the time string" nil)
 	  (string :tag "Text to prepend")))
 
-(defcustom org-show-notification-timeout 3
-  "Number of seconds to wait before closing Org notifications.
-This is applied to notifications sent with `notifications-notify'
-and `w32-notification-notify' only, not other mechanisms possibly
-set through `org-show-notification-handler'."
-  :group 'org-clock
-  :package-version '(Org . "9.4")
-  :type 'integer)
-
 (defcustom org-show-notification-handler nil
   "Function or program to send notification with.
 The function or program will be called with the notification
@@ -467,19 +456,6 @@ Valid values are: `today', `yesterday', `thisweek', `lastweek',
 		 (const untilnow)
 		 (const :tag "Select range interactively" interactive))
   :safe #'symbolp)
-
-(defcustom org-clock-auto-clockout-timer nil
-  "Timer for auto clocking out when Emacs is idle.
-When set to a number, auto clock out the currently clocked in
-task after this number of seconds of idle time.
-
-This is only effective when `org-clock-auto-clockout-insinuate'
-is added to the user configuration."
-  :group 'org-clock
-  :package-version '(Org . "9.4")
-  :type '(choice
-	  (integer :tag "Clock out after Emacs is idle for X seconds")
-	  (const :tag "Never auto clock out" nil)))
 
 (defvar org-clock-in-prepare-hook nil
   "Hook run when preparing the clock.
@@ -832,26 +808,15 @@ If PLAY-SOUND is non-nil, it overrides `org-clock-sound'."
   "Show notification.
 Use `org-show-notification-handler' if defined,
 use libnotify if available, or fall back on a message."
-  (ignore-errors (require 'notifications))
   (cond ((functionp org-show-notification-handler)
 	 (funcall org-show-notification-handler notification))
 	((stringp org-show-notification-handler)
 	 (start-process "emacs-timer-notification" nil
 			org-show-notification-handler notification))
-	((fboundp 'w32-notification-notify)
-	 (let ((id (w32-notification-notify
-		    :title "Org mode message"
-		    :body notification
-		    :urgency 'low)))
-	   (run-with-timer
-	    org-show-notification-timeout
-	    nil
-	    (lambda () (w32-notification-close id)))))
 	((fboundp 'notifications-notify)
 	 (notifications-notify
 	  :title "Org mode message"
 	  :body notification
-	  :timeout (* org-show-notification-timeout 1000)
 	  ;; FIXME how to link to the Org icon?
 	  ;; :app-icon "~/.emacs.d/icons/mail.png"
 	  :urgency 'low))
@@ -1350,6 +1315,7 @@ the default behavior."
 	  (t
 	   (insert-before-markers "\n")
 	   (backward-char 1)
+	   (org-indent-line)
 	   (when (and (save-excursion
 			(end-of-line 0)
 			(org-in-item-p)))
@@ -1374,8 +1340,7 @@ the default behavior."
 		     start-time
 		     (org-current-time org-clock-rounding-minutes t)))
 	   (setq ts (org-insert-time-stamp org-clock-start-time
-					   'with-hm 'inactive))
-	   (org-indent-line)))
+					   'with-hm 'inactive))))
 	 (move-marker org-clock-marker (point) (buffer-base-buffer))
 	 (move-marker org-clock-hd-marker
 		      (save-excursion (org-back-to-heading t) (point))
@@ -1409,26 +1374,6 @@ the default behavior."
 	       (run-with-timer 60 60 'org-resolve-clocks-if-idle))
 	 (message "Clock starts at %s - %s" ts org--msg-extra)
 	 (run-hooks 'org-clock-in-hook))))))
-
-(defun org-clock-auto-clockout ()
-  "Clock out the currently clocked in task if Emacs is idle.
-See `org-clock-auto-clockout-timer' to set the idle time span.
-
-Thie is only effective when `org-clock-auto-clockout-insinuate'
-is present in the user configuration."
-  (when (and (numberp org-clock-auto-clockout-timer)
-	     org-clock-current-task)
-    (run-with-idle-timer
-     org-clock-auto-clockout-timer nil #'org-clock-out)))
-
-;;;###autoload
-(defun org-clock-toggle-auto-clockout ()
-  (interactive)
-  (if (memq 'org-clock-auto-clockout org-clock-in-hook)
-      (progn (remove-hook 'org-clock-in-hook #'org-clock-auto-clockout)
-	     (message "Auto clock-out after idle time turned off"))
-    (add-hook 'org-clock-in-hook #'org-clock-auto-clockout t)
-    (message "Auto clock-out after idle time turned on")))
 
 ;;;###autoload
 (defun org-clock-in-last (&optional arg)
@@ -1779,7 +1724,7 @@ Optional argument N tells to change by that many units."
 	  (delq 'org-mode-line-string global-mode-string))
     (org-clock-restore-frame-title-format)
     (force-mode-line-update)
-    (user-error "No active clock"))
+    (error "No active clock"))
   (save-excursion    ; Do not replace this with `with-current-buffer'.
     (with-no-warnings (set-buffer (org-clocking-buffer)))
     (goto-char org-clock-marker)
@@ -1808,14 +1753,14 @@ With prefix arg SELECT, offer recently clocked tasks for selection."
 	 (m (cond
 	     (select
 	      (or (org-clock-select-task "Select task to go to: ")
-		  (user-error "No task selected")))
+		  (error "No task selected")))
 	     ((org-clocking-p) org-clock-marker)
 	     ((and org-clock-goto-may-find-recent-task
 		   (car org-clock-history)
 		   (marker-buffer (car org-clock-history)))
 	      (setq recent t)
 	      (car org-clock-history))
-	     (t (user-error "No active or recent clock task")))))
+	     (t (error "No active or recent clock task")))))
     (pop-to-buffer-same-window (marker-buffer m))
     (if (or (< m (point-min)) (> m (point-max))) (widen))
     (goto-char m)
@@ -2365,7 +2310,7 @@ the currently selected interval size."
   (save-excursion
     (goto-char (point-at-bol))
     (if (not (looking-at "^[ \t]*#\\+BEGIN:[ \t]+clocktable\\>.*?:block[ \t]+\\(\\S-+\\)"))
-	(user-error "Line needs a :block definition before this command works")
+	(error "Line needs a :block definition before this command works")
       (let* ((b (match-beginning 1)) (e (match-end 1))
 	     (s (match-string 1))
 	     block shift ins y mw d date wp m)
@@ -2424,7 +2369,7 @@ the currently selected interval size."
 		       (encode-time 0 0 0 1 (+ mw n) y))))
 	   (y
 	    (setq ins (number-to-string (+ y n))))))
-	 (t (user-error "Cannot shift clocktable block")))
+	 (t (error "Cannot shift clocktable block")))
 	(when ins
 	  (goto-char b)
 	  (insert ins)
@@ -2476,7 +2421,7 @@ the currently selected interval size."
       (when step
 	;; Write many tables, in steps
 	(unless (or block (and ts te))
-	  (user-error "Clocktable `:step' can only be used with `:block' or `:tstart, :end'"))
+	  (error "Clocktable `:step' can only be used with `:block' or `:tstart,:end'"))
 	(org-clocktable-steps params)
 	(throw 'exit nil))
 
@@ -2582,7 +2527,7 @@ from the dynamic block definition."
 	    (guard (string-match-p "\\`[0-9]+!\\'" (symbol-name narrow))))
        (setq narrow-cut-p t)
        (setq narrow (string-to-number (symbol-name narrow))))
-      (_ (user-error "Invalid value %s of :narrow property in clock table" narrow)))
+      (_ (error "Invalid value %s of :narrow property in clock table" narrow)))
 
     ;; Now we need to output this table stuff.
     (goto-char ipos)

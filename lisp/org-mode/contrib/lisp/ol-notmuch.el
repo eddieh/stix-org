@@ -1,4 +1,4 @@
-;;; ol-notmuch.el --- Links to notmuch messages
+;;; org-notmuch.el --- Links to notmuch messages
 
 ;; Copyright (C) 2010-2014  Matthieu Lemerre
 
@@ -40,6 +40,7 @@
 ;;; Code:
 
 (require 'ol)
+(require 'org)
 
 ;; customisable notmuch open functions
 (defcustom org-notmuch-open-function
@@ -79,11 +80,11 @@ Should accept a notmuch search string as the sole argument."
 	   (from (notmuch-show-get-from))
 	   (date (org-trim (notmuch-show-get-date)))
 	   desc link)
-      (org-link-store-props :type "notmuch" :from from :to to :date date
+      (org-store-link-props :type "notmuch" :from from :to to :date date
        			    :subject subject :message-id message-id)
-      (setq desc (org-link-email-description))
+      (setq desc (org-email-link-description))
       (setq link (concat "notmuch:id:" message-id))
-      (org-link-add-props :link link :description desc)
+      (org-add-link-props :link link :description desc)
       link)))
 
 (defun org-notmuch-open (path)
@@ -108,7 +109,7 @@ Can link to more than one message, if so all matching messages are shown."
   (when (eq major-mode 'notmuch-search-mode)
     (let ((link (concat "notmuch-search:" notmuch-search-query-string))
 	  (desc (concat "Notmuch search: " notmuch-search-query-string)))
-      (org-link-store-props :type "notmuch-search"
+      (org-store-link-props :type "notmuch-search"
 			    :link link
 			    :description desc)
       link)))
@@ -134,7 +135,7 @@ Can link to more than one message, if so all matching messages are shown."
   (when (eq major-mode 'notmuch-tree-mode)
     (let ((link (concat "notmuch-tree:" (notmuch-tree-get-query)))
 	  (desc (concat "Notmuch tree: " (notmuch-tree-get-query))))
-      (org-link-store-props :type "notmuch-tree"
+      (org-store-link-props :type "notmuch-tree"
 			    :link link
 			    :description desc)
       link)))

@@ -1,6 +1,6 @@
 ;;; org-src.el --- Source code examples in Org       -*- lexical-binding: t; -*-
 ;;
-;; Copyright (C) 2004-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2004-2019 Free Software Foundation, Inc.
 ;;
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;;	   Bastien Guerry <bzg@gnu.org>
@@ -148,9 +148,6 @@ the existing edit buffer."
   "How the source code edit buffer should be displayed.
 Possible values for this option are:
 
-plain              Show edit buffer using `display-buffer'.  Users can
-                   further control the display behavior by modifying
-                   `display-buffer-alist' and its relatives.
 current-window     Show edit buffer in the current window, keeping all other
                    windows.
 split-window-below Show edit buffer below the current window, keeping all
@@ -159,12 +156,10 @@ split-window-right Show edit buffer to the right of the current window,
                    keeping all other windows.
 other-window       Use `switch-to-buffer-other-window' to display edit buffer.
 reorganize-frame   Show only two windows on the current frame, the current
-                   window and the edit buffer.
+                   window and the edit buffer.  When exiting the edit buffer,
+                   return to one window.
 other-frame        Use `switch-to-buffer-other-frame' to display edit buffer.
-                   Also, when exiting the edit buffer, kill that frame.
-
-Values that modify the window layout (reorganize-frame, split-window-below,
-split-window-right) will restore the layout after exiting the edit buffer."
+                   Also, when exiting the edit buffer, kill that frame."
   :group 'org-edit-structure
   :type '(choice
 	  (const current-window)
@@ -280,9 +275,6 @@ issued in the language major mode buffer."
 
 (defvar-local org-src--remote nil)
 (put 'org-src--remote 'permanent-local t)
-
-(defvar-local org-src--saved-temp-window-config nil)
-(put 'org-src--saved-temp-window-config 'permanent-local t)
 
 (defvar-local org-src--source-type nil
   "Type of element being edited, as a symbol.")
@@ -477,10 +469,6 @@ When REMOTE is non-nil, do not try to preserve point or mark when
 moving from the edit area to the source.
 
 Leave point in edit buffer."
-  (when (memq org-src-window-setup '(reorganize-frame
-				     split-window-below
-				     split-window-right))
-    (setq org-src--saved-temp-window-config (current-window-configuration)))
   (let* ((area (org-src--contents-area datum))
 	 (beg (copy-marker (nth 0 area)))
 	 (end (copy-marker (nth 1 area) t))
@@ -804,14 +792,9 @@ Raise an error when current buffer is not a source editing buffer."
 
 (defun org-src-switch-to-buffer (buffer context)
   (pcase org-src-window-setup
-    (`plain
-     (when (eq context 'exit) (quit-restore-window))
-     (pop-to-buffer buffer))
     (`current-window (pop-to-buffer-same-window buffer))
     (`other-window
-     (let ((cur-win (selected-window)))
-       (switch-to-buffer-other-window buffer)
-       (when (eq context 'exit) (quit-restore-window cur-win))))
+     (switch-to-buffer-other-window buffer))
     (`split-window-below
      (if (eq context 'exit)
 	 (delete-window)
@@ -1199,11 +1182,8 @@ Throw an error if there is no such buffer."
        (write-back (org-src--goto-coordinates coordinates beg end))))
     ;; Clean up left-over markers and restore window configuration.
     (set-marker beg nil)
-    (set-marker end nil)
-    (when org-src--saved-temp-window-config
-      (unwind-protect
-	  (set-window-configuration org-src--saved-temp-window-config)
-	(setq org-src--saved-temp-window-config nil)))))
+    (set-marker end nil)))
+
 
 (provide 'org-src)
 

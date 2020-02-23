@@ -1,6 +1,6 @@
 ;;; org-capture.el --- Fast note taking in Org       -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2010-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2010-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -49,13 +49,11 @@
 
 (require 'cl-lib)
 (require 'org)
-(require 'org-refile)
 
 (declare-function org-at-encrypted-entry-p "org-crypt" ())
 (declare-function org-at-table-p "org-table" (&optional table-type))
 (declare-function org-clock-update-mode-line "org-clock" (&optional refresh))
 (declare-function org-datetree-find-date-create "org-datetree" (date &optional keep-restriction))
-(declare-function org-datetree-find-month-create (d &optional keep-restriction))
 (declare-function org-decrypt-entry "org-crypt" ())
 (declare-function org-element-at-point "org-element" ())
 (declare-function org-element-lineage "org-element" (datum &optional types with-self))
@@ -70,7 +68,6 @@
 
 (defvar dired-buffers)
 (defvar org-end-time-was-given)
-(defvar org-keyword-properties)
 (defvar org-remember-default-headline)
 (defvar org-remember-templates)
 (defvar org-store-link-plist)
@@ -239,15 +236,15 @@ properties are:
 
  :jump-to-captured   When set, jump to the captured entry when finished.
 
- :empty-lines        Set this to the number of lines that should be inserted
+ :empty-lines        Set this to the number of lines the should be inserted
                      before and after the new item.  Default 0, only common
                      other value is 1.
 
- :empty-lines-before Set this to the number of lines that should be inserted
+ :empty-lines-before Set this to the number of lines the should be inserted
                      before the new item.  Overrides :empty-lines for the
                      number lines inserted before.
 
- :empty-lines-after  Set this to the number of lines that should be inserted
+ :empty-lines-after  Set this to the number of lines the should be inserted
                      after the new item.  Overrides :empty-lines for the
                      number of lines inserted after.
 
@@ -997,13 +994,11 @@ Store them in the capture property list."
 	   (org-capture-put-target-region-and-position)
 	   (widen)
 	   ;; Make a date/week tree entry, with the current date (or
-	   ;; yesterday, if we are extending dates for a couple of
-	   ;; hours)
+	   ;; yesterday, if we are extending dates for a couple of hours)
 	   (funcall
-	    (pcase (org-capture-get :tree-type)
-	      (`week #'org-datetree-find-iso-week-create)
-	      (`month #'org-datetree-find-month-create)
-	      (_ #'org-datetree-find-date-create))
+	    (if (eq (org-capture-get :tree-type) 'week)
+		#'org-datetree-find-iso-week-create
+	      #'org-datetree-find-date-create)
 	    (calendar-gregorian-from-absolute
 	     (cond
 	      (org-overriding-default-time
@@ -1153,13 +1148,14 @@ may have been stored before."
 	  (when insert-here? (narrow-to-region beg beg))
 	  (org-paste-subtree level template 'for-yank))
 	(org-capture-position-for-last-stored beg)
-	(org-capture-empty-lines-after)
-	(unless (org-at-heading-p) (outline-next-heading))
-	(org-capture-mark-kill-region origin (point))
-	(org-capture-narrow beg (point))
-	(when (or (search-backward "%?" beg t)
-		  (search-forward "%?" nil t))
-	  (replace-match ""))))))
+	(let ((end (if (org-at-heading-p) (line-end-position 0) (point))))
+	  (org-capture-empty-lines-after)
+	  (unless (org-at-heading-p) (outline-next-heading))
+	  (org-capture-mark-kill-region origin (point))
+	  (org-capture-narrow beg end)
+	  (when (or (search-backward "%?" beg t)
+		    (search-forward "%?" end t))
+	    (replace-match "")))))))
 
 (defun org-capture-place-item ()
   "Place the template as a new plain list item."
@@ -1738,11 +1734,11 @@ The template may still contain \"%?\" for cursor positioning."
 			 (_ (error "Invalid `org-capture--clipboards' value: %S"
 				   org-capture--clipboards)))))
 		    ("p"
-		     ;; We remove keyword properties inherited from
+		     ;; We remove file properties inherited from
 		     ;; target buffer so `org-read-property-value' has
 		     ;; a chance to find allowed values in sub-trees
 		     ;; from the target buffer.
-		     (setq-local org-keyword-properties nil)
+		     (setq-local org-file-properties nil)
 		     (let* ((origin (set-marker (make-marker)
 						(org-capture-get :pos)
 						(org-capture-get :buffer)))

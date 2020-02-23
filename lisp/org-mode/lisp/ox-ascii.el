@@ -1,6 +1,6 @@
 ;;; ox-ascii.el --- ASCII Back-End for Org Export Engine -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2012-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
 ;; Author: Nicolas Goaziou <n.goaziou at gmail dot com>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -31,10 +31,7 @@
 (require 'ox-publish)
 (require 'cl-lib)
 
-;;; Function Declarations
-
 (declare-function aa2u "ext:ascii-art-to-unicode" ())
-(declare-function org-attach-link-expand "org-attach" (link &optional buffer-or-name))
 
 ;;; Define Back-End
 ;;
@@ -1570,18 +1567,13 @@ CONTENTS is nil.  INFO is a plist holding contextual
 
 DESC is the description part of the link, or the empty string.
 INFO is a plist holding contextual information."
-  (let* ((type (org-element-property :type link))
-	 (raw-path (org-element-property :path link))
-	 (path (cond
-		((string= type "attachment")
-		 (setq raw-path (org-attach-link-expand link))
-		 (concat type ":" raw-path))
-		(t (concat type ":" raw-path)))))
+  (let ((type (org-element-property :type link)))
     (cond
      ((org-export-custom-protocol-maybe link desc 'ascii))
      ((string= type "coderef")
-      (format (org-export-get-coderef-format path desc)
-	      (org-export-resolve-coderef path info)))
+      (let ((ref (org-element-property :path link)))
+	(format (org-export-get-coderef-format ref desc)
+		(org-export-resolve-coderef ref info))))
      ;; Do not apply a special syntax on radio links.  Though, use
      ;; transcoded target's contents as output.
      ((string= type "radio") desc)
@@ -1613,10 +1605,13 @@ INFO is a plist holding contextual information."
 	  ;; Don't know what to do.  Signal it.
 	  (_ "???"))))
      (t
-      (if (not (org-string-nw-p desc)) (format "<%s>" path)
-	(concat (format "[%s]" desc)
-		(and (not (plist-get info :ascii-links-to-notes))
-		     (format " (<%s>)" path))))))))
+      (let ((raw-link (concat (org-element-property :type link)
+			      ":"
+			      (org-element-property :path link))))
+	(if (not (org-string-nw-p desc)) (format "<%s>" raw-link)
+	  (concat (format "[%s]" desc)
+		  (and (not (plist-get info :ascii-links-to-notes))
+		       (format " (<%s>)" raw-link)))))))))
 
 
 ;;;; Node Properties

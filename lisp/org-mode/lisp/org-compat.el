@@ -1,6 +1,6 @@
 ;;; org-compat.el --- Compatibility Code for Older Emacsen -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2004-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2004-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -314,8 +314,6 @@ Counting starts at 1."
 
 (define-obsolete-variable-alias 'org-attach-directory
   'org-attach-id-dir "Org 9.3")
-(make-obsolete 'org-attach-store-link "No longer used" "Org 9.4")
-(make-obsolete 'org-attach-expand-link "No longer used" "Org 9.4")
 
 (defun org-in-fixed-width-region-p ()
   "Non-nil if point in a fixed-width region."
@@ -557,11 +555,6 @@ use of this function is for the stuck project list."
 
 (define-obsolete-function-alias 'org-make-link-regexps
   'org-link-make-regexps "Org 9.3")
-
-(define-obsolete-function-alias 'org-property-global-value
-  'org-property-global-or-keyword-value "Org 9.3")
-
-(make-obsolete-variable 'org-file-properties 'org-keyword-properties "Org 9.3")
 
 (define-obsolete-variable-alias 'org-angle-link-re
   'org-link-angle-re "Org 9.3")

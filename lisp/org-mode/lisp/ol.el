@@ -1,6 +1,6 @@
 ;;; ol.el --- Org links library                      -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2018-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -75,7 +75,6 @@
 (declare-function org-src-source-type "org-src" ())
 (declare-function org-time-stamp-format "org" (&optional long inactive))
 (declare-function outline-next-heading "outline" ())
-(declare-function org-attach-link-expand "org-attach" (link &optional buffer-or-name))
 
 
 ;;; Customization
@@ -933,9 +932,7 @@ a \"file\" link."
   (let ((type (org-element-property :type link))
 	(path (org-element-property :path link)))
     (cond
-     ((member type '("file" "attachment"))
-      (when (string= type "attachment")
-	(setq path (org-attach-link-expand link)))
+     ((equal type "file")
       (if (string-match "[*?{]" (file-name-nondirectory path))
 	  (dired path)
 	;; Look into `org-link-parameters' in order to find
@@ -1581,17 +1578,15 @@ non-nil."
       (cond ((not desc))
 	    ((equal desc "NONE") (setq desc nil))
 	    (t (setq desc (org-link-display-format desc))))
-      ;; Store and return the link
+      ;; Return the link
       (if (not (and interactive? link))
 	  (or agenda-link (and link (org-link-make-string link desc)))
-	(if (member (list link desc) org-stored-links)
-	    (message "This link already exists")
-	  (push (list link desc) org-stored-links)
-	  (message "Stored: %s" (or desc link))
-	  (when custom-id
-	    (setq link (concat "file:" (abbreviate-file-name
-					(buffer-file-name)) "::#" custom-id))
-	    (push (list link desc) org-stored-links)))
+	(push (list link desc) org-stored-links)
+	(message "Stored: %s" (or desc link))
+	(when custom-id
+	  (setq link (concat "file:" (abbreviate-file-name
+				      (buffer-file-name)) "::#" custom-id))
+	  (push (list link desc) org-stored-links))
 	(car org-stored-links)))))
 
 ;;;###autoload

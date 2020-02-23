@@ -1,6 +1,6 @@
 ;;; ob-scheme.el --- Babel Functions for Scheme      -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2010-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2010-2019 Free Software Foundation, Inc.
 
 ;; Authors: Eric Schulte
 ;;	    Michael Gauland
@@ -71,8 +71,7 @@
 (defun org-babel-expand-body:scheme (body params)
   "Expand BODY according to PARAMS, return the expanded body."
   (let ((vars (org-babel--get-vars params))
-	(prepends (cdr (assq :prologue params)))
-	(postpends (cdr (assq :epilogue params))))
+	(prepends (cdr (assq :prologue params))))
     (concat (and prepends (concat prepends "\n"))
 	    (if (null vars) body
 	      (format "(let (%s)\n%s\n)"
@@ -81,8 +80,7 @@
 			 (format "%S" (print `(,(car var) ',(cdr var)))))
 		       vars
 		       "\n      ")
-		      body))
-	    (and postpends (concat "\n" postpends)))))
+		      body)))))
 
 
 (defvar org-babel-scheme-repl-map (make-hash-table :test #'equal)

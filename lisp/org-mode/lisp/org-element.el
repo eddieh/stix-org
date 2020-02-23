@@ -1,6 +1,6 @@
 ;;; org-element.el --- Parser for Org Syntax         -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2012-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
 ;; Author: Nicolas Goaziou <n.goaziou at gmail dot com>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -72,6 +72,7 @@
 (declare-function org-at-heading-p "org" (&optional _))
 (declare-function org-end-of-subtree "org" (&optional invisible-ok to-heading))
 (declare-function org-escape-code-in-string "org-src" (s))
+(declare-function org-find-visible "org" ())
 (declare-function org-macro-escape-arguments "org-macro" (&rest args))
 (declare-function org-macro-extract-arguments "org-macro" (s))
 (declare-function org-reduced-level "org" (l))
@@ -1805,10 +1806,13 @@ Return a list whose CAR is `clock' and CDR is a plist containing
 
 ;;;; Comment
 
-(defun org-element-comment-parser (limit)
+(defun org-element-comment-parser (limit affiliated)
   "Parse a comment.
 
-LIMIT bounds the search.
+LIMIT bounds the search.  AFFILIATED is a list of which CAR is
+the buffer position at the beginning of the first affiliated
+keyword and CDR is a plist of affiliated keywords along with
+their value.
 
 Return a list whose CAR is `comment' and CDR is a plist
 containing `:begin', `:end', `:value', `:post-blank',
@@ -1816,7 +1820,8 @@ containing `:begin', `:end', `:value', `:post-blank',
 
 Assume point is at comment beginning."
   (save-excursion
-    (let* ((begin (point))
+    (let* ((begin (car affiliated))
+	   (post-affiliated (point))
 	   (value (prog2 (looking-at "[ \t]*# ?")
 		      (buffer-substring-no-properties
 		       (match-end 0) (line-end-position))
@@ -1838,11 +1843,13 @@ Assume point is at comment beginning."
 		       (skip-chars-forward " \r\t\n" limit)
 		       (if (eobp) (point) (line-beginning-position)))))
       (list 'comment
-	    (list :begin begin
-		  :end end
-		  :value value
-		  :post-blank (count-lines com-end end)
-		  :post-affiliated begin)))))
+	    (nconc
+	     (list :begin begin
+		   :end end
+		   :value value
+		   :post-blank (count-lines com-end end)
+		   :post-affiliated post-affiliated)
+	     (cdr affiliated))))))
 
 (defun org-element-comment-interpreter (comment _)
   "Interpret COMMENT element as Org syntax.
@@ -3210,11 +3217,10 @@ Assume point is at the beginning of the link."
 	(setq post-blank
 	      (progn (goto-char link-end) (skip-chars-forward " \t")))
 	(setq end (point)))
-      ;; Special "file" or "attachment" type link processing.  Extract
-      ;; opening application and search option, if any.  Also
-      ;; normalize URI.
-      (when (string-match "\\`\\(file\\|attachment\\)\\(?:\\+\\(.+\\)\\)?\\'" type)
-	(setq application (match-string 2 type) type (match-string 1 type))
+      ;; Special "file" type link processing.  Extract opening
+      ;; application and search option, if any.  Also normalize URI.
+      (when (string-match "\\`file\\(?:\\+\\(.+\\)\\)?\\'" type)
+	(setq application (match-string 1 type) type "file")
 	(when (string-match "::\\(.*\\)\\'" path)
 	  (setq search-option (match-string 1 path))
 	  (setq path (replace-match "" nil nil path)))
@@ -3817,6 +3823,12 @@ Assume point is at the first equal sign marker."
 ;; `org-element--current-element' is the core function of this section.
 ;; It returns the Lisp representation of the element starting at
 ;; point.
+;;
+;; `org-element--current-element' makes use of special modes.  They
+;; are activated for fixed element chaining (e.g., `plain-list' >
+;; `item') or fixed conditional element chaining (e.g., `headline' >
+;; `section').  Special modes are: `first-section', `item',
+;; `node-property', `section' and `table-row'.
 
 (defun org-element--current-element (limit &optional granularity mode structure)
   "Parse the element starting at point.
@@ -3836,9 +3848,8 @@ nil), secondary values will not be parsed, since they only
 contain objects.
 
 Optional argument MODE, when non-nil, can be either
-`first-section', `item', `node-property', `planning',
-`property-drawer', `section', `table-row', or `top-comment'.
-
+`first-section', `section', `planning', `item', `node-property'
+and `table-row'.
 
 If STRUCTURE isn't provided but MODE is set to `item', it will be
 computed.
@@ -3868,22 +3879,15 @@ element it has to parse."
 	(org-element-section-parser
 	 (or (save-excursion (org-with-limited-levels (outline-next-heading)))
 	     limit)))
-       ;; Comments.
-       ((looking-at "^[ \t]*#\\(?: \\|$\\)")
-	(org-element-comment-parser limit))
        ;; Planning.
        ((and (eq mode 'planning)
 	     (eq ?* (char-after (line-beginning-position 0)))
 	     (looking-at org-planning-line-re))
 	(org-element-planning-parser limit))
        ;; Property drawer.
-       ((and (pcase mode
-	       (`planning (eq ?* (char-after (line-beginning-position 0))))
-	       ((or `property-drawer `top-comment)
-		(save-excursion
-		  (beginning-of-line 0)
-		  (not (looking-at "[[:blank:]]*$"))))
-	       (_ nil))
+       ((and (memq mode '(planning property-drawer))
+	     (eq ?* (char-after (line-beginning-position
+				 (if (eq mode 'planning) 0 -1))))
 	     (looking-at org-property-drawer-re))
 	(org-element-property-drawer-parser limit))
        ;; When not at bol, point is at the beginning of an item or
@@ -3892,7 +3896,7 @@ element it has to parse."
        ;; Clock.
        ((looking-at org-clock-line-re) (org-element-clock-parser limit))
        ;; Inlinetask.
-       ((looking-at "^\\*+ ")
+       ((org-at-heading-p)
 	(org-element-inlinetask-parser limit raw-secondary-p))
        ;; From there, elements can have affiliated keywords.
        (t (let ((affiliated (org-element--collect-affiliated-keywords
@@ -3906,7 +3910,7 @@ element it has to parse."
 	     ;; LaTeX Environment.
 	     ((looking-at org-element--latex-begin-environment)
 	      (org-element-latex-environment-parser limit affiliated))
-	     ;; Drawer.
+	     ;; Drawer and Property Drawer.
 	     ((looking-at org-drawer-regexp)
 	      (org-element-drawer-parser limit affiliated))
 	     ;; Fixed Width
@@ -3914,10 +3918,13 @@ element it has to parse."
 	      (org-element-fixed-width-parser limit affiliated))
 	     ;; Inline Comments, Blocks, Babel Calls, Dynamic Blocks and
 	     ;; Keywords.
-	     ((looking-at "[ \t]*#\\+")
+	     ((looking-at "[ \t]*#")
 	      (goto-char (match-end 0))
 	      (cond
-	       ((looking-at "BEGIN_\\(\\S-+\\)")
+	       ((looking-at "\\(?: \\|$\\)")
+		(beginning-of-line)
+		(org-element-comment-parser limit affiliated))
+	       ((looking-at "\\+BEGIN_\\(\\S-+\\)")
 		(beginning-of-line)
 		(funcall (pcase (upcase (match-string 1))
 			   ("CENTER"  #'org-element-center-block-parser)
@@ -3930,13 +3937,13 @@ element it has to parse."
 			   (_         #'org-element-special-block-parser))
 			 limit
 			 affiliated))
-	       ((looking-at "CALL:")
+	       ((looking-at "\\+CALL:")
 		(beginning-of-line)
 		(org-element-babel-call-parser limit affiliated))
-	       ((looking-at "BEGIN:? ")
+	       ((looking-at "\\+BEGIN:? ")
 		(beginning-of-line)
 		(org-element-dynamic-block-parser limit affiliated))
-	       ((looking-at "\\S-+:")
+	       ((looking-at "\\+\\S-+:")
 		(beginning-of-line)
 		(org-element-keyword-parser limit affiliated))
 	       (t
@@ -4313,41 +4320,34 @@ looking into captions:
 ;; `org-element--object-lex' to find the next object in the current
 ;; container.
 
-(defsubst org-element--next-mode (mode type parent?)
-  "Return next mode according to current one.
-
-MODE is a symbol representing the expectation about the next
-element or object.  Meaningful values are `first-section',
-`item', `node-property', `planning', `property-drawer',
-`section', `table-row', `top-comment', and nil.
-
-TYPE is the type of the current element or object.
-
-If PARENT? is non-nil, assume the next element or object will be
-located inside the current one.  "
-  (if parent?
+(defsubst org-element--next-mode (type parentp)
+  "Return next special mode according to TYPE, or nil.
+TYPE is a symbol representing the type of an element or object
+containing next element if PARENTP is non-nil, or before it
+otherwise.  Modes can be either `first-section', `item',
+`node-property', `planning', `property-drawer', `section',
+`table-row' or nil."
+  (if parentp
       (pcase type
 	(`headline 'section)
-	(`first-section 'top-comment)
 	(`inlinetask 'planning)
 	(`plain-list 'item)
 	(`property-drawer 'node-property)
 	(`section 'planning)
 	(`table 'table-row))
-    (pcase mode
+    (pcase type
       (`item 'item)
       (`node-property 'node-property)
-      ((and `planning (guard (eq type 'planning))) 'property-drawer)
-      (`table-row 'table-row)
-      ((and `top-comment (guard (eq type 'comment))) 'property-drawer))))
+      (`planning 'property-drawer)
+      (`table-row 'table-row))))
 
 (defun org-element--parse-elements
     (beg end mode structure granularity visible-only acc)
   "Parse elements between BEG and END positions.
 
 MODE prioritizes some elements over the others.  It can be set to
-`first-section', `item', `node-property', `planning',
-`property-drawer', `section', `table-row', `top-comment', or nil.
+`first-section', `section', `planning', `item', `node-property'
+or `table-row'.
 
 When value is `item', STRUCTURE will be used as the current list
 structure.
@@ -4361,52 +4361,54 @@ elements.
 Elements are accumulated into ACC."
   (save-excursion
     (goto-char beg)
+    ;; Visible only: skip invisible parts at the beginning of the
+    ;; element.
+    (when (and visible-only (org-invisible-p2))
+      (goto-char (min (1+ (org-find-visible)) end)))
     ;; When parsing only headlines, skip any text before first one.
     (when (and (eq granularity 'headline) (not (org-at-heading-p)))
       (org-with-limited-levels (outline-next-heading)))
     (let (elements)
       (while (< (point) end)
-	;; Visible only: skip invisible parts due to folding.
-	(if (and visible-only (org-invisible-p nil t))
-	    (progn
-	      (goto-char (org-find-visible))
-	      (when (and (eolp) (not (eobp))) (forward-char)))
-	  ;; Find current element's type and parse it accordingly to
-	  ;; its category.
-	  (let* ((element (org-element--current-element
-			   end granularity mode structure))
-		 (type (org-element-type element))
-		 (cbeg (org-element-property :contents-begin element)))
-	    (goto-char (org-element-property :end element))
-	    ;; Fill ELEMENT contents by side-effect.
-	    (cond
-	     ;; If element has no contents, don't modify it.
-	     ((not cbeg))
-	     ;; Greater element: parse it between `contents-begin' and
-	     ;; `contents-end'.  Ensure GRANULARITY allows recursion,
-	     ;; or ELEMENT is a headline, in which case going inside
-	     ;; is mandatory, in order to get sub-level headings.
-	     ((and (memq type org-element-greater-elements)
-		   (or (memq granularity '(element object nil))
-		       (and (eq granularity 'greater-element)
-			    (eq type 'section))
-		       (eq type 'headline)))
-	      (org-element--parse-elements
-	       cbeg (org-element-property :contents-end element)
-	       ;; Possibly switch to a special mode.
-	       (org-element--next-mode mode type t)
-	       (and (memq type '(item plain-list))
-		    (org-element-property :structure element))
-	       granularity visible-only element))
-	     ;; ELEMENT has contents.  Parse objects inside, if
-	     ;; GRANULARITY allows it.
-	     ((memq granularity '(object nil))
-	      (org-element--parse-objects
-	       cbeg (org-element-property :contents-end element) element
-	       (org-element-restriction type))))
-	    (push (org-element-put-property element :parent acc) elements)
-	    ;; Update mode.
-	    (setq mode (org-element--next-mode mode type nil)))))
+	;; Find current element's type and parse it accordingly to
+	;; its category.
+	(let* ((element (org-element--current-element
+			 end granularity mode structure))
+	       (type (org-element-type element))
+	       (cbeg (org-element-property :contents-begin element)))
+	  (goto-char (org-element-property :end element))
+	  ;; Visible only: skip invisible parts between siblings.
+	  (when (and visible-only (org-invisible-p2))
+	    (goto-char (min (1+ (org-find-visible)) end)))
+	  ;; Fill ELEMENT contents by side-effect.
+	  (cond
+	   ;; If element has no contents, don't modify it.
+	   ((not cbeg))
+	   ;; Greater element: parse it between `contents-begin' and
+	   ;; `contents-end'.  Make sure GRANULARITY allows the
+	   ;; recursion, or ELEMENT is a headline, in which case going
+	   ;; inside is mandatory, in order to get sub-level headings.
+	   ((and (memq type org-element-greater-elements)
+		 (or (memq granularity '(element object nil))
+		     (and (eq granularity 'greater-element)
+			  (eq type 'section))
+		     (eq type 'headline)))
+	    (org-element--parse-elements
+	     cbeg (org-element-property :contents-end element)
+	     ;; Possibly switch to a special mode.
+	     (org-element--next-mode type t)
+	     (and (memq type '(item plain-list))
+		  (org-element-property :structure element))
+	     granularity visible-only element))
+	   ;; ELEMENT has contents.  Parse objects inside, if
+	   ;; GRANULARITY allows it.
+	   ((memq granularity '(object nil))
+	    (org-element--parse-objects
+	     cbeg (org-element-property :contents-end element) element
+	     (org-element-restriction type))))
+	  (push (org-element-put-property element :parent acc) elements)
+	  ;; Update mode.
+	  (setq mode (org-element--next-mode type nil))))
       ;; Return result.
       (apply #'org-element-set-contents acc (nreverse elements)))))
 
@@ -5448,11 +5450,9 @@ the process stopped before finding the expected result."
         ;; element following headline above, or first element in
         ;; buffer.
         ((not cached)
-         (if (org-with-limited-levels (outline-previous-heading))
-             (progn
-	       (setq mode 'planning)
-	       (forward-line))
-	   (setq mode 'top-comment))
+         (when (org-with-limited-levels (outline-previous-heading))
+           (setq mode 'planning)
+	   (forward-line))
          (skip-chars-forward " \r\t\n")
          (beginning-of-line))
         ;; Cache returned exact match: return it.
@@ -5521,7 +5521,7 @@ the process stopped before finding the expected result."
 	      ;; after it.
 	      ((and (<= elem-end pos) (/= (point-max) elem-end))
 	       (goto-char elem-end)
-	       (setq mode (org-element--next-mode mode type nil)))
+	       (setq mode (org-element--next-mode type nil)))
 	      ;; A non-greater element contains point: return it.
 	      ((not (memq type org-element-greater-elements))
 	       (throw 'exit element))
@@ -5549,7 +5549,7 @@ the process stopped before finding the expected result."
 				    (and (= cend pos) (= (point-max) pos)))))
 		   (goto-char (or next cbeg))
 		   (setq next nil
-			 mode (org-element--next-mode mode type t)
+			 mode (org-element--next-mode type t)
 			 parent element
 			 end cend))))
 	      ;; Otherwise, return ELEMENT as it is the smallest
@@ -5813,7 +5813,7 @@ element.
 
 Possible types are defined in `org-element-all-elements'.
 Properties depend on element or object type, but always include
-`:begin', `:end', and `:post-blank' properties.
+`:begin', `:end', `:parent' and `:post-blank' properties.
 
 As a special case, if point is at the very beginning of the first
 item in a list or sub-list, returned element will be that list

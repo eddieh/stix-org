@@ -1,6 +1,6 @@
 ;; ox-man.el --- Man Back-End for Org Export Engine -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2011-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2011-2019 Free Software Foundation, Inc.
 
 ;; Author: Nicolas Goaziou <n.goaziou at gmail dot com>
 ;;      Luis R Anaya <papoanaya aroba hot mail punto com>
@@ -39,10 +39,6 @@
 
 (require 'cl-lib)
 (require 'ox)
-
-;;; Function Declarations
-
-(declare-function org-attach-link-expand "org-attach" (link &optional buffer-or-name))
 
 (defvar org-export-man-default-packages-alist)
 (defvar org-export-man-packages-alist)
@@ -616,10 +612,7 @@ INFO is a plist holding contextual information.  See
          (path (cond
                 ((member type '("http" "https" "ftp" "mailto"))
                  (concat type ":" raw-path))
-                ((member type '("file" "attachment"))
-		 (when (string= type "attachment")
-		   (setq raw-path (org-attach-link-expand link)))
-		 (org-export-file-uri raw-path))
+                ((string= type "file") (org-export-file-uri raw-path))
                 (t raw-path))))
     (cond
      ;; Link type is handled by a special function.

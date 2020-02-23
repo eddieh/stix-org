@@ -5,195 +5,10 @@ ORG NEWS -- history of user-visible changes.   -*- mode: org; coding: utf-8 -*-
 #+LINK: doc https://orgmode.org/worg/doc.html#%s
 #+LINK: git https://code.orgmode.org/bzg/org-mode/commit/%s
 
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
 See the end of the file for license conditions.
 
 Please send Org bug reports to mailto:emacs-orgmode@gnu.org.
-
-* Version 9.4 (not yet released)
-** Incompatible changes
-*** Python session return values must be top-level expression statements
-
-Python blocks with ~:session :results value~ header arguments now only
-return a value if the last line is a top-level expression statement,
-otherwise the result is None. Also, None will now show up under
-"#+RESULTS:", as it already did with ~:results value~ for non-session
-blocks.
-
-** New features
-
-*** Numeric priorities are now allowed (up to 65)
-
-You can now set ~org-priority-highest/lowest/default~ to integers to
-use numeric priorities globally or set, for example
-
-#+PRIORITIES: 1 10 5
-
-to define a buffer-local range and default for priorities.  Priority
-commands should work as usual.  You cannot use numbers superior to 64
-for numeric priorities, as it would clash with priorities like [#A]
-where the "A" is internally converted to its numeric value of 65.
-
-*** New minor mode ~org-table-header-line-mode~
-
-Turn on the display of the first data row of the table at point in the
-window header line when this first row is not visible anymore in the
-buffer.
-
-You can activate this minor mode by default by setting the option
-~org-table-header-line-p~ to =t=.  You can also change the face for
-the header line by customizing the ~org-table-header~ face.
-
-*** Looping agenda commands over headlines
-
-~org-agenda-loop-over-headlines-in-active-region~ allows you to loop
-agenda commands over the active region.  When set to =t=, loop over
-all headlines.  When set to ='start-level=, loop over headlines with
-the same level than the first headline in the region.  When set to a
-string, loop over lines matching this regular expression.
-
-*** Property drawers allowed before first headline
-
-Property drawers are now allowed before the first headline.
-
-Org mode is moving more towards making things before the first
-headline behave just as if it was at outline level 0.  Inheritance for
-properties will work also for this level.  In other words: defining
-things in a property drawer before the first headline will make them
-"inheritable" for all headlines.
-
-*** Refinement in window behavior on exiting Org source buffer
-
-After editing a source block, Org will restore the window layout when
-~org-src-window-setup~ is set to a value that modifies the layout.
-
-*** Display remote inline images
-
-Added the capability to display remote images inline.  Whether the
-images are actually displayed are controlled by the new option
-~org-display-remote-inline-images~.
-
-*** New allowed value for ~org-adapt-indentation~
-
-~org-adapt-indentation~ now accepts a new value, ='headline-data=.
-
-When set to this value, Org will only adapt indentation of headline
-data lines, such as planning/clock lines and property/logbook drawers.
-Also, with this setting, =org-indent-mode= will keep these data lines
-correctly aligned with the headline above.
-
-*** Babel: new header argument to pass Java command line arguments
-
-Babel Java blocks recognize header argument =:cmdargs= and pass its
-value in call to =java=.
-
-** New options
-*** New option ~org-clock-auto-clockout-timer~
-
-When this option is set to a number and the user configuration
-contains =(org-clock-auto-clockout-insinuate)=, Org will clock out the
-currently clocked in task after that number of seconds of idle time.
-
-This is useful when you often forget to clock out before being idle
-and don't want to have to manually set the clocking time to take into
-account.
-
-*** New option ~org-table-header-line-p~
-
-Setting this option to =t= will activate
-~org-table-header-line-mode~ in org-mode buffers.
-
-*** New option to group captured datetime entries by month
-
-A new `:tree-type month' option was added to org-capture-templates to
-group new datetime entries by month.
-
-*** New option to show source buffers using "plain" display-buffer
-
-Added option ~plain~ to ~org-src-window-setup~ to show source buffers
-using ~display-buffer~. This allows users to control how source
-buffers are displayed by modifying ~display-buffer-alist~ or
-~display-buffer-base-action~.
-
-*** New option ~org-archive-subtree-save-file-p~
-
-Archiving a subtree used to always save the target archive buffer.
-Commit [[https://code.orgmode.org/bzg/org-mode/commit/b186d1d7][b186d1d7]] changed this behavior by always not saving the target
-buffer, because batch archiving from agenda could take too much time.
-
-This new option ~org-archive-subtree-save-file-p~ defaults to the
-value =from-org= so that archiving a subtree will save the target
-buffer when done from an org-mode buffer, but not from the agenda.
-You can also set this option to =t= or to =from-agenda=.
-
-*** New option ~org-show-notification-timeout~
-
-This option will add a timeout to notifications.
-
-** New commands
-*** ~org-table-header-line-mode~
-
-Turn on a minor mode to display the first data row of the table at
-point in the header-line when the beginning of the table is invisible.
-
-*** ~org-columns-toggle-or-columns-quit~
-
-=<C-c C-c>= bound to ~org-columns-toggle-or-columns-quit~ replaces the
-recent ~org-columns-set-tags-or-toggle~.  Tag setting is still
-possible via column view value edit or with =<C-c C-q>=.
-
-*** ~org-datetree-find-month-create~
-
-Find or create a month entry for a date.
-
-*** ~org-agenda-ctrl-c-ctrl-c~
-
-=<C-c C-c>= in agenda calls ~org-agenda-set-tags~.
-
-** Removed commands, functions and variables
-
-*** ~org-columns-set-tags-or-toggle~
-
-See [[*~org-columns-toggle-or-columns-quit~]].
-
-** Miscellaneous
-*** Duration can be read and written in compact form
-
-~org-duration-to-minutes~ understands =1d3h5min= as a duration,
-whereas ~org-duration-from-minutes~ can output this compact form if
-the duration format contains the symbol ~compact~.
-
-*** Fontify whole TODO headlines
-
-This feature is the same as ~org-fontify-done-headline~, but for TODO
-headlines instead.  This allows you to distinguish TODO headlines from
-normal headlines.  The face can be customized via ~org-headline-todo~.
-
-*** Exit column view with =<C-c C-c>=
-
-=<C-c C-c>= Now exits the column view from (almost) any point in the
-buffer.  Before this change, only the key =<q>= was used for this, and
-it was only functional on lines displayed as columns.
-
-*** New option in ~org-attach-store-link-p~
-~org-attach-store-link-p~ have a new option to store a file link to
-the attachment.
-
-*** New default value for ~org-file-apps~
-
-The new value uses emacs as the application for opening directory.
-
-*** Priority options have been renamed
-
-From ~org-lowest-priority~ to ~org-priority-lowest~.
-From ~org-default-priority~ to ~org-priority-default~.
-From ~org-highest-priority~ to ~org-priority-highest~.
-From ~org-enable-priority-commands~ to ~org-priority-enable-commands~.
-From ~org-show-priority~ to ~org-priority-show~.
-
-*** New =org-refile.el= file
-
-Org refile variables and functions have been moved to a new file.
 
 * Version 9.3
 
@@ -322,7 +137,7 @@ Export ignore done tasks with a deadline when
 Likewise, scheduled done tasks are also ignored when
 ~org-icalendar-use-scheduled~ contains the same symbol.
 
-*** Add ~split-window-right~ option for src block edit window placement
+*** Add split-window-right option for src block edit window placement
 
 Given the increasing popularity of wide screen monitors, splitting
 horizontally may make more sense than splitting vertically.  An
@@ -545,6 +360,7 @@ the headline to use for making the table of contents.
 ,* Another section
 ,#+TOC: headlines 1 :target "#TargetSection"
 #+end_example
+
 ** New functions
 *** ~org-dynamic-block-insert-dblock~
 
@@ -664,7 +480,7 @@ and ~org-list-radio-lists-templates~) are removed from the code base.
 Note that only radio /lists/ have been removed, not radio tables.
 
 If you want to manipulate lists like in Org in other modes, we suggest
-to use =orgalist.el=, which you can install from GNU ELPA.
+to use orgalist.el, which you can install from GNU ELPA.
 
 If you want to use Org folding outside of Org buffers, you can have a
 look at the outshine package in the MELPA repository.
@@ -1456,9 +1272,9 @@ removed from Gnus circa September 2010.
 
 *** ~org-agenda-repeating-timestamp-show-all~ is removed.
 
-For an equivalent to a =nil= value, set
+For an equivalent to a ~nil~ value, set
 ~org-agenda-show-future-repeats~ to nil and
-~org-agenda-prefer-last-repeat~ to =t=.
+~org-agenda-prefer-last-repeat~ to ~t~.
 
 *** ~org-gnus-nnimap-query-article-no-from-file~ is removed.
 
@@ -1476,7 +1292,7 @@ equivalent to the removed format string.
 
 *** ~org-enable-table-editor~ is removed.
 
-Setting it to a =nil= value broke some other features (e.g., speed
+Setting it to a ~nil~ value broke some other features (e.g., speed
 keys).
 
 *** ~org-export-use-babel~ cannot be set to ~inline-only~
@@ -2396,7 +2212,7 @@ without changing the headline.
 
 *** Hierarchies of tags
 
-The functionality of nesting tags in hierarchies is added to Org mode.
+The functionality of nesting tags in hierarchies is added to org-mode.
 This is the generalization of what was previously called "Tag groups"
 in the manual.  That term is now changed to "Tag hierarchy".
 

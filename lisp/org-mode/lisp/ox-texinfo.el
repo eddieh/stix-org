@@ -1,6 +1,6 @@
 ;;; ox-texinfo.el --- Texinfo Back-End for Org Export Engine -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2012-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2012-2019 Free Software Foundation, Inc.
 ;; Author: Jonathan Leech-Pepin <jonathan.leechpepin at gmail dot com>
 ;; Keywords: outlines, hypermedia, calendar, wp
 
@@ -27,10 +27,6 @@
 
 (require 'cl-lib)
 (require 'ox)
-
-;;; Function Declarations
-
-(declare-function org-attach-link-expand "org-attach" (link &optional buffer-or-name))
 
 (defvar orgtbl-exp-regexp)
 
@@ -407,8 +403,6 @@ If two strings share the same prefix (e.g. \"ISO-8859-1\" and
 
 (defconst org-texinfo-inline-image-rules
   (list (cons "file"
-	      (regexp-opt '("eps" "pdf" "png" "jpg" "jpeg" "gif" "svg")))
-	 (cons "attachment"
 	      (regexp-opt '("eps" "pdf" "png" "jpg" "jpeg" "gif" "svg"))))
   "Rules characterizing image files that can be inlined.")
 
@@ -1058,10 +1052,7 @@ INFO is a plist holding contextual information.  See
 	 (path (cond
 		((member type '("http" "https" "ftp"))
 		 (concat type ":" raw-path))
-		((member type '("file" "attachment"))
-		 (when (string= type "attachment")
-		   (setq raw-path (org-attach-link-expand link)))
-		 (org-export-file-uri raw-path))
+		((string= type "file") (org-export-file-uri raw-path))
 		(t raw-path))))
     (cond
      ((org-export-custom-protocol-maybe link desc 'texinfo))

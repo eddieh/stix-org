@@ -1,6 +1,6 @@
 ;;; ox-latex.el --- LaTeX Back-End for Org Export Engine -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2011-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2011-2019 Free Software Foundation, Inc.
 
 ;; Author: Nicolas Goaziou <n.goaziou at gmail dot com>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -29,10 +29,6 @@
 (require 'cl-lib)
 (require 'ox)
 (require 'ox-publish)
-
-;;; Function Declarations
-
-(declare-function org-attach-link-expand "org-attach" (link &optional buffer-or-name))
 
 (defvar org-latex-default-packages-alist)
 (defvar org-latex-packages-alist)
@@ -741,8 +737,6 @@ environment."
 
 (defcustom org-latex-inline-image-rules
   `(("file" . ,(regexp-opt
-		'("pdf" "jpeg" "jpg" "png" "ps" "eps" "tikz" "pgf" "svg")))
-    ("attachment" . ,(regexp-opt
 		'("pdf" "jpeg" "jpg" "png" "ps" "eps" "tikz" "pgf" "svg"))))
   "Rules characterizing image files that can be inlined into LaTeX.
 
@@ -1592,7 +1586,6 @@ INFO is a plist used as a communication channel."
 			lang))))
     `((?a . ,(org-export-data (plist-get info :author) info))
       (?t . ,(org-export-data (plist-get info :title) info))
-      (?s . ,(org-export-data (plist-get info :subtitle) info))
       (?k . ,(org-export-data (org-latex--wrap-latex-math-block
 			       (plist-get info :keywords) info)
 			      info))
@@ -2362,9 +2355,7 @@ CONTENTS is nil.  INFO is a plist holding contextual information."
 LINK is the link pointing to the inline image.  INFO is a plist
 used as a communication channel."
   (let* ((parent (org-export-get-parent-element link))
-	 (path (let ((raw-path (if (string= (org-element-property :type link) "attachment")
-				   (org-attach-link-expand link)
-				 (org-element-property :path link))))
+	 (path (let ((raw-path (org-element-property :path link)))
 		 (if (not (file-name-absolute-p raw-path)) raw-path
 		   (expand-file-name raw-path))))
 	 (filetype (file-name-extension path))
@@ -2529,9 +2520,7 @@ INFO is a plist holding contextual information.  See
 	 (path (org-latex--protect-text
 		(cond ((member type '("http" "https" "ftp" "mailto" "doi"))
 		       (concat type ":" raw-path))
-		      ((member type '("file" "attachment"))
-		       (when (string= type "attachment")
-			 (setq raw-path (org-attach-link-expand link)))
+		      ((string= type "file")
 		       (org-export-file-uri raw-path))
 		      (t
 		       raw-path)))))

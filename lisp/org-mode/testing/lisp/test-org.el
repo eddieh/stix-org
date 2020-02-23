@@ -386,118 +386,10 @@
 
 ;;; Drawers
 
-(ert-deftest test-org/at-property-p ()
-  "Test `org-at-property-p' specifications."
-  (should
-   (equal 't
-	  (org-test-with-temp-text "* H\n:PROPERTIES:\n<point>:PROP: t\n:END:\n"
-	    (org-at-property-p))))
-  (should
-   (equal 't
-	  (org-test-with-temp-text ":PROPERTIES:\n<point>:PROP: t\n:END:\n"
-	    (org-at-property-p)))))
-
-(ert-deftest test-org/at-property-block-p ()
-  "Test `org-at-property-block-p' specifications."
-  (should
-   (equal 't
-	  (org-test-with-temp-text "* H\n<point>:PROPERTIES:\n:PROP: t\n:END:\n"
-	    (org-at-property-block-p))))
-  (should
-   (equal 't
-	  (org-test-with-temp-text ":PROPERTIES:\n:PROP: t\n:END:\n"
-	    (org-at-property-block-p))))
-  ;; The function only returns t if point is at the first line of a
-  ;; property block.
-  (should-not
-   (equal 't
-	  (org-test-with-temp-text ":PROPERTIES:\n<point>:PROP: t\n:END:\n"
-	    (org-at-property-block-p)))))
-
-(ert-deftest test-org/get-property-block ()
-  "Test `org-get-property-block' specifications."
-  (should
-   (equal '(14 . 14)
-	  (org-test-with-temp-text ":PROPERTIES:\n:END:\n* H\n"
-	    (org-get-property-block))))
-  (should
-   (equal '(14 . 14)
-	  (org-test-with-temp-text ":PROPERTIES:\n:END:\n"
-	    (org-get-property-block))))
-  ;; Comments above a document property block is ok.
-  (should
-   (equal '(18 . 18)
-	  (org-test-with-temp-text "# C\n:PROPERTIES:\n:END:\n"
-	    (org-get-property-block))))
-  ;; Keywords above a document property block is ok.
-  (should
-   (equal '(22 . 22)
-	  (org-test-with-temp-text "# C\n# C\n:PROPERTIES:\n:END:\n"
-	    (org-get-property-block))))
-  ;; Comments and keywords are allowed before a document property block.
-  (should
-   (equal '(18 . 27)
-	  (org-test-with-temp-text "# C\n:PROPERTIES:\n:KEY: V:\n:END:\n"
-	    (org-get-property-block))))
-  ;; A document property block will not be valid if there are lines
-  ;; with whitespace above it
-  (should-not
-   (org-test-with-temp-text "\n:PROPERTIES:\n:END:\n"
-     (org-get-property-block)))
-  (should
-   (equal '(18 . 18)
-	  (org-test-with-temp-text "* H\n:PROPERTIES:\n:END:\n<point>"
-	    (org-get-property-block))))
-  (should
-   (equal "* H\n:PROPERTIES:\n:END:\n"
-	  (org-test-with-temp-text "* H"
-	    (let ((org-adapt-indentation nil))
-	      (org-get-property-block nil 'force))
-	    (buffer-string))))
-  (should
-   (equal ":PROPERTIES:\n:END:\n"
-	  (org-test-with-temp-text ""
-	    (org-get-property-block nil 'force)
-	    (buffer-string))))
-  (should
-   (equal "* H1\n  :PROPERTIES:\n  :END:\n* H2"
-	  (org-test-with-temp-text "* H1\n* H2"
-	    (let ((org-adapt-indentation t))
-	      (org-get-property-block nil 'force))
-	    (buffer-string)))))
-
 (ert-deftest test-org/insert-property-drawer ()
   "Test `org-insert-property-drawer' specifications."
-  ;; Insert drawer in empty buffer
-  (should
-   (equal ":PROPERTIES:\n:END:\n"
-	  (org-test-with-temp-text ""
-	    (let ((org-adapt-indentation nil)) (org-insert-property-drawer))
-	    (buffer-string))))
-  ;; Insert drawer in document header with existing comment and
-  ;; keyword.
-  (should
-   (equal "# C\n:PROPERTIES:\n:END:\n#+TITLE: T"
-	  (org-test-with-temp-text "# C\n#+TITLE: T"
-	    (let ((org-adapt-indentation nil)) (org-insert-property-drawer))
-	    (buffer-string))))
-  ;; Insert drawer in document header with existing keyword.
-  (should
-   (equal ":PROPERTIES:\n:END:\n#+TITLE: T"
-	  (org-test-with-temp-text "#+TITLE: T"
-	    (let ((org-adapt-indentation nil)) (org-insert-property-drawer))
-	    (buffer-string))))
-  (should
-   (equal ":PROPERTIES:\n:END:"
-	  (org-test-with-temp-text ":PROPERTIES:\n:END:"
-	    (let ((org-adapt-indentation nil)) (org-insert-property-drawer))
-	    (buffer-string))))
-  ;; Insert drawer in document header with one existing heading in buffer.
-  (should
-   (equal ":PROPERTIES:\n:END:\n\n* T\n"
-	  (org-test-with-temp-text "\n* T\n"
-	    (let ((org-adapt-indentation nil)) (org-insert-property-drawer))
-	    (buffer-string))))
+  ;; Error before first headline.
+  (should-error (org-test-with-temp-text "" (org-insert-property-drawer)))
   ;; Insert drawer right after headline if there is no planning line,
   ;; or after it otherwise.
   (should
@@ -2286,19 +2178,19 @@ SCHEDULED: <2014-03-04 tue.>"
    (equal "foo=1"
 	  (org-test-with-temp-text "#+PROPERTY: var foo=1"
 	    (org-mode-restart)
-	    (cdr (assoc "var" org-keyword-properties)))))
+	    (cdr (assoc "var" org-file-properties)))))
   (should
    (equal
     "foo=1 bar=2"
     (org-test-with-temp-text "#+PROPERTY: var foo=1\n#+PROPERTY: var+ bar=2"
       (org-mode-restart)
-      (cdr (assoc "var" org-keyword-properties)))))
+      (cdr (assoc "var" org-file-properties)))))
   (should
    (equal
     "foo=1 bar=2"
     (org-test-with-temp-text "#+PROPERTY: var foo=1\n#+PROPERTY: VAR+ bar=2"
       (org-mode-restart)
-      (cdr (assoc "var" org-keyword-properties)))))
+      (cdr (assoc "var" org-file-properties)))))
   ;; ARCHIVE keyword.
   (should
    (equal "%s_done::"
@@ -2315,7 +2207,7 @@ SCHEDULED: <2014-03-04 tue.>"
    (equal "test"
 	  (org-test-with-temp-text "#+CATEGORY: test"
 	    (org-mode-restart)
-	    (cdr (assoc "CATEGORY" org-keyword-properties)))))
+	    (cdr (assoc "CATEGORY" org-file-properties)))))
   ;; COLUMNS keyword.
   (should
    (equal "%25ITEM %TAGS %PRIORITY %TODO"
@@ -2354,13 +2246,13 @@ SCHEDULED: <2014-03-04 tue.>"
     '(?X ?Z ?Y)
     (org-test-with-temp-text "#+PRIORITIES: X Z Y"
       (org-mode-restart)
-      (list org-priority-highest org-priority-lowest org-priority-default))))
+      (list org-highest-priority org-lowest-priority org-default-priority))))
   (should
    (equal
     '(?A ?C ?B)
     (org-test-with-temp-text "#+PRIORITIES: X Z"
       (org-mode-restart)
-      (list org-priority-highest org-priority-lowest org-priority-default))))
+      (list org-highest-priority org-lowest-priority org-default-priority))))
   ;; STARTUP keyword.
   (should
    (equal '(t t)
@@ -2399,7 +2291,7 @@ SCHEDULED: <2014-03-04 tue.>"
 	  (org-test-with-temp-text
 	      (format "#+SETUPFILE: \"%s/examples/setupfile.org\"" org-test-dir)
 	    (org-mode-restart)
-	    (cdr (assoc "a" org-keyword-properties))))))
+	    (cdr (assoc "a" org-file-properties))))))
 
 
 
@@ -5049,66 +4941,6 @@ Paragraph<point>"
 	  (org-test-with-temp-text "* H\n:PROPERTIES:\n:A: 1\n:A+: 2\n:END:"
 	    (org-property-values "A")))))
 
-(ert-deftest test-org/set-property ()
-  "Test `org-set-property' specifications."
-  (should
-   (equal
-    ":PROPERTIES:\n:TEST: t\n:END:\n"
-    (org-test-with-temp-text ""
-      (let ((org-property-format "%s %s"))
-	(org-set-property "TEST" "t"))
-      (buffer-string))))
-  (should
-   (equal
-    "* H\n:PROPERTIES:\n:TEST: t\n:END:\n"
-    (org-test-with-temp-text "* H"
-      (let ((org-adapt-indentation nil)
-	    (org-property-format "%s %s"))
-	(org-set-property "TEST" "t"))
-      (buffer-string)))))
-
-(ert-deftest test-org/delete-property ()
-  "Test `org-delete-property' specifications."
-  (should
-   (equal
-    ""
-    (org-test-with-temp-text ":PROPERTIES:\n:TEST: t\n:END:\n"
-      (org-delete-property "TEST")
-      (buffer-string))))
-  (should
-   (equal
-    ":PROPERTIES:\n:TEST1: t\n:END:\n"
-    (org-test-with-temp-text ":PROPERTIES:\n:TEST1: t\n:TEST2: t\n:END:\n"
-      (org-delete-property "TEST2")
-      (buffer-string))))
-  (should
-   (equal
-    "* H\n"
-    (org-test-with-temp-text "* H\n:PROPERTIES:\n:TEST: t\n:END:\n"
-      (org-delete-property "TEST")
-      (buffer-string))))
-  (should
-   (equal
-    "* H\n:PROPERTIES:\n:TEST1: t\n:END:\n"
-    (org-test-with-temp-text "* H\n:PROPERTIES:\n:TEST1: t\n:TEST2: t\n:END:\n"
-      (org-delete-property "TEST2")
-      (buffer-string)))))
-
-(ert-deftest test-org/delete-property-globally ()
-  "Test `org-delete-property-global' specifications."
-  (should
-   (equal
-    ""
-    (org-test-with-temp-text ":PROPERTIES:\n:TEST: t\n:END:\n"
-      (org-delete-property-globally "TEST")
-      (buffer-string))))
-  (should
-   (equal
-    "* H\n"
-    (org-test-with-temp-text ":PROPERTIES:\n:TEST: t\n:END:\n* H\n:PROPERTIES:\n:TEST: nil\n:END:"
-      (org-delete-property-globally "TEST")
-      (buffer-string)))))
-
 (ert-deftest test-org/find-property ()
   "Test `org-find-property' specifications."
   ;; Regular test.
@@ -5192,10 +5024,6 @@ Paragraph<point>"
   ;; Regular test.
   (should
    (equal "1"
-	  (org-test-with-temp-text ":PROPERTIES:\n:A: 1\n:END:"
-	    (org-entry-get (point) "A"))))
-  (should
-   (equal "1"
 	  (org-test-with-temp-text "* H\n:PROPERTIES:\n:A: 1\n:END:"
 	    (org-entry-get (point) "A"))))
   ;; Ignore case.
@@ -5236,11 +5064,6 @@ Paragraph<point>"
   (should
    (equal
     "1"
-    (org-test-with-temp-text ":PROPERTIES:\n:A: 1\n:END:\n* H"
-      (org-entry-get (point-max) "A" t))))
-  (should
-   (equal
-    "1"
     (org-test-with-temp-text "* H\n:PROPERTIES:\n:A: 1\n:END:\n** H2"
       (org-entry-get (point-max) "A" t))))
   (should
@@ -5257,25 +5080,7 @@ Paragraph<point>"
    (equal
     "1 2"
     (org-test-with-temp-text
-	":PROPERTIES:\n:A: 1\n:END:\n* H\n:PROPERTIES:\n:A+: 2\n:END:"
-      (org-entry-get (point-max) "A" t))))
-  (should
-   (equal
-    "1 2"
-    (org-test-with-temp-text
 	"* H\n:PROPERTIES:\n:A: 1\n:END:\n** H2\n:PROPERTIES:\n:A+: 2\n:END:"
-      (org-entry-get (point-max) "A" t))))
-  (should
-   (equal
-    "1 2"
-    (org-test-with-temp-text
-	":PROPERTIES:\n:A: 1\n:END:\n* H1\n* H2\n:PROPERTIES:\n:A+: 2\n:END:"
-      (org-entry-get (point-max) "A" t))))
-  (should
-   (equal
-    "1 2"
-    (org-test-with-temp-text
-	"* H1\n:PROPERTIES:\n:A: 1\n:END:\n* H2.1\n* H2.2\n:PROPERTIES:\n:A+: 2\n:END:"
       (org-entry-get (point-max) "A" t))))
   (should
    (equal "1"
@@ -5287,14 +5092,6 @@ Paragraph<point>"
    (equal "0 1"
 	  (org-test-with-temp-text
 	      "#+PROPERTY: A 0\n* H\n:PROPERTIES:\n:A+: 1\n:END:"
-	    (org-mode-restart)
-	    (org-entry-get (point-max) "A" t))))
-  ;; document level property-drawer has precedance over
-  ;; global-property by PROPERTY-keyword.
-  (should
-   (equal "0 2"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:A: 0\n:END:\n#+PROPERTY: A 1\n* H\n:PROPERTIES:\n:A+: 2\n:END:"
 	    (org-mode-restart)
 	    (org-entry-get (point-max) "A" t)))))
 
@@ -5334,7 +5131,7 @@ Paragraph<point>"
 	  (org-test-with-temp-text "* [#A] H"
 	    (cdr (assoc "PRIORITY" (org-entry-properties))))))
   (should
-   (equal (char-to-string org-priority-default)
+   (equal (char-to-string org-default-priority)
 	  (org-test-with-temp-text "* H"
 	    (cdr (assoc "PRIORITY" (org-entry-properties nil "PRIORITY"))))))
   ;; Get "FILE" property.
@@ -5619,44 +5416,8 @@ Paragraph<point>"
 	    (let ((org-use-property-inheritance t))
 	      (org-refresh-properties "A" 'org-test))
 	    (get-text-property (point) 'org-test))))
-  ;; When a document level property-drawer is used, those properties
-  ;; should work exactly like headline-properties as if at a
-  ;; headline-level 0.
-  (should
-   (equal "1"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:A: 1\n:END:\n"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance t))
-	      (org-refresh-properties "A" 'org-test))
-	    (get-text-property (point) 'org-test))))
-  (should-not
-   (equal "1"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:A: 1\n:END:\n<point>* H1"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance nil))
-	      (org-refresh-properties "A" 'org-test))
-	    (get-text-property (point) 'org-test))))
-  (should
-   (equal "1"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:A: 1\n:END:\n<point>* H1"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance t))
-	      (org-refresh-properties "A" 'org-test))
-	    (get-text-property (point) 'org-test))))
-  (should
-   (equal "2"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:A: 1\n:END:\n<point>* H1\n:PROPERTIES:\n:A: 2\n:END:"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance t))
-	      (org-refresh-properties "A" 'org-test))
-	    (get-text-property (point) 'org-test))))
   ;; When property is inherited, use global value across the whole
-  ;; buffer.  However local values have precedence, as well as the
-  ;; document level property-drawer.
+  ;; buffer.  However local values have precedence.
   (should-not
    (equal "1"
 	  (org-test-with-temp-text "#+PROPERTY: A 1\n<point>* H1"
@@ -5678,59 +5439,7 @@ Paragraph<point>"
 	    (org-mode-restart)
 	    (let ((org-use-property-inheritance t))
 	      (org-refresh-properties "A" 'org-test))
-	    (get-text-property (point) 'org-test))))
-  ;; When both keyword-property and document-level property-block is
-  ;; defined, the property-block has precedance.
-  (should
-   (equal "1"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:A: 1\n:END:\n#+PROPERTY: A 2\n<point>* H1"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance t))
-	      (org-refresh-properties "A" 'org-test))
 	    (get-text-property (point) 'org-test)))))
-
-(ert-deftest test-org/refresh-category-properties ()
-  "Test `org-refresh-category-properties' specifications"
-  (should
-   (equal "cat1"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:CATEGORY: cat1\n:END:"
-	    (org-refresh-category-properties)
-	    (get-text-property (point) 'org-category))))
-  (should
-   (equal "cat1"
-	  (org-test-with-temp-text
-	      "* H\n:PROPERTIES:\n:CATEGORY: cat1\n:END:"
-	    (org-refresh-category-properties)
-	    (get-text-property (point) 'org-category))))
-  ;; Even though property-inheritance is deactivated, category
-  ;; property should be inherited.  As described in
-  ;; `org-use-property-inheritance'.
-  (should
-   (equal "cat1"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:CATEGORY: cat1\n:END:\n<point>* H"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance nil))
-	      (org-refresh-category-properties))
-	    (get-text-property (point) 'org-category))))
-  (should
-   (equal "cat1"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:CATEGORY: cat1\n:END:\n<point>* H"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance t))
-	      (org-refresh-category-properties))
-	    (get-text-property (point) 'org-category))))
-  (should
-   (equal "cat2"
-	  (org-test-with-temp-text
-	      ":PROPERTIES:\n:CATEGORY: cat1\n:END:\n<point>* H\n:PROPERTIES:\n:CATEGORY: cat2\n:END:\n"
-	    (org-mode-restart)
-	    (let ((org-use-property-inheritance t))
-	      (org-refresh-category-properties))
-	    (get-text-property (point) 'org-category)))))
 
 
 ;;; Refile
@@ -7547,16 +7256,6 @@ Contents
 :END:"
      (org-set-visibility-according-to-property)
      (invisible-p (point)))))
-
-(ert-deftest test-org/visibility-show-branches ()
-  "Test visibility of inline archived subtrees."
-  (org-test-with-temp-text
-   "* Foo<point>
-** Bar :ARCHIVE:
-*** Baz
-"
-   (org-kill-note-or-show-branches)
-   (should (org-invisible-p (- (point-max) 2)))))
 
 
 ;;; Yank and Kill

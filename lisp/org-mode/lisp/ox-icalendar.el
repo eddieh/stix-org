@@ -1,6 +1,6 @@
 ;;; ox-icalendar.el --- iCalendar Back-End for Org Export Engine -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2004-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2004-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;;      Nicolas Goaziou <n dot goaziou at gmail dot com>
@@ -763,10 +763,10 @@ Return VTODO component as a string."
 	     "SEQUENCE:1\n"
 	     (format "PRIORITY:%d\n"
 		     (let ((pri (or (org-element-property :priority entry)
-				    org-priority-default)))
-		       (floor (- 9 (* 8. (/ (float (- org-priority-lowest pri))
-					    (- org-priority-lowest
-					       org-priority-highest)))))))
+				    org-default-priority)))
+		       (floor (- 9 (* 8. (/ (float (- org-lowest-priority pri))
+					    (- org-lowest-priority
+					       org-highest-priority)))))))
 	     (format "STATUS:%s\n"
 		     (if (eq (org-element-property :todo-type entry) 'todo)
 			 "NEEDS-ACTION"

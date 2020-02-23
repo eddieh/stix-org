@@ -1,6 +1,6 @@
 ;;; org-table.el --- The Table Editor for Org        -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2004-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2004-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -40,8 +40,6 @@
 (require 'org-keys)
 
 (declare-function calc-eval "calc" (str &optional separator &rest args))
-(declare-function face-remap-remove-relative "face-remap" (cookie))
-(declare-function face-remap-add-relative "face-remap" (face &rest specs))
 (declare-function org-at-timestamp-p "org" (&optional extended))
 (declare-function org-delete-backward-char "org" (N))
 (declare-function org-element-at-point "org-element" ())
@@ -164,12 +162,6 @@ table, obtained by prompting the user."
 (defgroup org-table-settings nil
   "Settings for tables in Org mode."
   :tag "Org Table Settings"
-  :group 'org-table)
-
-(defcustom org-table-header-line-p nil
-  "Activate `org-table-header-line-mode' by default?"
-  :type 'boolean
-  :package-version "9.4"
   :group 'org-table)
 
 (defcustom org-table-default-size "5x2"
@@ -448,63 +440,6 @@ prevents it from hanging Emacs."
   :group 'org-table-import-export
   :type 'integer
   :package-version '(Org . "8.3"))
-
-
-;;; Org table header minor mode
-(defun org-table-row-get-visible-string (&optional pos)
-  "Get the visible string of a table row.
-This may be useful when columns have been shrunk."
-  (save-excursion
-    (when pos (goto-char pos))
-    (goto-char (line-beginning-position))
-    (let ((end (line-end-position)) str)
-      (while (progn (forward-char 1) (< (point) end))
-	(let ((ov (car (overlays-at (point)))))
-	  (if (not ov)
-	      (push (char-to-string (char-after)) str)
-	    (push (overlay-get ov 'display) str)
-	    (goto-char (1- (overlay-end ov))))))
-      (format "|%s" (mapconcat #'identity (reverse str) "")))))
-
-(defvar-local org-table-header-overlay nil)
-(defun org-table-header-set-header ()
-  "Display the header of the table at point."
-  (when (overlayp org-table-header-overlay)
-    (delete-overlay org-table-header-overlay))
-  (run-with-timer
-   0.01 nil
-   (lambda ()
-     (if (not (org-at-table-p))
-	 (when (overlayp org-table-header-overlay)
-	   (delete-overlay org-table-header-overlay))
-       (let* ((ws (window-start))
-	      (beg (save-excursion
-		     (goto-char (org-table-begin))
-		     (while (or (org-at-table-hline-p)
-				(looking-at-p ".*|\\s-+<[rcl]?\\([0-9]+\\)?>"))
-		       (move-beginning-of-line 2))
-		     (point)))
-	      (end (save-excursion (goto-char beg) (point-at-eol))))
-	 (when (not (pos-visible-in-window-p beg))
-	   (setq org-table-header-overlay
-		 (make-overlay ws (+ ws (- end beg))))
-	   (org-overlay-display
-	    org-table-header-overlay
-	    (org-table-row-get-visible-string beg)
-	    'org-table-header)))))))
-
-;;;###autoload
-(defvar-local org-table-header-line-mode nil)
-(define-minor-mode org-table-header-line-mode
-  "Display the first row of the table at point in the header line."
-  nil " TblHeader" nil
-  (unless (eq major-mode 'org-mode)
-    (user-error "Cannot turn org table header mode outside org-mode buffers"))
-  (if org-table-header-line-mode
-      (add-hook 'post-command-hook #'org-table-header-set-header nil t)
-    (when (overlayp org-table-header-overlay)
-      (delete-overlay org-table-header-overlay))
-    (remove-hook 'post-command-hook #'org-table-header-set-header t)))
 
 
 ;;; Regexps Constants
@@ -1246,7 +1181,7 @@ value."
   (save-excursion
     (let* ((pos (point))
 	   (col (org-table-current-column))
-	   (cname (car (rassoc (number-to-string col) org-table-column-names)))
+	   (cname (car (rassoc (int-to-string col) org-table-column-names)))
 	   (name (car (rassoc (list (count-lines org-table-current-begin-pos
 						 (line-beginning-position))
 				    col)
@@ -2023,9 +1958,9 @@ toggle `org-table-follow-field-mode'."
 	  (coord
 	   (if (eq org-table-use-standard-references t)
 	       (concat (org-number-to-letters (org-table-current-column))
-		       (number-to-string (org-table-current-dline)))
-	     (concat "@" (number-to-string (org-table-current-dline))
-		     "$" (number-to-string (org-table-current-column)))))
+		       (int-to-string (org-table-current-dline)))
+	     (concat "@" (int-to-string (org-table-current-dline))
+		     "$" (int-to-string (org-table-current-column)))))
 	  (field (org-table-get-field))
 	  (cw (current-window-configuration))
 	  p)
@@ -2283,7 +2218,7 @@ For all numbers larger than LIMIT, shift them by DELTA."
 	      (replace-match (concat key (cdr a)) t t)
 	      (message msg))
 	     ((and limit (> n limit))
-	      (replace-match (concat key (number-to-string (+ n delta))) t t)
+	      (replace-match (concat key (int-to-string (+ n delta))) t t)
 	      (message msg))))))
       (forward-line))))
 
@@ -2643,29 +2578,27 @@ location of point."
 		     ev)))
 
 	(when org-table-formula-debug
-	  (let ((wcf (current-window-configuration)))
-	    (with-output-to-temp-buffer "*Substitution History*"
-	      (princ (format "Substitution history of formula
+	  (with-output-to-temp-buffer "*Substitution History*"
+	    (princ (format "Substitution history of formula
 Orig:   %s
 $xyz->  %s
 @r$c->  %s
 $1->    %s\n" orig formula form0 form))
-	      (if (consp ev)
-		  (princ (format "        %s^\nError:  %s"
-				 (make-string (car ev) ?\-) (nth 1 ev)))
-		(princ (format "Result: %s\nFormat: %s\nFinal:  %s"
-			       ev (or fmt "NONE")
-			       (if fmt (format fmt (string-to-number ev)) ev)))))
-	    (setq bw (get-buffer-window "*Substitution History*"))
-	    (org-fit-window-to-buffer bw)
-	    (unless (and (called-interactively-p 'any) (not ndown))
-	      (unless (let (inhibit-redisplay)
-			(y-or-n-p "Debugging Formula.  Continue to next? "))
-		(org-table-align)
-		(user-error "Abort"))
-	      (delete-window bw)
-	      (message "")
-	      (set-window-configuration wcf))))
+	    (if (consp ev)
+		(princ (format "        %s^\nError:  %s"
+			       (make-string (car ev) ?\-) (nth 1 ev)))
+	      (princ (format "Result: %s\nFormat: %s\nFinal:  %s"
+			     ev (or fmt "NONE")
+			     (if fmt (format fmt (string-to-number ev)) ev)))))
+	  (setq bw (get-buffer-window "*Substitution History*"))
+	  (org-fit-window-to-buffer bw)
+	  (unless (and (called-interactively-p 'any) (not ndown))
+	    (unless (let (inhibit-redisplay)
+		      (y-or-n-p "Debugging Formula.  Continue to next? "))
+	      (org-table-align)
+	      (user-error "Abort"))
+	    (delete-window bw)
+	    (message "")))
 	(when (consp ev) (setq fmt nil ev "#ERROR"))
 	(org-table-justify-field-maybe
 	 (format org-table-formula-field-format
@@ -3835,16 +3768,14 @@ FACE, when non-nil, for the highlight."
 (defun org-table-toggle-coordinate-overlays ()
   "Toggle the display of Row/Column numbers in tables."
   (interactive)
-  (if (not (org-at-table-p))
-      (user-error "Not on a table")
-    (setq org-table-overlay-coordinates (not org-table-overlay-coordinates))
-    (when (and (org-at-table-p) org-table-overlay-coordinates)
-      (org-table-align))
-    (unless org-table-overlay-coordinates
-      (mapc 'delete-overlay org-table-coordinate-overlays)
-      (setq org-table-coordinate-overlays nil))
-    (message "Tables Row/Column numbers display turned %s"
-	     (if org-table-overlay-coordinates "on" "off"))))
+  (setq org-table-overlay-coordinates (not org-table-overlay-coordinates))
+  (message "Tables Row/Column numbers display turned %s"
+	   (if org-table-overlay-coordinates "on" "off"))
+  (when (and (org-at-table-p) org-table-overlay-coordinates)
+    (org-table-align))
+  (unless org-table-overlay-coordinates
+    (mapc 'delete-overlay org-table-coordinate-overlays)
+    (setq org-table-coordinate-overlays nil)))
 
 ;;;###autoload
 (defun org-table-toggle-formula-debugger ()
@@ -4827,7 +4758,7 @@ This function sets up the following dynamically scoped variables:
 	  (dolist (name (org-split-string (match-string 1) " *| *"))
 	    (cl-incf c)
 	    (when (string-match "\\`[a-zA-Z][_a-zA-Z0-9]*\\'" name)
-	      (push (cons name (number-to-string c)) org-table-column-names)))))
+	      (push (cons name (int-to-string c)) org-table-column-names)))))
       (setq org-table-column-names (nreverse org-table-column-names))
       (setq org-table-column-name-regexp
 	    (format "\\$\\(%s\\)\\>"
@@ -5108,66 +5039,66 @@ When LOCAL is non-nil, show references for the table at point."
 (put 'orgtbl-mode :menu-tag "Org Table Mode")
 
 (easy-menu-define orgtbl-mode-menu orgtbl-mode-map "OrgTbl menu"
-  '("OrgTbl"
-    ["Create or convert" org-table-create-or-convert-from-region
-     :active (not (org-at-table-p)) :keys "C-c |" ]
-    "--"
-    ["Align" org-ctrl-c-ctrl-c :active (org-at-table-p) :keys "C-c C-c"]
-    ["Next Field" org-cycle :active (org-at-table-p) :keys "TAB"]
-    ["Previous Field" org-shifttab :active (org-at-table-p) :keys "S-TAB"]
-    ["Next Row" org-return :active (org-at-table-p) :keys "RET"]
-    "--"
-    ["Blank Field" org-table-blank-field :active (org-at-table-p) :keys "C-c SPC"]
-    ["Edit Field" org-table-edit-field :active (org-at-table-p) :keys "C-c ` "]
-    ["Copy Field from Above"
-     org-table-copy-down :active (org-at-table-p) :keys "S-RET"]
-    "--"
-    ("Column"
-     ["Move Column Left" org-metaleft :active (org-at-table-p) :keys "M-<left>"]
-     ["Move Column Right" org-metaright :active (org-at-table-p) :keys "M-<right>"]
-     ["Delete Column" org-shiftmetaleft :active (org-at-table-p) :keys "M-S-<left>"]
-     ["Insert Column" org-shiftmetaright :active (org-at-table-p) :keys "M-S-<right>"])
-    ("Row"
-     ["Move Row Up" org-metaup :active (org-at-table-p) :keys "M-<up>"]
-     ["Move Row Down" org-metadown :active (org-at-table-p) :keys "M-<down>"]
-     ["Delete Row" org-shiftmetaup :active (org-at-table-p) :keys "M-S-<up>"]
-     ["Insert Row" org-shiftmetadown :active (org-at-table-p) :keys "M-S-<down>"]
-     ["Sort lines in region" org-table-sort-lines :active (org-at-table-p) :keys "C-c ^"]
-     "--"
-     ["Insert Hline" org-table-insert-hline :active (org-at-table-p) :keys "C-c -"])
-    ("Rectangle"
-     ["Copy Rectangle" org-copy-special :active (org-at-table-p)]
-     ["Cut Rectangle" org-cut-special :active (org-at-table-p)]
-     ["Paste Rectangle" org-paste-special :active (org-at-table-p)]
-     ["Fill Rectangle" org-table-wrap-region :active (org-at-table-p)])
-    "--"
-    ("Radio tables"
-     ["Insert table template" orgtbl-insert-radio-table
-      (cl-assoc-if #'derived-mode-p orgtbl-radio-table-templates)]
-     ["Comment/uncomment table" orgtbl-toggle-comment t])
-    "--"
-    ["Set Column Formula" org-table-eval-formula :active (org-at-table-p) :keys "C-c ="]
-    ["Set Field Formula" (org-table-eval-formula '(4)) :active (org-at-table-p) :keys "C-u C-c ="]
-    ["Edit Formulas" org-table-edit-formulas :active (org-at-table-p) :keys "C-c '"]
-    ["Recalculate line" org-table-recalculate :active (org-at-table-p) :keys "C-c *"]
-    ["Recalculate all" (org-table-recalculate '(4)) :active (org-at-table-p) :keys "C-u C-c *"]
-    ["Iterate all" (org-table-recalculate '(16)) :active (org-at-table-p) :keys "C-u C-u C-c *"]
-    ["Toggle Recalculate Mark" org-table-rotate-recalc-marks :active (org-at-table-p) :keys "C-c #"]
-    ["Sum Column/Rectangle" org-table-sum
-     :active (or (org-at-table-p) (org-region-active-p)) :keys "C-c +"]
-    ["Which Column?" org-table-current-column :active (org-at-table-p) :keys "C-c ?"]
-    ["Debug Formulas"
-     org-table-toggle-formula-debugger :active (org-at-table-p)
-     :keys "C-c {"
-     :style toggle :selected org-table-formula-debug]
-    ["Show Col/Row Numbers"
-     org-table-toggle-coordinate-overlays :active (org-at-table-p)
-     :keys "C-c }"
-     :style toggle :selected org-table-overlay-coordinates]
-    "--"
-    ("Plot"
-     ["Ascii plot" orgtbl-ascii-plot :active (org-at-table-p) :keys "C-c \" a"]
-     ["Gnuplot" org-plot/gnuplot :active (org-at-table-p) :keys "C-c \" g"])))
+      '("OrgTbl"
+	["Create or convert" org-table-create-or-convert-from-region
+	 :active (not (org-at-table-p)) :keys "C-c |" ]
+	"--"
+	["Align" org-ctrl-c-ctrl-c :active (org-at-table-p) :keys "C-c C-c"]
+	["Next Field" org-cycle :active (org-at-table-p) :keys "TAB"]
+	["Previous Field" org-shifttab :active (org-at-table-p) :keys "S-TAB"]
+	["Next Row" org-return :active (org-at-table-p) :keys "RET"]
+	"--"
+	["Blank Field" org-table-blank-field :active (org-at-table-p) :keys "C-c SPC"]
+	["Edit Field" org-table-edit-field :active (org-at-table-p) :keys "C-c ` "]
+	["Copy Field from Above"
+	 org-table-copy-down :active (org-at-table-p) :keys "S-RET"]
+	"--"
+	("Column"
+	 ["Move Column Left" org-metaleft :active (org-at-table-p) :keys "M-<left>"]
+	 ["Move Column Right" org-metaright :active (org-at-table-p) :keys "M-<right>"]
+	 ["Delete Column" org-shiftmetaleft :active (org-at-table-p) :keys "M-S-<left>"]
+	 ["Insert Column" org-shiftmetaright :active (org-at-table-p) :keys "M-S-<right>"])
+	("Row"
+	 ["Move Row Up" org-metaup :active (org-at-table-p) :keys "M-<up>"]
+	 ["Move Row Down" org-metadown :active (org-at-table-p) :keys "M-<down>"]
+	 ["Delete Row" org-shiftmetaup :active (org-at-table-p) :keys "M-S-<up>"]
+	 ["Insert Row" org-shiftmetadown :active (org-at-table-p) :keys "M-S-<down>"]
+	 ["Sort lines in region" org-table-sort-lines :active (org-at-table-p) :keys "C-c ^"]
+	 "--"
+	 ["Insert Hline" org-table-insert-hline :active (org-at-table-p) :keys "C-c -"])
+	("Rectangle"
+	 ["Copy Rectangle" org-copy-special :active (org-at-table-p)]
+	 ["Cut Rectangle" org-cut-special :active (org-at-table-p)]
+	 ["Paste Rectangle" org-paste-special :active (org-at-table-p)]
+	 ["Fill Rectangle" org-table-wrap-region :active (org-at-table-p)])
+	"--"
+	("Radio tables"
+	 ["Insert table template" orgtbl-insert-radio-table
+	  (cl-assoc-if #'derived-mode-p orgtbl-radio-table-templates)]
+	 ["Comment/uncomment table" orgtbl-toggle-comment t])
+	"--"
+	["Set Column Formula" org-table-eval-formula :active (org-at-table-p) :keys "C-c ="]
+	["Set Field Formula" (org-table-eval-formula '(4)) :active (org-at-table-p) :keys "C-u C-c ="]
+	["Edit Formulas" org-table-edit-formulas :active (org-at-table-p) :keys "C-c '"]
+	["Recalculate line" org-table-recalculate :active (org-at-table-p) :keys "C-c *"]
+	["Recalculate all" (org-table-recalculate '(4)) :active (org-at-table-p) :keys "C-u C-c *"]
+	["Iterate all" (org-table-recalculate '(16)) :active (org-at-table-p) :keys "C-u C-u C-c *"]
+	["Toggle Recalculate Mark" org-table-rotate-recalc-marks :active (org-at-table-p) :keys "C-c #"]
+	["Sum Column/Rectangle" org-table-sum
+	 :active (or (org-at-table-p) (org-region-active-p)) :keys "C-c +"]
+	["Which Column?" org-table-current-column :active (org-at-table-p) :keys "C-c ?"]
+	["Debug Formulas"
+	 org-table-toggle-formula-debugger :active (org-at-table-p)
+	 :keys "C-c {"
+	 :style toggle :selected org-table-formula-debug]
+	["Show Col/Row Numbers"
+	 org-table-toggle-coordinate-overlays :active (org-at-table-p)
+	 :keys "C-c }"
+	 :style toggle :selected org-table-overlay-coordinates]
+	"--"
+	("Plot"
+	 ["Ascii plot" orgtbl-ascii-plot :active (org-at-table-p) :keys "C-c \" a"]
+	 ["Gnuplot" org-plot/gnuplot :active (org-at-table-p) :keys "C-c \" g"])))
 
 ;;;###autoload
 (define-minor-mode orgtbl-mode
@@ -5216,7 +5147,7 @@ command name.  KEYS are keys that should be checked in for a command
 to execute outside of tables."
   (eval
    (list 'defun
-	 (intern (concat "orgtbl-hijacker-command-" (number-to-string n)))
+	 (intern (concat "orgtbl-hijacker-command-" (int-to-string n)))
 	 '(arg)
 	 (concat "In tables, run `" (symbol-name fun) "'.\n"
 		 "Outside of tables, run the binding of `"

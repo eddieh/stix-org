@@ -1,6 +1,6 @@
 ;;; org-faces.el --- Face definitions -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2004-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2004-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -243,15 +243,6 @@ is of course immediately visible, but for example a passed deadline is
 of the frame, for example."
   :group 'org-faces)
 
-(defface org-headline-todo	  ;Copied from `font-lock-string-face'
-  '((((class color) (min-colors 16) (background light)) (:foreground "Red4"))
-    (((class color) (min-colors 16) (background dark)) (:foreground "Pink2"))
-    (((class color) (min-colors 8)  (background light)) (:bold t)))
-  "Face used to indicate that a headline is marked as TODO.
-This face is only used if `org-fontify-todo-headline' is set.  If applies
-to the part of the headline after the TODO keyword."
-  :group 'org-faces)
-
 (defface org-headline-done	  ;Copied from `font-lock-string-face'
   '((((class color) (min-colors 16) (background light)) (:foreground "RosyBrown"))
     (((class color) (min-colors 16) (background dark)) (:foreground "LightSalmon"))
@@ -362,12 +353,6 @@ changes."
     (((class color) (min-colors 8)  (background light)) (:foreground "blue"))
     (((class color) (min-colors 8)  (background dark))))
   "Face used for tables."
-  :group 'org-faces)
-
-(defface org-table-header '((t :inherit org-table
-			       :background "LightGray"
-			       :foreground "Black"))
-  "Face for table header."
   :group 'org-faces)
 
 (defface org-formula

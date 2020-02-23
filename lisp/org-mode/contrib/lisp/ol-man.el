@@ -24,6 +24,7 @@
 ;;; Commentary:
 
 (require 'ol)
+(require 'org)
 
 (org-link-set-parameters "man"
 			 :follow #'org-man-open
@@ -47,7 +48,7 @@ PATH should be a topic that can be thrown at the man command."
     (let* ((page (org-man-get-page-name))
            (link (concat "man:" page))
            (description (format "Manpage for %s" page)))
-      (org-link-store-props
+      (org-store-link-props
        :type "man"
        :link link
        :description description))))

@@ -1,6 +1,6 @@
 ;;; org-indent.el --- Dynamic indentation for Org    -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2009-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2009-2019 Free Software Foundation, Inc.
 ;;
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -178,10 +178,7 @@ during idle time."
     (setq-local indent-tabs-mode nil)
     (setq-local org-indent--initial-marker (copy-marker 1))
     (when org-indent-mode-turns-off-org-adapt-indentation
-      ;; Don't turn off `org-adapt-indentation' when its value is
-      ;; 'headline-data, just indent headline data specially.
-      (or (eq org-adapt-indentation 'headline-data)
-	  (setq-local org-adapt-indentation nil)))
+      (setq-local org-adapt-indentation nil))
     (when org-indent-mode-turns-on-hiding-stars
       (setq-local org-hide-leading-stars-before-indent-mode
 		  org-hide-leading-stars)
@@ -210,7 +207,7 @@ during idle time."
       (setq org-indent-agent-timer
 	    (run-with-idle-timer 0.2 t #'org-indent-initialize-agent))))
    (t
-    ;; Mode was turned off (or we refused to turn it on)
+    ;; mode was turned off (or we refused to turn it on)
     (kill-local-variable 'org-adapt-indentation)
     (setq org-indent-agentized-buffers
 	  (delq (current-buffer) org-indent-agentized-buffers))
@@ -368,18 +365,7 @@ stopped."
 	      level (org-list-item-body-column (point))))
 	    ;; Regular line.
 	    (t
-	     (org-indent-set-line-properties
-	      level
-	      (current-indentation)
-	      ;; When adapt indentation is 'headline-data, use
-	      ;; `org-indent--heading-line-prefixes' for setting
-	      ;; headline data indentation.
-	      (and (eq org-adapt-indentation 'headline-data)
-		   (or (org-at-planning-p)
-		       (org-at-clock-log-p)
-		       (looking-at-p org-property-start-re)
-		       (looking-at-p org-property-end-re)
-		       (looking-at-p org-property-re))))))))))))
+	     (org-indent-set-line-properties level (current-indentation))))))))))
 
 (defun org-indent-notify-modified-headline (beg end)
   "Set `org-indent-modified-headline-flag' depending on context.

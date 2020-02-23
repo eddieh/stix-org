@@ -1,6 +1,6 @@
 ;;; org-archive.el --- Archiving for Org             -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2004-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2004-2019 Free Software Foundation, Inc.
 
 ;; Author: Carsten Dominik <carsten at orgmode dot org>
 ;; Keywords: outlines, hypermedia, calendar, wp
@@ -90,15 +90,6 @@ When a string, a %s formatter will be replaced by the file name."
 	  (const :tag "Never" nil)
 	  (const :tag "When archiving a subtree to the same file" infile)
 	  (const :tag "Always" t)))
-
-(defcustom org-archive-subtree-save-file-p 'from-org
-  "Non-nil means save the archive file after archiving a subtree."
-  :group 'org-archive
-  :type '(choice
-	  (const :tag "Always save the archive buffer" t)
-	  (const :tag "Save target buffer when archiving from an agenda view" from-agenda)
-	  (const :tag "Save target buffer when archiving from an org buffer" from-org)
-	  (const :tag "Do not save the archive buffer")))
 
 (defcustom org-archive-save-context-info '(time file olpath category todo itags)
   "Parts of context info that should be stored as properties when archiving.
@@ -370,16 +361,6 @@ direct children of this heading."
 		     (point)
 		     (concat "ARCHIVE_" (upcase (symbol-name item)))
 		     value))))
-	      ;; Save and kill the buffer, if it is not the same
-	      ;; buffer and depending on `org-archive-subtree-save-file-p'
-	      (unless (eq this-buffer buffer)
-		(when (or (eq org-archive-subtree-save-file-p t)
-			  (and (boundp 'org-archive-from-agenda)
-			       (eq org-archive-subtree-save-file-p 'from-agenda)))
-		  (save-buffer)))
-	      ;; (unless (or (not org-archive-subtree-save-file-p)
-	      ;; 		  (eq this-buffer buffer))
-	      ;; 	(save-buffer))
 	      (widen))))
 	;; Here we are back in the original buffer.  Everything seems
 	;; to have worked.  So now run hooks, cut the tree and finish

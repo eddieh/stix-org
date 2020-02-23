@@ -1,10 +1,11 @@
 ;;; ob-abc.el --- Org Babel Functions for ABC -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2013-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2013-2019 Free Software Foundation, Inc.
 
 ;; Author: William Waites
 ;; Keywords: literate programming, music
 ;; Homepage: http://www.tardis.ed.ac.uk/wwaites
+;; Version: 0.01
 
 ;; This file is part of GNU Emacs.
 

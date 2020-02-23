@@ -1,6 +1,6 @@
 ;;; ox-md.el --- Markdown Back-End for Org Export Engine -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2012-2020 Free Software Foundation, Inc.
+;; Copyright (C) 2012-2019 Free Software Foundation, Inc.
 
 ;; Author: Nicolas Goaziou <n.goaziou@gmail.com>
 ;; Keywords: org, wp, markdown
@@ -33,10 +33,6 @@
 (require 'ox-publish)
 
 
-;;; Function Declarations
-
-(declare-function org-attach-link-expand "org-attach" (link &optional buffer-or-name))
-
 ;;; User-Configurable Variables
 
 (defgroup org-export-md nil
@@ -389,30 +385,20 @@ channel."
 
 ;;;; Link
 
-(defun org-md-link (link desc info)
+(defun org-md-link (link contents info)
   "Transcode LINE-BREAK object into Markdown format.
-DESC is the description part of the link, or the empty string.
-INFO is a plist holding contextual information.  See
-`org-export-data'."
-  (let* ((link-org-files-as-md
-	  (lambda (raw-path)
-	    ;; Treat links to `file.org' as links to `file.md'.
-	    (if (string= ".org" (downcase (file-name-extension raw-path ".")))
-		(concat (file-name-sans-extension raw-path) ".md")
-	      raw-path)))
-	 (type (org-element-property :type link))
-	 (raw-path (org-element-property :path link))
-	 (path (cond
-		((member type '("http" "https" "ftp" "mailto"))
-		 (concat type ":" raw-path))
-		((member type '("file" "attachment"))
-		 (when (string= type "attachment")
-		   (setq raw-path (org-attach-link-expand link)))
-		 (org-export-file-uri (funcall link-org-files-as-md raw-path)))
-		(t raw-path))))
+CONTENTS is the link's description.  INFO is a plist used as
+a communication channel."
+  (let ((link-org-files-as-md
+	 (lambda (raw-path)
+	   ;; Treat links to `file.org' as links to `file.md'.
+	   (if (string= ".org" (downcase (file-name-extension raw-path ".")))
+	       (concat (file-name-sans-extension raw-path) ".md")
+	     raw-path)))
+	(type (org-element-property :type link)))
     (cond
      ;; Link type is handled by a special function.
-     ((org-export-custom-protocol-maybe link desc 'md))
+     ((org-export-custom-protocol-maybe link contents 'md))
      ((member type '("custom-id" "id" "fuzzy"))
       (let ((destination (if (string= type "fuzzy")
 			     (org-export-resolve-fuzzy-link link info)
@@ -420,13 +406,13 @@ INFO is a plist holding contextual information.  See
 	(pcase (org-element-type destination)
 	  (`plain-text			; External file.
 	   (let ((path (funcall link-org-files-as-md destination)))
-	     (if (not desc) (format "<%s>" path)
-	       (format "[%s](%s)" desc path))))
+	     (if (not contents) (format "<%s>" path)
+	       (format "[%s](%s)" contents path))))
 	  (`headline
 	   (format
 	    "[%s](#%s)"
 	    ;; Description.
-	    (cond ((org-string-nw-p desc))
+	    (cond ((org-string-nw-p contents))
 		  ((org-export-numbered-headline-p destination info)
 		   (mapconcat #'number-to-string
 			      (org-export-get-headline-number destination info)
@@ -438,7 +424,7 @@ INFO is a plist holding contextual information.  See
 		(org-export-get-reference destination info))))
 	  (_
 	   (let ((description
-		  (or (org-string-nw-p desc)
+		  (or (org-string-nw-p contents)
 		      (let ((number (org-export-get-ordinal destination info)))
 			(cond
 			 ((not number) nil)
@@ -449,10 +435,10 @@ INFO is a plist holding contextual information.  See
 		       description
 		       (org-export-get-reference destination info))))))))
      ((org-export-inline-image-p link org-html-inline-image-rules)
-      (let ((path (cond ((not (member type '("file" "attachment")))
-			 (concat type ":" raw-path))
-			((not (file-name-absolute-p raw-path)) raw-path)
-			(t (expand-file-name raw-path))))
+      (let ((path (let ((raw-path (org-element-property :path link)))
+		    (cond ((not (equal "file" type)) (concat type ":" raw-path))
+			  ((not (file-name-absolute-p raw-path)) raw-path)
+			  (t (expand-file-name raw-path)))))
 	    (caption (org-export-data
 		      (org-export-get-caption
 		       (org-export-get-parent-element link)) info)))
@@ -460,11 +446,20 @@ INFO is a plist holding contextual information.  See
 		(if (not (org-string-nw-p caption)) path
 		  (format "%s \"%s\"" path caption)))))
      ((string= type "coderef")
-      (format (org-export-get-coderef-format path desc)
-	      (org-export-resolve-coderef path info)))
-     ((equal type "radio") desc)
-     (t (if (not desc) (format "<%s>" path)
-	  (format "[%s](%s)" desc path))))))
+      (let ((ref (org-element-property :path link)))
+	(format (org-export-get-coderef-format ref contents)
+		(org-export-resolve-coderef ref info))))
+     ((equal type "radio") contents)
+     (t (let* ((raw-path (org-element-property :path link))
+	       (path
+		(cond
+		 ((member type '("http" "https" "ftp" "mailto"))
+		  (concat type ":" raw-path))
+		 ((string= type "file")
+		  (org-export-file-uri (funcall link-org-files-as-md raw-path)))
+		 (t raw-path))))
+	  (if (not contents) (format "<%s>" path)
+	    (format "[%s](%s)" contents path)))))))
 
 
 ;;;; Node Property

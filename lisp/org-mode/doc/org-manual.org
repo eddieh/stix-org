@@ -227,9 +227,7 @@ If you find problems with Org, or if you have questions, remarks, or
 ideas about it, please send an email to the Org mailing list
 [[mailto:emacs-orgmode@gnu.org]].  You can subscribe to the list [[https://lists.gnu.org/mailman/listinfo/emacs-orgmode][from this
 web page]].  If you are not a member of the mailing list, your mail will
-be passed to the list after a moderator has approved it[fn:2].  We ask
-you to read and respect the [[https://www.gnu.org/philosophy/kind-communication.html][GNU Kind Communications Guidelines]] when
-sending messages on this mailing list.
+be passed to the list after a moderator has approved it[fn:2].
 
 #+findex: org-version
 #+findex: org-submit-bug-report
@@ -1637,15 +1635,6 @@ you, configure the option ~org-table-auto-blank-field~.
   quite general formats for exported tables.  The exporter format is
   the same as the format used by Orgtbl radio tables, see [[*Translator
   functions]], for a detailed description.
-
-- {{{kbd(M-x org-table-header-line-mode)}}} ::
-
-  #+findex: org-table-header-line-mode
-  #+vindex: org-table-header-line-p
-  Turn on the display of the first data row of the table at point in
-  the window header line when this first row is not visible anymore in
-  the buffer.  You can activate this minor mode by default by setting
-  the option ~org-table-header-line-p~ to ~t~.
 
 ** Column Width and Alignment
 :PROPERTIES:
@@ -4319,8 +4308,8 @@ example.
 
 If you use Org mode extensively, you may end up with enough TODO items
 that it starts to make sense to prioritize them.  Prioritizing can be
-done by placing a /priority cookie/ into the headline of a TODO item
-right after the TODO keyword, like this:
+done by placing a /priority cookie/ into the headline of a TODO item,
+like this
 
 : *** TODO [#A] Write letter to Sam Fortune
 
@@ -4328,18 +4317,10 @@ right after the TODO keyword, like this:
 By default, Org mode supports three priorities: =A=, =B=, and =C=.
 =A= is the highest priority.  An entry without a cookie is treated as
 equivalent if it had priority =B=.  Priorities make a difference only
-for sorting in the agenda (see [[*Weekly/daily agenda]]).  Outside the
+for sorting in the agenda (see [[*Weekly/daily agenda]]); outside the
 agenda, they have no inherent meaning to Org mode.  The cookies are
 displayed with the face defined by the variable ~org-priority-faces~,
 which can be customized.
-
-You can also use numeric values for priorities, such as
-
-: *** TODO [#1] Write letter to Sam Fortune
-
-When using numeric priorities, you need to set ~org-priority-highest~,
-~org-priority-lowest~ and ~org-priority-default~ to integers, which
-must all be strictly inferior to 65.
 
 Priorities can be attached to any outline node; they do not need to be
 TODO items.
@@ -4368,21 +4349,17 @@ TODO items.
   Timestamps]]).  See also [[*Packages that conflict with Org mode]], for
   a discussion of the interaction with shift-selection.
 
-#+vindex: org-priority-highest
-#+vindex: org-priority-lowest
-#+vindex: org-priority-default
+#+vindex: org-highest-priority
+#+vindex: org-lowest-priority
+#+vindex: org-default-priority
 You can change the range of allowed priorities by setting the
-variables ~org-priority-highest~, ~org-priority-lowest~, and
-~org-priority-default~.  For an individual buffer, you may set these
+variables ~org-highest-priority~, ~org-lowest-priority~, and
+~org-default-priority~.  For an individual buffer, you may set these
 values (highest, lowest, default) like this (please make sure that the
 highest priority is earlier in the alphabet than the lowest priority):
 
 #+cindex: @samp{PRIORITIES}, keyword
 : #+PRIORITIES: A C B
-
-Or, using numeric values:
-
-: #+PRIORITIES: 1 10 5
 
 ** Breaking Down Tasks into Subtasks
 :PROPERTIES:
@@ -4984,7 +4961,7 @@ with many examples, see [[*Matching tags and properties]].
 
 A property is a key-value pair associated with an entry.  Properties
 can be set so they are associated with a single entry, with every
-entry in a tree, or with the whole buffer.
+entry in a tree, or with every entry in an Org file.
 
 There are two main applications for properties in Org mode.  First,
 properties are like tags, but with a value.  Imagine maintaining
@@ -5048,12 +5025,8 @@ disks in a box like this:
   :END:
 #+end_example
 
-Properties can be inserted on buffer level.  That means they apply
-before the first headline and can be inherited by all entries in a
-file.  Property blocks defined before first headline needs to be
-located at the top of the buffer, allowing only comments above.
-
-Properties can also be defined using lines like:
+If you want to set properties that can be inherited by any entry in
+a file, use a line like:
 
 #+cindex: @samp{_ALL} suffix, in properties
 #+cindex: @samp{PROPERTY}, keyword
@@ -5118,8 +5091,7 @@ The following commands help to work with properties:
   #+findex: org-insert-drawer
   Insert a property drawer into the current entry.  The drawer is
   inserted early in the entry, but after the lines with planning
-  information like deadlines.  If before first headline the drawer is
-  inserted at the top of the drawer after any potential comments.
+  information like deadlines.
 
 - {{{kbd(C-c C-c)}}} (~org-property-action~) ::
 
@@ -5342,6 +5314,11 @@ done by defining a column format line.
 :DESCRIPTION: Where defined, where valid?
 :END:
 
+To define a column format for an entire file, use a line like:
+
+#+cindex: @samp{COLUMNS}, keyword
+: #+COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+
 To specify a format that only applies to a specific tree, add
 a =COLUMNS= property to the top node of that tree, for example:
 
@@ -5351,13 +5328,6 @@ a =COLUMNS= property to the top node of that tree, for example:
    :COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
    :END:
 #+end_example
-
-A =COLUMNS= property within a property drawer before first headline
-will apply to the entire file.  As an addition to property drawers,
-keywords can also be defined for an entire file using a line like:
-
-#+cindex: @samp{COLUMNS}, keyword
-: #+COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
 
 If a =COLUMNS= property is present in an entry, it defines columns for
 the entry itself, and for the entire subtree below it.  Since the
@@ -5496,7 +5466,7 @@ either for all clocks or just for today.
   ~org-columns-default-format~, and column view is established for the
   current entry and its subtree.
 
-- {{{kbd(r)}}} or {{{kbd(g)}}} on a columns view line (~org-columns-redo~) ::
+- {{{kbd(r)}}} or {{{kbd(g)}}} (~org-columns-redo~) ::
 
   #+kindex: r
   #+kindex: g
@@ -5504,10 +5474,9 @@ either for all clocks or just for today.
   Recreate the column view, to include recent changes made in the
   buffer.
 
-- {{{kbd(C-c C-c)}}} or {{{kbd(q)}}} on a columns view line (~org-columns-quit~) ::
+- {{{kbd(q)}}} (~org-columns-quit~) ::
 
   #+kindex: q
-  #+kindex: C-c C-c
   #+findex: org-columns-quit
   Exit column view.
 
@@ -5547,12 +5516,11 @@ either for all clocks or just for today.
   property.  For example, the tag completion or fast selection
   interface pops up when editing a =TAGS= property.
 
-- {{{kbd(C-c C-c)}}} (~org-columns-toggle-or-columns-quit~) ::
+- {{{kbd(C-c C-c)}}} (~org-columns-set-tags-or-toggle~) ::
 
   #+kindex: C-c C-c
-  #+findex: org-columns-toggle-or-columns-quit
-  When there is a checkbox at point, toggle it.  Else exit column
-  view.
+  #+findex: org-columns-set-tags-or-toggle
+  When there is a checkbox at point, toggle it.
 
 - {{{kbd(v)}}} (~org-columns-show-value~) ::
 
@@ -6886,24 +6854,6 @@ If you only want this from time to time, use three universal prefix
 arguments with ~org-clock-in~ and two {{{kbd(C-u C-u)}}} with
 ~org-clock-in-last~.
 
-**** Clocking out automatically after some idle time
-:PROPERTIES:
-:UNNUMBERED: notoc
-:END:
-#+cindex: auto clocking out after idle time
-
-#+vindex: org-clock-auto-clockout-timer
-When you often forget to clock out before being idle and you don't
-want to manually set the clocking time to take into account, you can
-set ~org-clock-auto-clockout-timer~ to a number of seconds and add
-=(org-clock-auto-clockout-insinuate)= to your =.emacs= file.
-
-When the clock is running and Emacs is idle for more than this number
-of seconds, the clock will be clocked out automatically.
-
-Use =M-x org-clock-toggle-auto-clockout RET= to temporarily turn this
-on or off.
-
 ** Effort Estimates
 :PROPERTIES:
 :DESCRIPTION: Planning work effort in advance.
@@ -6917,14 +6867,9 @@ to produce offers with quotations of the estimated work effort, you
 may want to assign effort estimates to entries.  If you are also
 clocking your work, you may later want to compare the planned effort
 with the actual working time, a great way to improve planning
-estimates.
-
-Effort estimates are stored in a special property =EFFORT=.  Multiple
-formats are supported, such as =3:12=, =1:23:45=, or =1d3h5min=; see
-the file =org-duration.el= for more detailed information about the
-format.
-
-You can set the effort for an entry with the following commands:
+estimates.  Effort estimates are stored in a special property
+=EFFORT=.  You can set the effort for an entry with the following
+commands:
 
 - {{{kbd(C-c C-x e)}}}  (~org-set-effort~) ::
 
@@ -7144,10 +7089,10 @@ special command:
   by setting ~org-refile-use-cache~.  To make the command see new
   possible targets, you have to clear the cache with this command.
 
-- {{{kbd(C-c M-w)}}} (~org-refile-copy~) ::
+- {{{kbd(C-c M-w)}}} (~org-copy~) ::
 
   #+kindex: C-c M-w
-  #+findex: org-refile-copy
+  #+findex: org-copy
   Copying works like refiling, except that the original note is not
   deleted.
 
@@ -7231,10 +7176,6 @@ that record context information like the file from where the entry
 came, its outline path the archiving time etc.  Configure the variable
 ~org-archive-save-context-info~ to adjust the amount of information
 added.
-
-#+vindex: org-archive-subtree-save-file-p
-When ~org-archive-subtree-save-file-p~ is non-~nil~, save the target
-archive buffer.
 
 *** Internal archiving
 :PROPERTIES:
@@ -7658,10 +7599,9 @@ Now lets look at the elements of a template definition.  Each entry in
 
   - ~:tree-type~ ::
 
-    Use ~week~ to make a week tree instead of the month-day tree,
-    i.e., place the headings for each day under a heading with the
-    current ISO week.  Use @code{month} to group entries by month
-    only.  Default is to group entries by day.
+    When ~week~, make a week tree instead of the month tree, i.e.,
+    place the headings for each day under a heading with the current
+    ISO week.
 
   - ~:unnarrowed~ ::
 
@@ -8080,19 +8020,6 @@ mentioning.
   structure in any other way.  All functions in this list will be
   tried when resolving existing ID's into paths, to maintain backward
   compatibility with existing folders in your system.
-
-- ~org-attach-store-link-p~ ::
-  #+vindex: org-attach-store-link-p
-  Stores a link to the file that is being attached.  The link is
-  stored in ~org-stored-links~ for later insertion with {{{kbd(C-c
-  C-l)}}} (see [[*Handling Links]]).  Depending on what option is set in
-  ~org-attach-store-link-p~, the link is stored to either the original
-  location as a file link, the attachment location as an attachment
-  link or to the attachment location as a file link.
-
-- ~org-attach-commands~ ::
-  #+vindex: org-attach-commands
-  List of all commands used in the attach dispatcher.
 
 - ~org-attach-expert~ ::
   #+vindex: org-attach-expert
@@ -9797,6 +9724,12 @@ the other commands, point needs to be in the desired line.
   Set the priority for the current item.  Org mode prompts for the
   priority character.  If you reply with {{{kbd(SPC)}}}, the priority
   cookie is removed from the entry.
+
+- {{{kbd(P)}}} (~org-agenda-show-priority~) ::
+
+  #+kindex: P
+  #+findex: org-agenda-show-priority
+  Display weighted priority of current item.
 
 - {{{kbd(+)}}} or {{{kbd(S-UP)}}} (~org-agenda-priority-up~) ::
 
@@ -16253,19 +16186,6 @@ Here is an example source code block in the Emacs Lisp language:
 ,#+END_SRC
 #+end_example
 
-Source code blocks are one of many Org block types, which also include
-"center", "comment", "dynamic", "example", "export", "quote",
-"special", and "verse".  This section pertains to blocks between
-=#+BEGIN_SRC= and =#+END_SRC=.
-
-Details of Org's facilities for working with source code are described
-in the following sections.
-
-** Features
-:PROPERTIES:
-:DESCRIPTION: Enjoy the versatility of source blocks.
-:END:
-
 Org can manage the source code in the block delimited by =#+BEGIN_SRC=
 ... =#+END_SRC= in several ways that can simplify housekeeping tasks
 essential to modern source code maintenance.  Org can edit, format,
@@ -16274,8 +16194,14 @@ and execute a source code block, then capture the results.  The Org
 mode literature sometimes refers to source code blocks as /live code/
 blocks because they can alter the content of the Org document or the
 material that it exports.  Users can control how live they want each
-source code block by tweaking the header arguments (see [[*Using Header
-Arguments]]) for compiling, execution, extraction, and exporting.
+source code block by tweaking the header arguments (see [[*Using
+Header Arguments]]) for compiling, execution, extraction, and
+exporting.
+
+Source code blocks are one of many Org block types, which also include
+"center", "comment", "dynamic", "example", "export", "quote",
+"special", and "verse".  This section pertains to blocks between
+=#+BEGIN_SRC= and =#+END_SRC=.
 
 For editing and formatting a source code block, Org uses an
 appropriate Emacs major mode that includes features specifically
@@ -16312,6 +16238,9 @@ publishing reproducible research by keeping text, data, code,
 configuration settings of the execution environment, the results of
 the execution, and associated narratives, claims, references, and
 internal and external links in a single Org document.
+
+Details of Org's facilities for working with source code are described
+in the following sections.
 
 ** Structure of Code Blocks
 :PROPERTIES:
@@ -17448,13 +17377,13 @@ follows from the type specified above.
 
 - =link=, =graphics= ::
 
-  When used along with =file= type, the result is a link to the file
-  specified in =:file= header argument.  However, unlike plain =file=
-  type, nothing is written to the disk.  The block is used for its
-  side-effects only, as in the following example:
+  Result is a link to the file specified in =:file= header argument.
+  However, unlike plain =:file=, nothing is written to the disk.  The
+  block is used for its side-effects only, as in the following
+  example:
 
   #+begin_example
-  ,#+begin_src shell :results file link :file "download.tar.gz"
+  ,#+begin_src shell :results link :file "download.tar.gz"
   wget -c "http://example.com/download.tar.gz"
   ,#+end_src
   #+end_example
@@ -18556,16 +18485,8 @@ the headline text[fn:146].
 #+vindex: org-indent-indentation-per-level
 To make more horizontal space, the headlines are shifted by two
 characters.  Configure ~org-indent-indentation-per-level~ variable for
-a different number.
-
-#+vindex: org-indent-mode-turns-on-hiding-stars
-#+vindex: org-indent-mode-turns-off-org-adapt-indentation
-By default, Org Indent mode turns off ~org-adapt-indentation~ and does
-hide leading stars by locally setting ~org-hide-leading-stars~ to ~t~:
-only one star on each headline is visible, the rest are masked with
-the same font color as the background.  If you want to customize this
-default behavior, see ~org-indent-mode-turns-on-hiding-stars~ and
-~org-indent-mode-turns-off-org-adapt-indentation~.
+a different number.  Only one star on each headline is visible, the
+rest are masked with the same font color as the background[fn:147].
 
 #+vindex: org-startup-indented
 To globally turn on Org Indent mode for all files, customize the
@@ -18579,9 +18500,8 @@ use =STARTUP= keyword as follows:
 
 It is possible to use hard spaces to achieve the indentation instead,
 if the bare ASCII file should have the indented look also outside
-Emacs[fn:147].  With Org's support, you have to indent all lines to
-line up with the outline headers.  You would use these
-settings[fn:148]:
+Emacs[fn:148].  With Org's support, you have to indent all lines to
+line up with the outline headers.  You would use these settings:
 
   #+begin_src emacs-lisp
   (setq org-adapt-indentation t
@@ -18613,7 +18533,7 @@ settings[fn:148]:
 
   #+vindex: org-odd-levels-only
   The third setting makes Org use only odd levels, 1, 3, 5, ..., in
-  the outline to create more indentation.  On a per-file level,
+  the outline to create more indentation.  On a  per-file level,
   control this with:
 
   #+begin_example
@@ -18624,29 +18544,6 @@ settings[fn:148]:
   To convert a file between single and double stars layouts, use
   {{{kbd(M-x org-convert-to-odd-levels)}}} and {{{kbd(M-x
   org-convert-to-oddeven-levels)}}}.
-
-** Execute commands in the active region
-:PROPERTIES:
-:DESCRIPTION: Execute commands on multiple items in Org or agenda view.
-:END:
-
-#+vindex: org-loop-over-headlines-in-active-region
-When in an Org buffer, you might want to apply a command to all the
-subtrees in the active region.  To enable this, set the option
-~org-loop-over-headlines-in-active-region~ to non-~nil~, activate the
-region and run the command normally.  For example, hitting {{{kbd(C-c
-C-s)}}} when multiple headlines are within the active region will
-successively prompt you for a new schedule date and time.
-
-#+vindex: org-agenda-loop-over-headlines-in-active-region
-~org-agenda-loop-over-headlines-in-active-region~ lets you obtain the
-same behavior within an agenda buffer.  In the agenda, you can also
-use [[*Bulk remote editing selected entries][bulk editing of selected entries]], which see.
-
-Not all commands can loop in the active region and what subtrees or
-headlines are considered can be refined: see the docstrings of these
-options for more details.
-
 
 ** Dynamic Headline Numbering
 :PROPERTIES:
@@ -18689,8 +18586,6 @@ The {{{kbd(C-c C-c)}}} key in Org serves many purposes depending on
 the context.  It is probably the most over-worked, multi-purpose key
 combination in Org.  Its uses are well documented throughout this
 manual, but here is a consolidated list for easy reference.
-
-- If column view (see [[*Column View]]) is on, exit column view.
 
 - If any highlights shown in the buffer from the creation of a sparse
   tree, or from clock display, remove such highlights.
@@ -18797,9 +18692,9 @@ changes.
 - =#+PRIORITIES: highest lowest default= ::
 
   #+cindex: @samp{PRIORITIES}, keyword
-  #+vindex: org-priority-highest
-  #+vindex: org-priority-lowest
-  #+vindex: org-priority-default
+  #+vindex: org-highest-priority
+  #+vindex: org-lowest-priority
+  #+vindex: org-default-priority
   This line sets the limits and the default for the priorities.  All
   three must be either letters A--Z or numbers 0--9.  The highest
   priority must have a lower ASCII number than the lowest priority.
@@ -19638,13 +19533,13 @@ compatible with Org Mobile.  It also describes synchronizing changes,
 such as to notes, between the mobile application and the computer.
 
 To change tags and TODO states in the mobile application, first
-customize the variables ~org-todo-keywords~, ~org-tag-alist~ and
-~org-tag-persistent-alist~.  These should cover all the important tags
-and TODO keywords, even if Org files use only some of them.  Though
-the mobile application is expected to support in-buffer settings, it
-is required to understand TODO states /sets/ (see [[*Setting up keywords
-for individual files]]) and /mutually exclusive/ tags (see [[*Setting
-Tags]]) only for those set in these variables.
+customize the variables ~org-todo-keywords~ and ~org-tag-alist~.
+These should cover all the important tags and TODO keywords, even if
+Org files use only some of them.  Though the mobile application is
+expected to support in-buffer settings, it is required to understand
+TODO states /sets/ (see [[*Setting up keywords for individual files]]) and
+/mutually exclusive/ tags (see [[*Setting Tags]]) only for those set in
+these variables.
 
 *** Setting up the staging area
 :PROPERTIES:
@@ -19800,11 +19695,11 @@ process of adding Org links to Unix man pages, which look like this
 : [[man:printf][The printf manual]]
 
 #+texinfo: @noindent
-The following =ol-man.el= file implements it
+The following =org-man.el= file implements it
 
 #+begin_src emacs-lisp
-;;; ol-man.el - Support for links to man pages in Org mode
-(require 'ol)
+;;; org-man.el - Support for links to man pages in Org mode
+(require 'org)
 
 (org-link-set-parameters "man"
                          :follow org-man-command
@@ -19823,7 +19718,7 @@ The following =ol-man.el= file implements it
     (let* ((page (org-man-get-page-name))
            (link (concat "man:" page))
            (description (format "Man page for %s" page)))
-      (org-link-store-props
+      (org-store-link-props
        :type "man"
        :link link
        :description description))))
@@ -19846,8 +19741,8 @@ The following =ol-man.el= file implements it
       (`ascii (format "%s (%s)" desc path))
       (t path))))
 
-(provide ol-man)
-;;; ol-man.el ends here
+(provide 'org-man)
+;;; org-man.el ends here
 #+end_src
 
 #+texinfo: @noindent
@@ -19855,13 +19750,13 @@ To activate links to man pages in Org, enter this in the Emacs init
 file:
 
 #+begin_src emacs-lisp
-(require 'ol-man)
+(require 'org-man)
 #+end_src
 
 #+texinfo: @noindent
-A review of =ol-man.el=:
+A review of =org-man.el=:
 
-1. First, =(require 'ol)= ensures that =ol.el= is loaded.
+1. First, =(require 'org)= ensures =org.el= is loaded.
 
 2.
 
@@ -21139,7 +21034,7 @@ that are mentioned in the manual.  For a more complete list, use
 
 This manual is for Org version {{{version}}}.
 
-Copyright \copy 2004--2020 Free Software Foundation, Inc.
+Copyright \copy 2004--2019  Free Software Foundation, Inc.
 
 #+begin_quote
 Permission is granted to copy, distribute and/or modify this document
@@ -21717,11 +21612,11 @@ indenting and wrapping long lines of headlines or text.  This minor
 mode also handles Visual Line mode and directly applied settings
 through ~word-wrap~.
 
-[fn:147] This works, but requires extra effort.  Org Indent mode is
-more convenient for most applications.
+[fn:147] Note that turning on Org Indent mode sets
+~org-hide-leading-stars~ to ~t~ and ~org-adapt-indentation~ to ~nil~.
 
-[fn:148] ~org-adapt-indentation~ can also be set to ='headline-data=,
-in which case only data lines below the headline will be indented.
+[fn:148] This works, but requires extra effort.  Org Indent mode is
+more convenient for most applications.
 
 [fn:149] Note that Org Indent mode also sets the ~wrap-prefix~
 property, such that Visual Line mode (or purely setting ~word-wrap~)
